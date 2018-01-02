@@ -1,9 +1,24 @@
 package Game;
 
 public class Dice {
+	int currentRoll;
+	int sides;
 
 	public Dice() {
-		// TODO Auto-generated constructor stub
+		sides = 6;
+	}
+
+	public Dice(int sides) {
+		this.sides = sides;
+	}
+
+	public int roll() {
+		currentRoll = (int) (Math.random() * sides + 1);
+		return currentRoll;
+	}
+
+	public int getFaceValue() {
+		return currentRoll;
 	}
 
 }
