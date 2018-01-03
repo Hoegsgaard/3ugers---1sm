@@ -1,7 +1,7 @@
 package Game;
 
 public class Dice {
-	int currentRoll;
+	int currentFaceValue;
 	int sides;
 
 	public Dice() {
@@ -13,12 +13,12 @@ public class Dice {
 	}
 
 	public int roll() {
-		currentRoll = (int) (Math.random() * sides + 1);
-		return currentRoll;
+		currentFaceValue = (int) (Math.random() * sides + 1);
+		return currentFaceValue;
 	}
 
 	public int getFaceValue() {
-		return currentRoll;
+		return currentFaceValue;
 	}
 
 }
