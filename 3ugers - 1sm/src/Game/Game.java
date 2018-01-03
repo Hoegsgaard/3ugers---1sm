@@ -9,6 +9,7 @@ import gui_main.GUI;
 import gui_fields.GUI_Ownable;
 import gui_fields.GUI_Player;
 public class Game {
+
 	GUI_Field[] fields = new GUI_Field[40];
 	GUI_Player p1 = new GUI_Player("rambo", 1000);
 	
@@ -31,6 +32,10 @@ public class Game {
 		fields[2] = new GUI_Chance();
 		fields[2].setSubText("Take a Chance");
 		createStreet(3, "Hvidovre", Color.CYAN, 60);
+	}
+
+	public Game() {
+
 	}
 
 	

@@ -3,7 +3,6 @@ package Game;
 import gui_fields.GUI_Player;
 //import gui_main.GUI;
 
-
 public class Player { 
 	private int currentField = 0;
 	private static int playerCounter = 1;
@@ -62,6 +61,5 @@ public class Player {
 	public void setHasJailCard(boolean hasJailCard) {
 		this.hasJailCard = hasJailCard;
 	}
-
 }
 
