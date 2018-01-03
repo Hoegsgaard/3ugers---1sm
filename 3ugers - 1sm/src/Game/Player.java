@@ -15,6 +15,7 @@ public class Player {
 
 	public Player() {
 		playerNumber = playerCounter++;
+
 	}
 	
 	public int getPlayerNumber() {
