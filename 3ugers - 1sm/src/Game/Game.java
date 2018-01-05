@@ -1,5 +1,10 @@
 package Game;
 
+import java.awt.Color;
+
+import gui_fields.GUI_Player;
+import gui_main.GUI;
+
 public class Game {
 	public Game() {
 	}
@@ -10,7 +15,7 @@ public class Game {
 		board.createBoard();
 	}
 
-}
+
 
 // Method that accepts amount of players, and their names.
 private void enterPlayers(GUI gui) {
@@ -21,7 +26,7 @@ private void enterPlayers(GUI gui) {
 		AmountOfPlayers = (gui.getUserInteger("How many players? Min. 2 and Max. 4."));
 	}
 	
-	players = new Player[AmountOfPlayers];
+	Player[] players = new Player[AmountOfPlayers];
 	//Creates one player at a time
 	for (int i = 0; i < players.length; i++) {
 		players[i] = new Player();
@@ -60,4 +65,5 @@ private void enterPlayers(GUI gui) {
 		
 	}
 	
+}
 }
