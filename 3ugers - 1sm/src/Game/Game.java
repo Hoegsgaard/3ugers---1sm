@@ -9,4 +9,5 @@ public class Game {
 		board.createBoard();
 	}
 
+	//Er de væk nu
 }
