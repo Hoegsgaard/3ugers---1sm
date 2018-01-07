@@ -47,8 +47,15 @@ public class GameBoard {
 	
 	
 	
+	
+	
 	public GameBoard() {
 		
+	}
+	
+	public GUI_Field[] getFields() {
+		
+		return fields;
 	}
 
 	public void createBoard() {
@@ -105,7 +112,10 @@ public class GameBoard {
 		/*Ekstraordinær statsskat betal kr. 2.000*/
 		createStreet(39, "Rådhuspladsen", Color.magenta, 8000, housePrice[3], rentRødovervej);
 		GUI gui = new GUI(fields);
-	}
+		createStreet(37, "Frederiksberggade", Color.magenta, 7000, housePrice[3], rentRødovervej);
+		//Ekstraordinær statsskat betal kr. 2.000
+		createStreet(39, "Rådhuspladsen", Color.magenta, 8000, housePrice[3], rentRødovervej);
+		}
 
 	private void createStreet(int field, String name, Color color, int price, int housePrice, int[] test) {
 		fields[field] = new GUI_Street();
