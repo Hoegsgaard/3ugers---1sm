@@ -8,6 +8,4 @@ public class Game {
 	public void runGame() {
 		board.createBoard();
 	}
-
-	//Er de væk nu
 }
