@@ -2,6 +2,7 @@ package Controller;
 
 import java.awt.Color;
 
+import Game.ChanceCard;
 import Game.Dice;
 import Game.Game;
 import Game.GameBoard;
@@ -31,7 +32,7 @@ public class Controller {
 			takeRound(gui);
 		}
 		
-		
+
 	}
 
 	
