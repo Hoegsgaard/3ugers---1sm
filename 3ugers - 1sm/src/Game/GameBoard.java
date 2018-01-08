@@ -152,5 +152,11 @@ public class GameBoard {
 	public GUI_Street getStreet(int field) {
 		return ((GUI_Street) fields[field]);
 	}
+	public GUI_Brewery getBrewery(int field) {
+		return ((GUI_Brewery) fields[field]);
+	}
+	public GUI_Shipping getShipping(int field) {
+		return ((GUI_Shipping) fields[field]);
+	}
 }
 
