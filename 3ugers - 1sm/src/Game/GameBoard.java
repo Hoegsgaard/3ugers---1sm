@@ -61,7 +61,7 @@ public class GameBoard {
 		fields[2] = new GUI_Chance();
 		fields[2].setSubText("Take a Chance");
 		createStreet(3, "Hvidovre", Color.CYAN, 1200, housePrice[0], rentHvidover);
-		// Skat
+		fields[4] = new GUI_Chance();
 		/* Rederi */ fields[5] = new GUI_Shipping();
 		createStreet(6, "Roskildevej", Color.pink, 2000, housePrice[0], rentRoskildevej);
 		fields[7] = new GUI_Chance();
@@ -81,7 +81,7 @@ public class GameBoard {
 		fields[17].setSubText("Take a Chance");
 		createStreet(18, "Hellerupvej", Color.gray, 3600, housePrice[1], rentHellerupvej);
 		createStreet(19, "Strandvej", Color.gray, 4000, housePrice[1], rentStrandvejen);
-		/* Parkering */
+		fields[20] = new GUI_Chance();
 		createStreet(21, "Trianglen", Color.red, 4400, housePrice[2], rentTrianglen);
 		fields[22] = new GUI_Chance();
 		fields[22].setSubText("Take a Chance");
@@ -93,7 +93,8 @@ public class GameBoard {
 		/* Faxe */ fields[28] = new GUI_Brewery();
 		// Mangler SUB
 		createStreet(29, "Østergade", Color.white, 5600, housePrice[2], rentØstergade);
-		/* Ryk ik fængsel */
+		fields[30] = new GUI_Jail();
+		fields[30].setSubText("Gå i Fængsel");
 		createStreet(31, "Amagertorv", Color.yellow, 6000, housePrice[3], rentAmagerto);
 		createStreet(32, "Vimmelskaftet", Color.yellow, 6000, housePrice[3], rentVimmelskaftet);
 		fields[33] = new GUI_Chance();
@@ -103,9 +104,9 @@ public class GameBoard {
 		fields[36] = new GUI_Chance();
 		fields[36].setSubText("Take a Chance");
 		createStreet(37, "Frederiksberggade", Color.magenta, 7000, housePrice[3], rentFrederiksberggade);
-		/* Ekstraordinær statsskat betal kr. 2.000 */
+		fields[38] = new GUI_Chance();
 		createStreet(39, "Rådhuspladsen", Color.magenta, 8000, housePrice[3], rentRådhuspladesen);
-		GUI gui = new GUI(fields);
+		
 	}
 
 	private void createStreet(int field, String name, Color color, int price, int housePrice, int[] rentAr) {
