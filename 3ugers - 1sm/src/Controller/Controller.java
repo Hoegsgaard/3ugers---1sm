@@ -22,6 +22,7 @@ public class Controller {
 	Dice d1 = new Dice(6);
 	Dice d2 = new Dice(6);
 	DiceController diceController2 = new DiceController();
+	ChanceCard cc = new ChanceCard();
 	
 	public void runGame() {
 		board.createBoard();
@@ -154,6 +155,24 @@ public class Controller {
 		}
 		
 		
+	}
+public void movePlayer(Player player, GUI gui, int dist) {
+		
+		
+		int field = player.getCurrentField();
+		// Removes the brick from the current field.
+		gui.getFields()[ player.getCurrentField()].setCar(player.getCarObject(), false);
+		// Updates the player object.
+		player.setCurrentField( player.getCurrentField() + dist);
+		// Places the player's brick on the new field.
+		gui.getFields()[ player.getCurrentField()].setCar(player.getCarObject(), true);
+		//Checks if they player has to go to jail or draw a chancecard.
+		if(field == 2 || field == 7 || field == 17 || field == 22 || field == 33 || field == 36) {
+			cc.drawCard(player,players);
+		} 
+//		else if (gui.getFields()[player.getCurrentField()] == fields[18]) {
+//				goToJail(player, gui);
+//		}
 	}
 
 	public void payRent(Player player) {
