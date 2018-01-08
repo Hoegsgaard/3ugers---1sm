@@ -51,9 +51,15 @@ public class GameBoard {
 
 		return fields;
 	}
+	
+	public boolean getOwnable() {
+		System.out.println(ownable);
+		return ownable;
+	}
 
 	public void createBoard() {
 		GUI.setNull_fields_allowed(true);
+		
 		fields[0] = new GUI_Start();
 		fields[0].setTitle("Start");
 
@@ -109,7 +115,7 @@ public class GameBoard {
 		fields[36] = new GUI_Chance();
 		fields[36].setSubText("Take a Chance");
 		createStreet(37, "Frederiksberggade", Color.magenta, 7000, housePrice[3], rentFrederiksberggade);
-		// Ekstraordinært skat
+		// Ekstraordinært skat 
 		createStreet(39, "Rådhuspladsen", Color.magenta, 8000, housePrice[3], rentRÃ¥dhuspladesen);
 		
 		
@@ -122,6 +128,7 @@ public class GameBoard {
 		fields[field].setBackGroundColor(color);
 		ownable = true;
 		pirceForHouse = housePrice;
+		
 		// rent
 		for (int i = 0; i < rentAr.length; i++) {
 			int hold = rentAr[i];

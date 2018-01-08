@@ -23,10 +23,15 @@ public class Controller {
 	Dice d2 = new Dice(6);
 
 	public void runGame() {
-		board.createBoard();		
-		GUI gui = new GUI(board.getFields());		
+		board.createBoard();	
+		board.getOwnable();
+		board.getOwnable();
+		board.getOwnable();
+		GUI gui = new GUI(board.getFields());	
 		addPlayers(gui);		
 		initPlayers(gui);
+	
+		
 		while(!gameOver) {
 			takeRound(gui);
 		}
@@ -133,6 +138,15 @@ public class Controller {
 //				|| player.getCurrentField() == 21) {
 //			cd.drawCard(player, players);
 //		}
+	}
+	
+	public void buyProberty(Player player) {
+		if(board.getOwnable()==true) {
+			player.getCurrentField()
+			
+		}
+				
+		
 	}
 	
 	
