@@ -24,7 +24,7 @@ public class Controller {
 
 	public void runGame() {
 		board.createBoard();
-		GUI gui = new GUI(board.getFields());	
+		GUI gui = new GUI(board.getFields());
 		addPlayers(gui);		
 		initPlayers(gui);
 		while(!gameOver) {
@@ -98,15 +98,18 @@ public class Controller {
 	private void takeTurn(Player player, GUI gui) {
 		if(turn) {
 			view.rollDiceButton(gui);
+			
 		}
 		
 		int sum = diceController.roll() + diceController.roll();
-		if ((player.getCurrentField() + sum) > 23) {
-			sum -= 24;
+		if ((player.getCurrentField() + sum) > 39) {
+			sum -= 40;
 			player.changeBalance(2);
 		}
 		gui.setDice(d1.getFaceValue(), d2.getFaceValue());
 		movePlayer(player, gui, sum);
+		buyField(player);
+		
 	}
 	
 	
@@ -136,23 +139,22 @@ public class Controller {
 	}
 	
 
-//	public void buyProberty(Player player) {
-//		if(board.getOwnable()==true) {
-//			player.getCurrentField();
-//		
-//			
-//		}
-				
-		
+	public void setOwner(Player player) {
+			board.getStreet(player.getCurrentField()).setOwnableLabel("Owner : ");
+			board.getStreet(player.getCurrentField()).setOwnerName(player.getName());
+					
+	}
+	
+	public void buyField(Player player) {
+		int field = player.getCurrentField();
+		if(board.getOwnable(field)) {
+		setOwner(player);
+		board.getStreet(field).setBorder(player.getCarObject().getPrimaryColor());
+		board.setOwnable(field, false);
+		}
+	}
 
-//	public void buyProberty(Player player) {
-//		if(board.getOwnable()==true) {
-//			player.getCurrentField();
-//			
-//		}
-//				
-//		
-//	}
+
 
 	
 	

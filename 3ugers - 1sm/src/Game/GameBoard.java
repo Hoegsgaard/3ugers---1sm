@@ -147,5 +147,9 @@ public class GameBoard {
 	public void setOwnable(int field, boolean own) {
 		ownable[field] = own;
 	}
+	
+	public GUI_Street getStreet(int field) {
+		return ((GUI_Street) fields[field]);
+	}
 }
 
