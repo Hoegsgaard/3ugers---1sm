@@ -222,4 +222,15 @@ public class ChanceCard {
 			player.setHasJailCard(true);
 			gui.displayChanceCard(message);
 		}
+		
+		
+		//Move funktioner
+		
+		
+		
+		
+		
+		
+		
+		
 }
