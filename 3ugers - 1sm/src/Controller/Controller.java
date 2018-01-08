@@ -23,10 +23,7 @@ public class Controller {
 	Dice d2 = new Dice(6);
 
 	public void runGame() {
-		board.createBoard();	
-		board.getOwnable();
-		board.getOwnable();
-		board.getOwnable();
+		board.createBoard();
 		GUI gui = new GUI(board.getFields());	
 		addPlayers(gui);		
 		initPlayers(gui);
@@ -143,6 +140,7 @@ public class Controller {
 	public void buyProberty(Player player) {
 		if(board.getOwnable()==true) {
 			player.getCurrentField();
+		
 			
 		}
 				
