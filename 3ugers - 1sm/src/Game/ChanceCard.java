@@ -29,6 +29,8 @@ public class ChanceCard {
 		shuffle(chanceCard);
 	}
 	
+	// konflikt
+	
 	public void shuffle(String[] chanceCard) {
 
 		for (int i = 0; i < chanceCard.length; i++) { // goes length of array times
