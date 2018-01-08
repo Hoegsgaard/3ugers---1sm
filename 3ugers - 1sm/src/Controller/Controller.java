@@ -35,7 +35,9 @@ public class Controller {
 
 	}
 
-	
+	public Player[] getPlayers() {
+		return players;
+	}
 	
 	
 	
@@ -168,9 +170,13 @@ public class Controller {
 			}
 			
 		}
+		
+		
 	}
 
-
+	public void payRent(Player player) {
+		
+	}
 
 	
 	
