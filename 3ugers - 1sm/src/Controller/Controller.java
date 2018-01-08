@@ -151,6 +151,7 @@ public class Controller {
 		setOwner(player);
 		board.getStreet(field).setBorder(player.getCarObject().getPrimaryColor());
 		board.setOwnable(field, false);
+		
 		}
 	}
 
