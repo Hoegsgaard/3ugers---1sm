@@ -1,18 +1,8 @@
 package Game;
 
-import Controller.Controller;
 import gui_main.GUI;
 
 public class ChanceCard {
-	
-	private static ChanceCard instance;
-	
-	public static ChanceCard getInstance() {
-		if (instance == null) {
-			instance = new ChanceCard();
-		}
-		return instance;
-	}
 	
 	public ChanceCard() {}
 	
@@ -232,20 +222,4 @@ public class ChanceCard {
 			player.setHasJailCard(true);
 			gui.displayChanceCard(message);
 		}
-		
-//		public void movePlayer(Player player, GUI gui, int dist) {
-//			// Removes the brick from the current field.
-//			gui.getFields()[player.getCurrentField()].setCar(player.getCarObject(), false);
-//			// Updates the player object.
-//			player.setCurrentField(player.getCurrentField() + dist);
-//			// Places the player's brick on the new field.
-//			gui.getFields()[player.getCurrentField()].setCar(player.getCarObject(), true);
-//			//Checks if they player has to go to jail or draw a chancecard.
-////			if (gui.getFields()[player.getCurrentField()] == fields[18]) {
-////				goToJail(player, gui);
-////			} else if (player.getCurrentField() == 3 || player.getCurrentField() == 9 || player.getCurrentField() == 15
-////					|| player.getCurrentField() == 21) {
-////				cd.drawCard(player, players);
-////			}
-//		}
 }

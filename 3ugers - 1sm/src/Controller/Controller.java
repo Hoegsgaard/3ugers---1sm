@@ -8,7 +8,6 @@ import Game.Game;
 import Game.GameBoard;
 import Game.Player;
 import View.Display;
-import gui_fields.GUI_Field;
 import gui_fields.GUI_Player;
 import gui_main.GUI;
 
@@ -20,9 +19,10 @@ public class Controller {
 	Game game = new Game();
 	Player[] players;
 	DiceController diceController = new DiceController();
+	Dice d1 = new Dice(6);
+	Dice d2 = new Dice(6);
 	DiceController diceController2 = new DiceController();
 	
-
 	public void runGame() {
 		board.createBoard();
 		GUI gui = new GUI(board.getFields());
@@ -123,24 +123,6 @@ public class Controller {
 			}
 		}
 	}
-	
-	
-	public void movePlayer(Player player, GUI gui, int dist) {
-		// Removes the brick from the current field.
-		gui.getFields()[player.getCurrentField()].setCar(player.getCarObject(), false);
-		// Updates the player object.
-		player.setCurrentField(player.getCurrentField() + dist);
-		// Places the player's brick on the new field.
-		gui.getFields()[player.getCurrentField()].setCar(player.getCarObject(), true);
-		//Checks if they player has to go to jail or draw a chancecard.
-//		if (gui.getFields()[player.getCurrentField()] == fields[18]) {
-//			goToJail(player, gui);
-//		} else if (player.getCurrentField() == 3 || player.getCurrentField() == 9 || player.getCurrentField() == 15
-//				|| player.getCurrentField() == 21) {
-//			cd.drawCard(player, players);
-//		}
-	}
-	
 
 	public void setOwner(Player player) {
 			board.getStreet(player.getCurrentField()).setOwnableLabel("Owner : ");
