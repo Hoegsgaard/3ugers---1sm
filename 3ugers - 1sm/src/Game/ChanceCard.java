@@ -203,7 +203,7 @@ public class ChanceCard {
 //		public void goThreeStepsBack(Player player) {
 //			
 //		}
-		
+		// Conflict
 		// Get money (this chance card adds money to the players balance)
 		public void getMoney(Player player, ) {
 			
