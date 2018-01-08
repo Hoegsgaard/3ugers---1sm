@@ -140,8 +140,11 @@ public class GameBoard {
 		return fields;
 	}
 	
-//	public boolean getOwnable() {
-//		return ;
-//	}
+	public boolean getOwnable(int field) {
+		return ownable[field]; 	
+	}
+	public void setOwnable(int field, boolean own) {
+		ownable[field] = own;
+	}
 }
 
