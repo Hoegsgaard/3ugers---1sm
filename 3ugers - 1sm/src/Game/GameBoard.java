@@ -27,7 +27,7 @@ public class GameBoard {
 		fields[0] = new GUI_Start();
 		fields[0].setTitle("Start");
 		fields[0].setSubText("Gain: 1000");
-		createStreet(1, "Rødeorevej", Color.CYAN, 1200, housePrice[0]);
+		createStreet(1, "Rødeorevej", Color.CYAN, 1200, housePrice[0] );
 		fields[2] = new GUI_Chance();
 		fields[2].setSubText("Take a Chance");
 		createStreet(3, "Hvidovre", Color.CYAN, 1200, housePrice[0]);
