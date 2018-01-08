@@ -142,7 +142,7 @@ public class Controller {
 	
 	public void buyProberty(Player player) {
 		if(board.getOwnable()==true) {
-			player.getCurrentField()
+			player.getCurrentField();
 			
 		}
 				
