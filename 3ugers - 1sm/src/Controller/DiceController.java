@@ -13,5 +13,4 @@ public class DiceController {
 		return currentFaceValue;
 	}
 
-	//
 }

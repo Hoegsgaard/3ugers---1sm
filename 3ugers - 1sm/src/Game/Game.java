@@ -13,18 +13,17 @@ public class Game {
 
 	public void runGame() {
 		board.createBoard();
+		
+		
+		
 	}
-
-
 
 // Method that accepts amount of players, and their names.
 private void enterPlayers(GUI gui) {
 	//Accepts a number of players and keeps trying until the
 	//Entered number is between 2 and 4.
 	int AmountOfPlayers = (gui.getUserInteger("How many players? Min. 2 and Max. 4."));
-	while (AmountOfPlayers > 4 || AmountOfPlayers < 2) {
-		AmountOfPlayers = (gui.getUserInteger("How many players? Min. 2 and Max. 4."));
-	}
+	
 	
 	Player[] players = new Player[AmountOfPlayers];
 	//Creates one player at a time
