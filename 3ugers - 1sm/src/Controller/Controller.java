@@ -27,8 +27,6 @@ public class Controller {
 		GUI gui = new GUI(board.getFields());	
 		addPlayers(gui);		
 		initPlayers(gui);
-	
-		
 		while(!gameOver) {
 			takeRound(gui);
 		}
@@ -137,15 +135,25 @@ public class Controller {
 //		}
 	}
 	
-	public void buyProberty(Player player) {
-		if(board.getOwnable()==true) {
-			player.getCurrentField();
-		
-			
-		}
+
+//	public void buyProberty(Player player) {
+//		if(board.getOwnable()==true) {
+//			player.getCurrentField();
+//		
+//			
+//		}
 				
 		
-	}
+
+//	public void buyProberty(Player player) {
+//		if(board.getOwnable()==true) {
+//			player.getCurrentField();
+//			
+//		}
+//				
+//		
+//	}
+
 	
 	
 }

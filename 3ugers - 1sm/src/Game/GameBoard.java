@@ -14,10 +14,13 @@ import gui_fields.GUI_Tax;
 import gui_main.GUI;
 
 public class GameBoard {
+	public GameBoard() {
+
+	}
 
 	GUI_Field[] fields = new GUI_Field[40];
 
-	boolean ownable;
+	boolean[] ownable = new boolean[40];
 	int[] housePrice = { 1000, 2000, 3000, 4000 };
 	int pirceForHouse;
 	int[] rent = new int[6];
@@ -45,32 +48,12 @@ public class GameBoard {
 	int[] rentFrederiksberggade = { 700, 3500, 10000, 22000, 26000, 30000 };
 	int[] rentRÃ¥dhuspladesen = { 1000, 4000, 12000, 28000, 34000, 40000 };
 
-	public GameBoard() {
-
-	}
-
-	public GUI_Field[] getFields() {
-
-		return fields;
-	}
-	
-	public boolean getOwnable() {
-		
-		return ownable;
-	}
-
 	public void createBoard() {
 		GUI.setNull_fields_allowed(true);
-		
 		fields[0] = new GUI_Start();
 		fields[0].setTitle("Start");
-
-		
-		
-
 		fields[0].setSubText("Modtag: 1000");
 		createStreet(1, "Roedeorevej", Color.CYAN, 1200, housePrice[0], rentRoedovervej);
-
 		fields[2] = new GUI_Chance();
 		fields[2].setSubText("Take a Chance");
 		createStreet(3, "Hvidovre", Color.CYAN, 1200, housePrice[0], rentHvidover);
@@ -127,6 +110,10 @@ public class GameBoard {
 		fields[38].setTitle("Ekstraordinær skat");
 		fields[38].setSubText("Betal 2000");
 		createStreet(39, "Rådhuspladsen", Color.magenta, 8000, housePrice[3], rentRÃ¥dhuspladesen);
+		brewShipSetOenable();
+		for (boolean i : ownable) {
+			System.out.println(i);
+		}
 	}
 
 	private void createStreet(int field, String name, Color color, int price, int housePrice, int[] rentAr) {
@@ -134,10 +121,27 @@ public class GameBoard {
 		fields[field].setTitle(name);
 		fields[field].setSubText("Pris: " + price);
 		fields[field].setBackGroundColor(color);
-		ownable = true;
+		ownable[field] = true;
 		pirceForHouse = housePrice;
 		for (int i = 0; i < rentAr.length; i++) {
 			this.rent[i] = rentAr[i];
+		}	
+	}
+	
+	private void brewShipSetOenable() {
+		ownable[12] = true;
+		ownable[28] = true;
+		for (int i = 5; i < 40; i = i + 10) {
+			ownable[i] = true;
 		}
 	}
+	
+	public GUI_Field[] getFields() {
+		return fields;
+	}
+	
+//	public boolean getOwnable() {
+//		return ;
+//	}
 }
+
