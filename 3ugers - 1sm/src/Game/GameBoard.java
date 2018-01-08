@@ -117,8 +117,7 @@ public class GameBoard {
 		pirceForHouse = housePrice;
 		// rent
 		for (int i = 0; i < rentAr.length; i++) {
-			int hold = rentAr[i];
-			this.rent[i] = hold;
+			this.rent[i] = rentAr[i];
 			System.out.println(this.rent[i]);
 		}
 	}
