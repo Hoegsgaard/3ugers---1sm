@@ -42,7 +42,7 @@ public class Controller {
 		int AmountOfPlayers = view.enterPlayers(gui);
 		
 		while (AmountOfPlayers > 6 || AmountOfPlayers < 2) {
-			AmountOfPlayers = (gui.getUserInteger("How many players? Min. 2 and Max. 4."));
+			AmountOfPlayers = (gui.getUserInteger("How many players? Min. 2 and Max. 6."));
 		}
 		
 		players = new Player[AmountOfPlayers];
@@ -101,7 +101,7 @@ public class Controller {
 		}
 		
 		int sum = diceController.roll() + diceController.roll();
-		if (player.getCurrentField() + sum > 23) {
+		if ((player.getCurrentField() + sum) > 23) {
 			sum -= 24;
 			player.changeBalance(2);
 		}
