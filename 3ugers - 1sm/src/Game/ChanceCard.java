@@ -153,11 +153,15 @@ public class ChanceCard {
 			player.setCurrentField(field);
 			gui.getFields()[player.getCurrentField()].setCar(player.getCarObject(), true);
 			gui.displayChanceCard(message);
+			ifPassStart(player, field);
 		}
 		
 		// Go to next Shipping Company
 		public void goToNextShippingCompany(Player player, GUI gui, String message) {
 			if (player.getCurrentField() > 35 && player.getCurrentField() < 5) {
+				if (player.getCurrentField() > 35) {
+					player.changeBalance(200);
+				}
 				gui.getFields()[player.getCurrentField()].setCar(player.getCarObject(), false);
 				player.setCurrentField(5);
 				gui.getFields()[player.getCurrentField()].setCar(player.getCarObject(), true);
@@ -224,10 +228,40 @@ public class ChanceCard {
 		}
 		
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		/////////////////
 		//Move funktioner
+		public void movePlayerDist(Player player, GUI gui, int dist) {
+			// Removes the brick from the current field.
+			gui.getFields()[player.getCurrentField()].setCar(player.getCarObject(), false);
+			// Updates the player object.
+			if (player.getCurrentField() + dist > 39) {
+				dist -= 40;
+				player.changeBalance(200);
+			}
+			player.setCurrentField(player.getCurrentField() + dist);
+			// Places the player's brick on the new field.
+			gui.getFields()[player.getCurrentField()].setCar(player.getCarObject(), true);
+		}
 		
 		
-		
+		public void ifPassStart(Player player, int field) {
+			if (player.getCurrentField() > field) {
+				player.changeBalance(200);
+			}
+		}
 		
 		
 		
