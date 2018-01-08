@@ -55,7 +55,7 @@ public class GameBoard {
 	}
 	
 	public boolean getOwnable() {
-		System.out.println(ownable);
+		
 		return ownable;
 	}
 
