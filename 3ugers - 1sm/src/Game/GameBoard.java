@@ -4,7 +4,6 @@ import java.awt.Color;
 
 import gui_fields.GUI_Brewery;
 import gui_fields.GUI_Chance;
-import gui_fields.GUI_Empty;
 import gui_fields.GUI_Field;
 import gui_fields.GUI_Jail;
 import gui_fields.GUI_Refuge;
