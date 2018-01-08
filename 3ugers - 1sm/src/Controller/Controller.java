@@ -57,7 +57,7 @@ public class Controller {
 			//16 if AmountOfPlayers = 4.
 			//18 if AmountOfPlayers = 3.
 			//20 if AmountOfPlayers = 2.
-			players[i].changeBalance(20 - ((AmountOfPlayers - 2) * 2));
+			players[i].changeBalance(10000 - ((AmountOfPlayers - 2) * 2));
 			//Sets the colour of the cars manually, so they dont end up the same by chance.
 			switch (i) {
 			case 0:
@@ -148,10 +148,24 @@ public class Controller {
 	public void buyField(Player player) {
 		int field = player.getCurrentField();
 		if(board.getOwnable(field)) {
-		setOwner(player);
-		board.getStreet(field).setBorder(player.getCarObject().getPrimaryColor());
-		board.setOwnable(field, false);
-		
+			if(field == 12 || field == 28) {
+				//setOwner(player);
+				board.getBrewery(field).setBorder(player.getCarObject().getPrimaryColor());
+				board.setOwnable(field, false);
+				player.changeBalance(-150);
+			}
+			else if(field == 5 ||field == 15 || field == 25|| field == 35){
+				//setOwner(player);
+				board.getShipping(field).setBorder(player.getCarObject().getPrimaryColor());
+				board.setOwnable(field, false);
+				player.changeBalance(-200);
+			}else {
+				setOwner(player);
+				board.getStreet(field).setBorder(player.getCarObject().getPrimaryColor());
+				board.setOwnable(field, false);
+				player.changeBalance(board.getPrice());
+			}
+			
 		}
 	}
 
