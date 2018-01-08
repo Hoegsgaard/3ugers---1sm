@@ -56,13 +56,13 @@ public class GameBoard {
 		GUI.setNull_fields_allowed(true);
 		fields[0] = new GUI_Start();
 		fields[0].setTitle("Start");
-<<<<<<< HEAD
-		fields[0].setSubText("Gain: 1000");
-		createStreet(1, "Rødeorevej", Color.CYAN, 1200, housePrice[0] );
-=======
+
+		
+		
+
 		fields[0].setSubText("Modtag: 1000");
 		createStreet(1, "Roedeorevej", Color.CYAN, 1200, housePrice[0], rentRoedovervej);
->>>>>>> branch 'Developer' of https://github.com/Hoegsgaard/3ugers---1sm.git
+
 		fields[2] = new GUI_Chance();
 		fields[2].setSubText("Take a Chance");
 		createStreet(3, "Hvidovre", Color.CYAN, 1200, housePrice[0], rentHvidover);
