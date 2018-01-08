@@ -110,7 +110,7 @@ public class Controller {
 		gui.setDice(diceController.getFaceValue(), diceController2.getFaceValue());
 		movePlayer(player, gui, sum);
 		buyField(player);
-		
+	//	
 	}
 	
 	
