@@ -22,7 +22,7 @@ public class GameBoard {
 
 	int[] fieldPrice = new int[40];
 	boolean[] ownable = new boolean[40];
-	int[] housePrice = { 1000, 2000, 3000, 4000 };
+	int[] housePrice = { 50, 100, 150, 200 };
 	int pirceForHouse;
 	int[] rent = new int[6];
 
