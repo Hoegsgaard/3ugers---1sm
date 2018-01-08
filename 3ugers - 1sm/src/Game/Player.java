@@ -8,6 +8,7 @@ public class Player {
 	private static int playerCounter = 1;
 	private int playerNumber;
 	private int balance = 0;
+	private int totalValue = 0;
 	private String name = "";
 	private GUI_Player carObject;
 	private boolean hasJailCard = false;
@@ -61,5 +62,14 @@ public class Player {
 	public void setHasJailCard(boolean hasJailCard) {
 		this.hasJailCard = hasJailCard;
 	}
+	
+	public int getTotalValue() {
+		return totalValue;
+	}
+	
+	public void setTotalValue(int val) {
+		totalValue = totalValue + val;
+	}
 }
+
 
