@@ -52,13 +52,13 @@ public class Controller {
 			players[i] = new Player();
 			//Asks the user for a name.
 			players[i].setName(gui.getUserString(("Enter the name of player " + (i + 1))));
-			players[i].setCarObject(new GUI_Player(players[i].getName(), 20 - ((AmountOfPlayers - 2) * 2)));
+			players[i].setCarObject(new GUI_Player(players[i].getName()));
 			
 			//Sets the players balance. 20 - ((AmountOfPlayers - 2) * 2) is an equation that gives the following results:
 			//16 if AmountOfPlayers = 4.
 			//18 if AmountOfPlayers = 3.
 			//20 if AmountOfPlayers = 2.
-			players[i].changeBalance(10000 - ((AmountOfPlayers - 2) * 2));
+			players[i].changeBalance(1500);
 			//Sets the colour of the cars manually, so they dont end up the same by chance.
 			switch (i) {
 			case 0:
@@ -105,7 +105,7 @@ public class Controller {
 		int sum = diceController.roll() + diceController.roll();
 		if ((player.getCurrentField() + sum) > 39) {
 			sum -= 40;
-			player.changeBalance(2);
+			player.changeBalance(200);
 		}
 		gui.setDice(d1.getFaceValue(), d2.getFaceValue());
 		movePlayer(player, gui, sum);
@@ -164,7 +164,7 @@ public class Controller {
 				setOwner(player);
 				board.getStreet(field).setBorder(player.getCarObject().getPrimaryColor());
 				board.setOwnable(field, false);
-				player.changeBalance(board.getPrice());
+				player.changeBalance(-board.getPrice(field));
 			}
 			
 		}

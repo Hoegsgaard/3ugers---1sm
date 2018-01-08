@@ -20,8 +20,9 @@ public class GameBoard {
 
 	GUI_Field[] fields = new GUI_Field[40];
 
+	int[] fieldPrice = new int[40];
 	boolean[] ownable = new boolean[40];
-	int[] housePrice = { 1000, 2000, 3000, 4000 };
+	int[] housePrice = { 50, 100, 150, 200 };
 	int pirceForHouse;
 	int[] rent = new int[6];
 
@@ -62,6 +63,8 @@ public class GameBoard {
 		fields[4].setSubText("Betal skat");
 		fields[4].setDescription("Betal 4000 eller 10% af dine samlede værdier");
 		fields[5] = new GUI_Shipping();
+		fields[5].setTitle("D/S Bornholm");
+		fields[5].setSubText("Pris: 200");
 		createStreet(6, "Roskildevej", Color.pink, 100, housePrice[0], rentRoskildevej);
 		fields[7] = new GUI_Chance();
 		fields[7].setSubText("Chance");
@@ -72,10 +75,12 @@ public class GameBoard {
 		createStreet(11, "Frederiksberg Alle", Color.green, 140, housePrice[0], rentFrederiksbergalle);
 		fields[12] = new GUI_Brewery();
 		fields[12].setTitle("Tuborg");
-		fields[12].setSubText("Bryggeri");
+		fields[12].setSubText("Pris: 150");
 		createStreet(13, "Bulowsvej", Color.green, 140, housePrice[1], rentBulowsvej);
 		createStreet(14, "GL. Kongevej", Color.green, 160, housePrice[1], rentGammelKongeVej);
 		fields[15] = new GUI_Shipping();
+		fields[15].setTitle("Øresund A/S");
+		fields[15].setSubText("Pris: 200");
 		createStreet(16, "Bernstorffsvej", Color.gray, 180, housePrice[1], rentBernstorffsvej);
 		fields[17] = new GUI_Chance();
 		fields[17].setSubText("Chance");
@@ -89,11 +94,13 @@ public class GameBoard {
 		createStreet(23, "Østerbrogade", Color.red, 220, housePrice[2], rentOesterbrogade);
 		createStreet(24, "Grøninningen", Color.red, 240, housePrice[2], rentGroenningen);
 		fields[25] = new GUI_Shipping();
+		fields[25].setTitle("D.F.D.S.");
+		fields[25].setSubText("Pris: 200");
 		createStreet(26, "Bredegade", Color.white, 260, housePrice[2], rentBredgade);
 		createStreet(27, "Kgs. Nytorv", Color.white, 260, housePrice[2], rentKgsNytov);
 		fields[28] = new GUI_Brewery();
 		fields[28].setTitle("Carlsberg");
-		fields[28].setSubText("Bryggeri");
+		fields[28].setSubText("Pris: 150");
 		createStreet(29, "Østergade", Color.white, 280, housePrice[2], rentOestergade);
 		fields[30] = new GUI_Jail();
 		fields[30].setSubText("Gå i fængsel");
@@ -103,6 +110,8 @@ public class GameBoard {
 		fields[33].setSubText("Chance");
 		createStreet(34, "Nygade", Color.yellow, 320, housePrice[3], rentNygade);
 		fields[35] = new GUI_Shipping();
+		fields[35].setTitle("D.K.");
+		fields[35].setSubText("Pris: 200");
 		fields[36] = new GUI_Chance();
 		fields[36].setSubText("Chance");
 		createStreet(37, "Frederiksberggade", Color.magenta, 350, housePrice[3], rentFrederiksberggade);
@@ -110,7 +119,7 @@ public class GameBoard {
 		fields[38].setTitle("Ekstraordinær skat");
 		fields[38].setSubText("Betal 2000");
 		createStreet(39, "Rådhuspladsen", Color.magenta, 400, housePrice[3], rentRÃ¥dhuspladesen);
-		brewShipSetOenable();
+		brewShipSetSetup();
 		}
 
 	private void createStreet(int field, String name, Color color, int price, int housePrice, int[] rentAr) {
@@ -123,17 +132,23 @@ public class GameBoard {
 		pirceForHouse = housePrice;
 		for (int i = 0; i < rentAr.length; i++) {
 			this.rent[i] = rentAr[i];
-		}	
+		}
+		fieldPrice[field] = price;
+		
 	}
 	
-	private void brewShipSetOenable() {
+	private void brewShipSetSetup() {
 		ownable[12] = true;
 		((GUI_Brewery) fields[12]).setOwnerName(null);
+		setPrice(12, 150);
+		
 		ownable[28] = true;
 		((GUI_Brewery) fields[28]).setOwnerName(null);
+		setPrice(28, 150);
 		for (int i = 5; i < 40; i = i + 10) {
 			ownable[i] = true;
 			((GUI_Shipping)fields[i]).setOwnerName(null);
+			setPrice(i, 200);
 		}
 	}
 	
@@ -158,5 +173,12 @@ public class GameBoard {
 	public GUI_Shipping getShipping(int field) {
 		return ((GUI_Shipping) fields[field]);
 	}
+	public int getPrice(int field) {
+		return fieldPrice[field];
+	}
+	public void setPrice(int fields, int price) {
+		fieldPrice[fields] = price;
+	}
+	
 }
 
