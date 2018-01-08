@@ -180,5 +180,10 @@ public class GameBoard {
 		fieldPrice[fields] = price;
 	}
 	
+// WIP	
+//	public int getRent() {
+//		
+//	}
+	
 }
 
