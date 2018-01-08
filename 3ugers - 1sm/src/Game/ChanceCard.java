@@ -52,7 +52,9 @@ public class ChanceCard {
 			chanceCard[currentValue] = a;
 		}
 	}
-		
+	
+	// Work in progress	
+	
 		// Trækker et kort, kalder metoden og lægger det nederst i bunken
 		public void drawCard(Player player, Player[] players) {
 			String card = chanceCard[0];
