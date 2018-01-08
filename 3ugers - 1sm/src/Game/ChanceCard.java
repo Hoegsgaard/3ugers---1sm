@@ -1,18 +1,17 @@
 package Game;
 
-import Controller.Controller;
 import gui_main.GUI;
 
 public class ChanceCard {
 	
-	private static ChanceCard instance;
-	
-	public static ChanceCard getInstance() {
-		if (instance == null) {
-			instance = new ChanceCard();
-		}
-		return instance;
-	}
+//	private static ChanceCard instance;
+//	
+//	public static ChanceCard getInstance() {
+//		if (instance == null) {
+//			instance = new ChanceCard();
+//		}
+//		return instance;
+//	}
 	
 	public ChanceCard() {}
 	

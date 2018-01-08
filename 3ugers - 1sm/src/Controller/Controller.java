@@ -22,6 +22,7 @@ public class Controller {
 	DiceController diceController = new DiceController();
 	Dice d1 = new Dice(6);
 	Dice d2 = new Dice(6);
+	ChanceCard cc = new ChanceCard();
 
 	public void runGame() {
 		board.createBoard();
@@ -124,18 +125,19 @@ public class Controller {
 	
 	
 	public void movePlayer(Player player, GUI gui, int dist) {
+		int field = player.getCurrentField();
 		// Removes the brick from the current field.
-		gui.getFields()[player.getCurrentField()].setCar(player.getCarObject(), false);
+		gui.getFields()[field].setCar(player.getCarObject(), false);
 		// Updates the player object.
-		player.setCurrentField(player.getCurrentField() + dist);
+		player.setCurrentField(field + dist);
 		// Places the player's brick on the new field.
-		gui.getFields()[player.getCurrentField()].setCar(player.getCarObject(), true);
+		gui.getFields()[field].setCar(player.getCarObject(), true);
 		//Checks if they player has to go to jail or draw a chancecard.
-//		if (gui.getFields()[player.getCurrentField()] == fields[18]) {
-//			goToJail(player, gui);
-//		} else if (player.getCurrentField() == 3 || player.getCurrentField() == 9 || player.getCurrentField() == 15
-//				|| player.getCurrentField() == 21) {
-//			cd.drawCard(player, players);
+//		if(field == 2 || field == 7 || field == 17 || field == 22 || field == 33 || field == 36) {
+//			cc.drawCard(player, players);
+//		} 
+//		else if (gui.getFields()[player.getCurrentField()] == fields[18]) {
+//				goToJail(player, gui);
 //		}
 	}
 	
