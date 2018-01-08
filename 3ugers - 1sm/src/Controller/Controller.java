@@ -22,7 +22,8 @@ public class Controller {
 	Dice d1 = new Dice(6);
 	Dice d2 = new Dice(6);
 	ChanceCard cc = new ChanceCard();
-
+	DiceController diceController2 = new DiceController();
+	
 	public void runGame() {
 		board.createBoard();
 		GUI gui = new GUI(board.getFields());
@@ -102,15 +103,15 @@ public class Controller {
 			
 		}
 		
-		int sum = diceController.roll() + diceController.roll();
+		int sum = diceController.roll() + diceController2.roll();
 		if ((player.getCurrentField() + sum) > 39) {
 			sum -= 40;
 			player.changeBalance(200);
 		}
-		gui.setDice(d1.getFaceValue(), d2.getFaceValue());
+		gui.setDice(diceController.getFaceValue(), diceController2.getFaceValue());
 		movePlayer(player, gui, sum);
 		buyField(player);
-		
+	//	
 	}
 	
 	
