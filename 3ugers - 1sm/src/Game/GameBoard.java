@@ -22,7 +22,7 @@ public class GameBoard {
 
 	int[] fieldPrice = new int[40];
 	boolean[] ownable = new boolean[40];
-	int[] housePrice = { 1000, 2000, 3000, 4000 };
+	int[] housePrice = { 50, 100, 150, 200 };
 	int pirceForHouse;
 	int[] rent = new int[6];
 
@@ -72,7 +72,7 @@ public class GameBoard {
 		createStreet(9, "Allegade", Color.pink, 120, housePrice[0], rentAllegade);
 		fields[10] = new GUI_Jail();
 		fields[10].setSubText("På besøg");
-		createStreet(11, "Frederiksberg Alle", Color.green, 140, housePrice[0], rentFrederiksbergalle);
+		createStreet(11, "Frederiksberg Alle", Color.green, 140, housePrice[1], rentFrederiksbergalle);
 		fields[12] = new GUI_Brewery();
 		fields[12].setTitle("Tuborg");
 		fields[12].setSubText("Pris: 150");

@@ -1,8 +1,18 @@
 package Game;
 
+import Controller.Controller;
 import gui_main.GUI;
 
 public class ChanceCard {
+	
+	private static ChanceCard instance;
+	
+	public static ChanceCard getInstance() {
+		if (instance == null) {
+			instance = new ChanceCard();
+		}
+		return instance;
+	}
 	
 	public ChanceCard() {}
 	
@@ -42,7 +52,9 @@ public class ChanceCard {
 			chanceCard[currentValue] = a;
 		}
 	}
-		
+	
+	// Work in progress	
+	
 		// Trækker et kort, kalder metoden og lægger det nederst i bunken
 		public void drawCard(Player player, Player[] players) {
 			String card = chanceCard[0];
@@ -56,87 +68,91 @@ public class ChanceCard {
 			
 			// Move cards
 			case "moveToRådhuspladsen":
-				moveTo(player, 39, gui, message[?]);
+				moveTo(player, 39, gui, "Tag ind til Rådhuspladsen");
 				break;
 			case "moveToGrønningen":
-				moveTo(player, 24, gui, message[?]);
+				moveTo(player, 24, gui, "Ryk frem til Grønningen. Hvis du passerer >>Start<< indkasser da kr. 200.");
 				break;
-			case "takeØresundsbanen":
-				moveTo(player, 5, gui, message[?]);
+			case "takeØresundsbåden":
+				moveTo(player, 5, gui, "Tag med Øresundsbåden.. Flyt brikken frem, og hvis du passerer >>Start<< indkasser kr. 200.");
 				break;
-			case "goThreeStepsBack":
-				moveSteps(player, gui, -3, message[?]);
-				break;
+//			case "goThreeStepsBack":
+//				moveSteps(player, -3, gui, "Ryk tre felter tilbage");
+//				break;
 			case "goToStart":
-				moveTo(player, 0, gui, message[?]);
+				moveTo(player, 0, gui, "Ryk frem til >>Start<<");
 				break;
 			case "goToNextShippingCompany":
-				goToNextShippingCompany(player, gui, message[?]);
+				goToNextShippingCompany(player, gui, "Ryk brikken frem til det nærmeste dampskibsselskab "
+						+ "og betal ejeren to gange den leje, han ellers er berettiget til. "
+						+ "Hvis selskabet ikke er ejet af nogen, kan De købe det af banken.");
 				break;
 				
 			// Get money
 			case "sammenskudsgilde":
-				sammenskudsgilde(player);
+				getMoney(player, gui, 25, "De har lagt penge ud til sammenskudsgilde. "
+						+ "Mærkværdigvis betaler alle straks. Modtag kr. 25 fra hver medspiller.");
 				break;
 			case "nyttehaven":
-				nyttehaven(player);
+				getMoney(player, gui, 200, "Værdien af egen avl fra nyttehaven udgør kr. 200, som du modtager af Banken.");
 				break;
 			case "klude":
-				klude(player);
+				getMoney(player, gui, 20, "Du har solgt dine gamle klude. Modtag kr. 20.");
 				break;
 			case "abonnementskort":
-				abonnementskort(player);
+				getMoney(player, gui, 1, "Du har rettidigt afleveret dine abonnementskort. Et depositum på kr. 1 udbetales til dig af banken.");
 				break;
 			case "manufakturvarer":
-				manufakturvarer(player);
+				getMoney(player, gui, 50, "Manufakturvarerne er blevet billigere og bedre, herved sparer du kr. 50, som du modtager af banken.");
 				break;
 			case "assistenthus":
-				assistenthus(player);
+				getMoney(player, gui, 108, "Efter auktionen på Assistenshuset, hvor du har pantsat dit tøj, modtag de ekstra kr. 108.");
 				break;
 			case "aktier":
-				aktier(player);
+				getMoney(player, gui, 50, "Modtag udbytte af dine aktier: kr. 50");
 				break;
 			case "legater":
-				legater(player);
+				scholarship(player, gui, 2000, "Du modtager >>Matador-legater for værdig trængende<< kr. 2000." 
+						+ "Ved værdig trængende forstås, at din formue, d. v. s. dine kontante penge + skøder + bygninger, ikke overstiger kr. 750.");
 				break;
 			case "præmieoblikation":
-				præmieoblikation(player);
+				getMoney(player, gui, 100, "Din præmieobligation er kommet ud. De Modtager kr. 100 af banken.");
 				break;
 			case "gageforhøjelse":
-				gageforhøjelse(player);
+				getMoney(player, gui, 25, "Grundet på dyrtiden har du fået gageforhøjelse. Modtag kr. 25.");
 				break;
 			
 			// Pay money
-			case "kokspriser":
-				kokspriser(player);
-				break;
-			case "ejendomsskat":
-				ejendomsskat(player);
-				break;
+//			case "kokspriser":
+//				kokspriser(player);
+//				break;
+//			case "ejendomsskat":
+//				ejendomsskat(player);
+//				break;
 			case "dæk":
-				dæk(player);
+				payMoney(player, gui, 100, "Du har anskaffet et nyt dæk til din bil. Indbetal kr. 100.");
 				break;
 			case "fullStop":
-				fullStop(player);
+				payMoney(player, gui, 100, "Du har kørt frem for >Fuld Stop<. Betal kr. 100 i bøde.");
 				break;
 			case "vask":
-				vask(player);
+				payMoney(player, gui, 100, "Betal for vogn vask og smørning kr. 100.");
 				break;
 			case "smøger":
-				smøger(player);
+				payMoney(player, gui, 20, "Du har været en tur i udlandet og har haft for mange cigaretter med hjem. Betal told kr. 20.");
 				break;
 			case "parkeringsbøde":
-				parkeringsbøde(player);
+				payMoney(player, gui, 20, "Du har måttet vedtage en parkeringsbøde. Betal kr. 20 til banken.");
 				break;
 				
 			// Go to jail
 			case "goToJail":
-				goToJail(player);
+				goToJail(player, 30, gui, "Gå i fængsel. Ryk direkte til fængsel. Selv om De passerer >>Start<<, indkasserer du ikke kr. 200.");
 				break;
 			
 			// Get out of jail
 			case "getOutOfJail":
-				getOutOfJail(player);
+				getOutOfJail(player, "I anledning af Kongens fødelsdag benådes du herved for fængsel. Dette kort kan opbevares, indtil du får brug for det eller du kan sælge det.");
 				break;
 			}	
 		}
@@ -146,28 +162,8 @@ public class ChanceCard {
 			gui.getFields()[player.getCurrentField()].setCar(player.getCarObject(), false);
 			player.setCurrentField(field);
 			gui.getFields()[player.getCurrentField()].setCar(player.getCarObject(), true);
+			gui.displayChanceCard(message);
 		}
-		
-		/* Udkommenteret.. kig på disse funktioner senere! */
-//		// Move to Rådhuspladsen
-//		public void moveToRådhuspladsen(Player player) {
-//			
-//		}
-//		
-//		// Move to Grønningen
-//		public void moveToGrønningen(Player player) {
-//			
-//		}
-//		
-//		// Take Øresundsbanen
-//		public void takeØresundsbanen(Player player) {
-//			
-//		}
-		
-//		// Go to start
-//		public void goToStart(Player player) {
-//			
-//		}
 		
 		// Go to next Shipping Company
 		public void goToNextShippingCompany(Player player, GUI gui, String message) {
@@ -191,116 +187,65 @@ public class ChanceCard {
 				player.setCurrentField(35);
 				gui.getFields()[player.getCurrentField()].setCar(player.getCarObject(), true);
 			}
-		}
-		
-		// Move steps (this chance card moves a player forwards or backwards on the board)
-		public void moveSteps(Player player, int steps, GUI gui, String message) {
-			movePlayer(player, gui, steps);
 			gui.displayChanceCard(message);
 		}
 		
-//		// Go three steps back
-//		public void goThreeStepsBack(Player player) {
-//			
+//		// Move steps (this chance card moves a player forwards or backwards on the board)
+//		public void moveSteps(Player player, int steps, GUI gui, String message) {
+//			movePlayer(player, gui, steps);
+//			gui.displayChanceCard(message);
 //		}
-		// Conflict
+		
 		// Get money (this chance card adds money to the players balance)
-		public void getMoney(Player player, ) {
-			
+		public void getMoney(Player player, GUI gui, int money, String message) {
+			player.changeBalance(money);
+			gui.displayChanceCard(message);
 		}
 		
-//		// Sammenskudsgilde
-//		public void sammenskudsgilde(Player player) {
-//			
-//		}
-//		
-//		// Nyttehaven
-//		public void nyttehaven(Player player) {
-//			
-//		}
-//		
-//		// Klude
-//		public void klude(Player player) {
-//			
-//		}
-//		
-//		// Abonnementskort
-//		public void abonnementskort(Player player) {
-//			
-//		}
-//		
-//		// Manufakturvarer
-//		public void manufakturvarer(Player player) {
-//			
-//		}
-//		
-//		// Assistenthus
-//		public void assistenthus(Player player) {
-//			
-//		}
-//		
-//		// Aktier
-//		public void aktier(Player player) {
-//			
-//		}
-//		
-//		// Legater
-//		public void legater(Player player) {
-//			
-//		}
-//		
-//		// Præmieoblikation
-//		public void præmieoblikation(Player player) {
-//			
-//		}
-//		
-//		// Gageforhøjelse
-//		public void gageforhøjelse(Player player) {
-//			
-//		}
-		
-		// Kokspriser
-		public void kokspriser(Player player) {
-			
+		// Scholarships
+		public void scholarship(Player player, GUI gui, int money, String message) {
+			if (player.getTotalValue() <= 750) {
+				player.changeBalance(money);
+			}
+			else if (player.getTotalValue() > 750) {
+				player.changeBalance(0);
+			}
+			gui.displayChanceCard(message);
 		}
 		
-		// Ejendomsskat
-		public void ejendomsskat(Player player) {
-			
-		}
-		
-		// Dæk
-		public void dæk(Player player) {
-			
-		}
-		
-		// Full stop
-		public void fullStop(Player player) {
-			
-		}
-		
-		// Vask
-		public void vask(Player player) {
-			
-		}
-		
-		// Smøger
-		public void smøger(Player player) {
-			
-		}
-		
-		// Parkeringsbøde
-		public void parkeringsbøde(Player player) {
-			
+		// Pay money (this chance card draws money from the players balance)
+		public void payMoney(Player player, GUI gui, int money, String message) {
+			player.changeBalance(money);
+			gui.displayChanceCard(message);
 		}
 		
 		// Go to jail
-		public void goToJail(Player player) {
-			
+		public void goToJail(Player player, int field, GUI gui, String message) {
+			gui.getFields()[player.getCurrentField()].setCar(player.getCarObject(), false);
+			player.setCurrentField(field);
+			gui.getFields()[player.getCurrentField()].setCar(player.getCarObject(), true);
+			gui.displayChanceCard(message);
 		}
 		
 		// Get out of jail
-		public void getOutOfJail(Player player) {
-			
+		public void getOutOfJail(Player player, String message) {
+			player.setHasJailCard(true);
+			gui.displayChanceCard(message);
 		}
+		
+//		public void movePlayer(Player player, GUI gui, int dist) {
+//			// Removes the brick from the current field.
+//			gui.getFields()[player.getCurrentField()].setCar(player.getCarObject(), false);
+//			// Updates the player object.
+//			player.setCurrentField(player.getCurrentField() + dist);
+//			// Places the player's brick on the new field.
+//			gui.getFields()[player.getCurrentField()].setCar(player.getCarObject(), true);
+//			//Checks if they player has to go to jail or draw a chancecard.
+////			if (gui.getFields()[player.getCurrentField()] == fields[18]) {
+////				goToJail(player, gui);
+////			} else if (player.getCurrentField() == 3 || player.getCurrentField() == 9 || player.getCurrentField() == 15
+////					|| player.getCurrentField() == 21) {
+////				cd.drawCard(player, players);
+////			}
+//		}
 }
