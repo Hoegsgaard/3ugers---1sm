@@ -24,9 +24,6 @@ public class Controller {
 
 	public void runGame() {
 		board.createBoard();	
-		board.getOwnable();
-		board.getOwnable();
-		board.getOwnable();
 		GUI gui = new GUI(board.getFields());	
 		addPlayers(gui);		
 		initPlayers(gui);
@@ -140,14 +137,14 @@ public class Controller {
 //		}
 	}
 	
-	public void buyProberty(Player player) {
-		if(board.getOwnable()==true) {
-			player.getCurrentField();
-			
-		}
-				
-		
-	}
+//	public void buyProberty(Player player) {
+//		if(board.getOwnable()==true) {
+//			player.getCurrentField();
+//			
+//		}
+//				
+//		
+//	}
 	
 	
 }
