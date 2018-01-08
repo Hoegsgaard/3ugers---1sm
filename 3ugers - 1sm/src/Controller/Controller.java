@@ -8,7 +8,6 @@ import Game.Game;
 import Game.GameBoard;
 import Game.Player;
 import View.Display;
-import gui_fields.GUI_Field;
 import gui_fields.GUI_Player;
 import gui_main.GUI;
 
