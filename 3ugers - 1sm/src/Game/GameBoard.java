@@ -140,6 +140,7 @@ public class GameBoard {
 		return fields;
 	}
 	
+	//Ownable get og set
 	public boolean getOwnable(int field) {
 		return ownable[field]; 	
 	}
