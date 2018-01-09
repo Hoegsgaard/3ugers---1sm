@@ -147,7 +147,7 @@ public class GameBoard {
 		fields[field].setTitle(name);
 		fields[field].setSubText("Pris: " + price);
 		fields[field].setBackGroundColor(color);
-		ownable[field] = false;
+		ownable[field] = true;
 		((GUI_Street) fields[field]).setOwnerName(null);
 		pirceForHouse = housePrice;
 		fieldPrice[field] = price;
@@ -215,16 +215,16 @@ public int getRentShipping(int count) {
 	int pay = 0;
 	switch(count) {
 	case 1:
-		pay = rent[5][1];
+		pay = rent[5][0];
 		break;
 	case 2:
-		pay = rent[5][2];
+		pay = rent[5][1];
 		break;
 	case 3:
-		pay = rent[5][3];
+		pay = rent[5][2];
 		break;
 	case 4:
-		pay = rent[5][4];
+		pay = rent[5][3];
 		break;
 	}
 		return pay;

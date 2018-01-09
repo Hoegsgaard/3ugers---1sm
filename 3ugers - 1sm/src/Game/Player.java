@@ -8,7 +8,7 @@ public class Player {
 	private static int playerCounter = 1;
 	private int playerNumber;
 	private int balance = 0;
-	private int totalValue = 1000;
+	private int totalValue = 0;
 	private String name = "";
 	private GUI_Player carObject;
 	private boolean hasJailCard = false;
