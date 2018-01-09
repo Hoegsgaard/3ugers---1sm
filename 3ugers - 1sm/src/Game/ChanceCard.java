@@ -10,8 +10,8 @@ public class ChanceCard {
 	String[] chanceCard = { "moveToRådhuspladsen", "moveToGrønningen", "takeØresundsbanen", "goThreeStepsBack",
 			"goThreeStepsBack", "goToStart", "goToNextShippingCompany", "sammenskudsgilde", "nyttehaven", "klude",
 			"abonnementskort", "manufakturvarer", "assistenthus", "aktier", "legater", "præmieoblikation",
-			"gageforhøjelse", "kokspriser", "ejendomsskat", "dæk", "fullStop", "vask", "vask", "smøger",
-			"parkeringsbøde", "parkeringsbøde", "goToJail", "goToJail", "goToJail", "getOutOfJail", "getOutOfJail" };
+			"gageforhøjelse", "coalPrices", "propertyTax", "tire", "fullStop", "vash", "vash", "cigarettes",
+			"parkeringTicket", "parkeringTicket", "goToJail", "goToJail", "goToJail", "getOutOfJail", "getOutOfJail" };
 
 	private GUI gui;
 
@@ -68,9 +68,9 @@ public class ChanceCard {
 			moveTo(player, 5, gui,
 					"Tag med Øresundsbåden.. Flyt brikken frem, og hvis du passerer >>Start<< indkasser kr. 200.");
 			break;
-		// case "goThreeStepsBack":
-		// moveSteps(player, -3, gui, "Ryk tre felter tilbage");
-		// break;
+		case "goThreeStepsBack":
+			moveSteps(player, -3, gui, "Ryk tre felter tilbage");
+			break;
 		case "goToStart":
 			moveTo(player, 0, gui, "Ryk frem til >>Start<<");
 			break;
@@ -119,26 +119,26 @@ public class ChanceCard {
 			break;
 
 		// Pay money
-		// case "kokspriser":
-		// kokspriser(player);
-		// break;
-		// case "ejendomsskat":
-		// ejendomsskat(player);
-		// break;
-		case "dæk":
+//		case "coalPrices":
+//			kokspriser(player, "Kul og kokspriserne er steget, og De skal betale: kr. 25 pr hus og kr. 125 per Hotel.");
+//			break;
+//		case "propertyTax":
+//			ejendomsskat(player, "Ejendomsskat er steget, ekstraudgifterne er: kr. 50 per hus og kr. 125 per Hotel.");
+//			break;
+		case "tire":
 			payMoney(player, gui, 100, "Du har anskaffet et nyt dæk til din bil. Indbetal kr. 100.");
 			break;
 		case "fullStop":
 			payMoney(player, gui, 100, "Du har kørt frem for >Fuld Stop<. Betal kr. 100 i bøde.");
 			break;
-		case "vask":
+		case "vash":
 			payMoney(player, gui, 100, "Betal for vogn vask og smørning kr. 100.");
 			break;
-		case "smøger":
+		case "cigarettes":
 			payMoney(player, gui, 20,
 					"Du har været en tur i udlandet og har haft for mange cigaretter med hjem. Betal told kr. 20.");
 			break;
-		case "parkeringsbøde":
+		case "parkeringTicket":
 			payMoney(player, gui, 20, "Du har måttet vedtage en parkeringsbøde. Betal kr. 20 til banken.");
 			break;
 
@@ -192,10 +192,10 @@ public class ChanceCard {
 
 	// // Move steps (this chance card moves a player forwards or backwards on the
 	// board)
-	// public void moveSteps(Player player, int steps, GUI gui, String message) {
-	// movePlayer(player, gui, steps);
-	// gui.displayChanceCard(message);
-	// }
+	public void moveSteps(Player player, int steps, GUI gui, String message) {
+		movePlayerDist(player, gui, steps);
+		gui.displayChanceCard(message);
+	 }
 
 	// Get money (this chance card adds money to the players balance)
 	public void getMoney(Player player, GUI gui, int money, String message) {
@@ -212,6 +212,12 @@ public class ChanceCard {
 		}
 		gui.displayChanceCard(message);
 	}
+	
+	// Coal prices
+	
+	
+	// Property tax
+	
 
 	// Pay money (this chance card draws money from the players balance)
 	public void payMoney(Player player, GUI gui, int money, String message) {
@@ -234,7 +240,7 @@ public class ChanceCard {
 	}
 
 	/////////////////
-	// Move funktioner
+	// Move funktions
 	public void movePlayerDist(Player player, GUI gui, int dist) {
 		// Removes the brick from the current field.
 		gui.getFields()[player.getCurrentField()].setCar(player.getCarObject(), false);
