@@ -214,6 +214,9 @@ public class Controller {
 //			board.setOwnable(player.getCurrentField(), true);
 //		}	
 //	}
+	
+	
+	//TAX
 	public void eksTax(Player player, GUI gui) {
 		player.changeBalance(-100);
 		gui.displayChanceCard("Ekatraordinær skat, betal 100kr.");
