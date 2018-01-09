@@ -81,7 +81,7 @@ public class GameBoard {
 		fields[4] = new GUI_Tax();
 		fields[4].setTitle("Stats skat");
 		fields[4].setSubText("Betal skat");
-		fields[4].setDescription("Betal 4000 eller 10% af dine samlede værdier");
+		fields[4].setDescription("Betal 200 eller 10% af dine samlede værdier");
 		fields[5] = new GUI_Shipping();
 		fields[5].setTitle("D/S Bornholm");
 		fields[5].setSubText("Pris: 200");
@@ -137,7 +137,7 @@ public class GameBoard {
 		createStreet(37, "Frederiksberggade", Color.magenta, 350, housePrice[3]);
 		fields[38] = new GUI_Tax();
 		fields[38].setTitle("Ekstraordinær skat");
-		fields[38].setSubText("Betal 2000");
+		fields[38].setSubText("Betal 100");
 		createStreet(39, "Rådhuspladsen", Color.magenta, 400, housePrice[3]);
 		brewShipSetSetup();
 		}

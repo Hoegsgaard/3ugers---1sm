@@ -169,8 +169,15 @@ public class Controller {
 		// Checks if they player has to go to jail or draw a chancecard.
 		if (player.getCurrentField() == 2 || player.getCurrentField() == 7 || player.getCurrentField() == 17 || player.getCurrentField() == 22 || player.getCurrentField() == 33 || player.getCurrentField() == 36) {
 			cc.drawCard(player, players);
-		} else if (gui.getFields()[player.getCurrentField()] ==gui.getFields()[30]) {
+		} 
+		else if (gui.getFields()[player.getCurrentField()] ==gui.getFields()[30]) {
 			goToJail(player, gui);
+		}
+		else if (gui.getFields()[player.getCurrentField()] == gui.getFields()[38]) {
+			eksTax(player, gui);
+		}
+		else if (gui.getFields()[player.getCurrentField()] == gui.getFields()[4]) {
+			stageTax(player, gui);
 		}
 
 	}
@@ -203,6 +210,17 @@ public class Controller {
 //			board.setOwnable(player.getCurrentField(), true);
 //		}	
 //	}
-	
-
+	public void eksTax(Player player, GUI gui) {
+		player.changeBalance(-100);
+		gui.displayChanceCard("Ekatraordinær skat, betal 100kr.");
+	}
+	public void stageTax(Player player, GUI gui) {
+		if (view.stageTax(gui)) {
+			player.changeBalance(-200);
+		}
+		else {
+			int tax = player.getTotalValue() * 10/100;
+			player.changeBalance(-tax);
+		}
+	}
 }

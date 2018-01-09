@@ -21,6 +21,11 @@ public class Display {
 		
 	}
 	
+	public Boolean stageTax(GUI gui) {
+		Boolean choice = gui.getUserLeftButtonPressed("Stats skat! betal 200kr eller 10% af din samlede indtægt", "200kr", "10%");
+		return choice;
+	}
+	
 
 		
 }
