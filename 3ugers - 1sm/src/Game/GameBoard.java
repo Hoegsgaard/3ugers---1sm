@@ -127,7 +127,7 @@ public class GameBoard {
 		fields[field].setTitle(name);
 		fields[field].setSubText("Pris: " + price);
 		fields[field].setBackGroundColor(color);
-		ownable[field] = false;
+		ownable[field] = true;
 		((GUI_Street) fields[field]).setOwnerName(null);
 		pirceForHouse = housePrice;
 		for (int i = 0; i < rentAr.length; i++) {

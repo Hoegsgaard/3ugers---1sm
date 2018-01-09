@@ -9,6 +9,7 @@ import Game.GameBoard;
 import Game.Player;
 import View.Display;
 import gui_fields.GUI_Player;
+import gui_fields.GUI_Street;
 import gui_main.GUI;
 
 public class Controller {
@@ -96,6 +97,10 @@ public class Controller {
 	}
 
 	private void takeTurn(Player player, GUI gui) {
+		if(player.getBalance() == 0) {
+			
+			gui.getFields()[player.getCurrentField()].setCar(player.getCarObject(), false);
+		}
 		if (turn) {
 			view.rollDiceButton(gui);
 
@@ -108,8 +113,8 @@ public class Controller {
 		}
 		gui.setDice(diceController.getFaceValue(), diceController2.getFaceValue());
 		movePlayer(player, gui, sum);
-		buyField(player);
-		//
+		buyField(player, gui);
+		
 	}
 
 	private void takeRound(GUI gui) {
@@ -123,29 +128,32 @@ public class Controller {
 	public void setOwner(Player player) {
 		board.getStreet(player.getCurrentField()).setOwnableLabel("Owner : ");
 		board.getStreet(player.getCurrentField()).setOwnerName(player.getName());
-
+		
+		
 	}
 
+	
 
-
-	public void buyField(Player player) {
-		int field = player.getCurrentField();
-		if (board.getOwnable(field)) {
-			if (field == 12 || field == 28) {
+	public void buyField(Player player, GUI gui) {
+		
+		if (board.getOwnable(player.getCurrentField())) {
+			if (player.getCurrentField() == 12 || player.getCurrentField() == 28) {
 				// setOwner(player);
-				board.getBrewery(field).setBorder(player.getCarObject().getPrimaryColor());
-				board.setOwnable(field, false);
+				board.getBrewery(player.getCurrentField()).setBorder(player.getCarObject().getPrimaryColor());
+				board.setOwnable(player.getCurrentField(), false);
 				player.changeBalance(-150);
-			} else if (field == 5 || field == 15 || field == 25 || field == 35) {
+			} else if (player.getCurrentField() == 5 || player.getCurrentField() == 15 
+					|| player.getCurrentField() == 25 || player.getCurrentField() == 35) {
 				// setOwner(player);
-				board.getShipping(field).setBorder(player.getCarObject().getPrimaryColor());
-				board.setOwnable(field, false);
+				board.getShipping(player.getCurrentField()).setBorder(player.getCarObject().getPrimaryColor());
+				board.setOwnable(player.getCurrentField(), false);
 				player.changeBalance(-200);
 			} else {
 				setOwner(player);
-				board.getStreet(field).setBorder(player.getCarObject().getPrimaryColor());
-				board.setOwnable(field, false);
-				player.changeBalance(-board.getPrice(field));
+				board.getStreet(player.getCurrentField()).setBorder(player.getCarObject().getPrimaryColor());
+				board.setOwnable(player.getCurrentField(), false);
+				player.changeBalance(-board.getPrice(player.getCurrentField()));
+				payRent(player, gui);
 			}
 
 		}
@@ -176,24 +184,38 @@ public class Controller {
 	}
 
 
-// Work in progress.... this is next
-//	public void payRent(Player player) {
-//		if(board.getStreet(player.getCurrentField()).getOwnerName() != null){
-//			player.changeBalance(-1 * board.getRent);
-//			owner 
-//		}
-//	}
 
-	
+	public void payRent(Player player, GUI gui) {
+		if(board.getStreet(player.getCurrentField()).getOwnerName() != null){
+			if(board.getStreet(player.getCurrentField()).getOwnerName() != player.getName()) {
+				player.changeBalance(-1 * 10);
+				board.getStreet(player.getCurrentField()).getOwnerName();
+				String ownerName = ((GUI_Street) gui.getFields()[player.getCurrentField()]).getOwnerName();
+				for (int i = 0; i < players.length; i++) {
+					if (ownerName.equals(players[i].getName())) {
+						payRent(players[i], player, player.getCurrentField(), gui);
+					}
+				}
+				
+			}
+			
+		}
+		
+				
+	}
+
+	private void payRent(Player owner, Player renter, int field, GUI gui) {
+		int rent = Integer.parseInt(((GUI_Street) gui.getFields()[field]).getRent());
+		renter.changeBalance(-1 * rent);
+		owner.changeBalance(rent);
+	}
 	
 
 	public void goToJail(Player player, GUI gui) {
 		setPlayerPos(player, 10, gui);
 	}
 
-	public void payRent(Player player) {
 
-	}
 
 
 }
