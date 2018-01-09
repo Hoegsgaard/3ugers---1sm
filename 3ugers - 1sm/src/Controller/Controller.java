@@ -185,30 +185,13 @@ public class Controller {
 
 
 
-	public void payRent(Player player, GUI gui) {
-		if(board.getStreet(player.getCurrentField()).getOwnerName() != null){
-			if(board.getStreet(player.getCurrentField()).getOwnerName() != player.getName()) {
-				player.changeBalance(-1 * 10);
-				board.getStreet(player.getCurrentField()).getOwnerName();
-				String ownerName = ((GUI_Street) gui.getFields()[player.getCurrentField()]).getOwnerName();
-				for (int i = 0; i < players.length; i++) {
-					if (ownerName.equals(players[i].getName())) {
-						payRent(players[i], player, player.getCurrentField(), gui);
-					}
-				}
-				
-			}
-			
-		}
-		
-				
-	}
+	
 
-	private void payRent(Player owner, Player renter, int field, GUI gui) {
-		int rent = Integer.parseInt(((GUI_Street) gui.getFields()[field]).getRent());
-		renter.changeBalance(-1 * rent);
-		owner.changeBalance(rent);
-	}
+//	private void payRent(Player owner, Player renter, int field, GUI gui) {
+//		int rent = Integer.parseInt(((GUI_Street) gui.getFields()[field]).getRent());
+//		renter.changeBalance(-1 * rent);
+//		owner.changeBalance(rent);
+//	}
 	
 
 	public void goToJail(Player player, GUI gui) {
