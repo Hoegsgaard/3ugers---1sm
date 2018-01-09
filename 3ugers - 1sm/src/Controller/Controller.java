@@ -126,32 +126,36 @@ public class Controller {
 				payRent(player, gui, sum);
 			}
 		}
+		if (player.getCurrentField() == 2 || player.getCurrentField() == 7 || player.getCurrentField() == 17
+				|| player.getCurrentField() == 22 || player.getCurrentField() == 33 || player.getCurrentField() == 36) {
+			cc.drawCard(player, players);
+		} else if (gui.getFields()[player.getCurrentField()] == gui.getFields()[30]) {
+			goToJail(player, gui);
+		} else if (gui.getFields()[player.getCurrentField()] == gui.getFields()[38]) {
+			eksTax(player, gui);
+		} else if (gui.getFields()[player.getCurrentField()] == gui.getFields()[4]) {
+			stageTax(player, gui);
+		}
 	}
 
 	public void buyField(Player player, GUI gui) {
 			if (player.getCurrentField() == 12 || player.getCurrentField() == 28) {
-				if (view.buyBut(gui)) {
 				setOwner(player);
 				board.getBrewery(player.getCurrentField()).setBorder(player.getCarObject().getPrimaryColor());
 				board.setOwnable(player.getCurrentField(), false);
 				player.changeBalance(-150);
-				}
 			} else if (player.getCurrentField() == 5 || player.getCurrentField() == 15 || player.getCurrentField() == 25
 					|| player.getCurrentField() == 35) {
-				if (view.buyBut(gui)) {
 				setOwner(player);
 				board.getShipping(player.getCurrentField()).setBorder(player.getCarObject().getPrimaryColor());
 				board.setOwnable(player.getCurrentField(), false);
 				player.changeBalance(-200);
-				}
 			} else {
-				if (view.buyBut(gui)) {
 				setOwner(player);
 				board.getStreet(player.getCurrentField()).setBorder(player.getCarObject().getPrimaryColor());
 				board.setOwnable(player.getCurrentField(), false);
 				int price = board.getPrice(player.getCurrentField());
 				player.changeBalance(-price);
-				}
 			}
 		}
 
@@ -234,17 +238,8 @@ public class Controller {
 		// Places the player's brick on the new field.
 		gui.getFields()[player.getCurrentField()].setCar(player.getCarObject(), true);
 
-		// Checks if they player has to go to jail or draw a chancecard.
-		if (player.getCurrentField() == 2 || player.getCurrentField() == 7 || player.getCurrentField() == 17
-				|| player.getCurrentField() == 22 || player.getCurrentField() == 33 || player.getCurrentField() == 36) {
-			cc.drawCard(player, players);
-		} else if (gui.getFields()[player.getCurrentField()] == gui.getFields()[30]) {
-			goToJail(player, gui);
-		} else if (gui.getFields()[player.getCurrentField()] == gui.getFields()[38]) {
-			eksTax(player, gui);
-		} else if (gui.getFields()[player.getCurrentField()] == gui.getFields()[4]) {
-			stageTax(player, gui);
-		}
+	
+		
 
 	}
 
