@@ -153,7 +153,7 @@ public class Controller {
 				board.getStreet(player.getCurrentField()).setBorder(player.getCarObject().getPrimaryColor());
 				board.setOwnable(player.getCurrentField(), false);
 				player.changeBalance(-board.getPrice(player.getCurrentField()));
-				payRent(player, gui);
+//				payRent(player, gui);
 			}
 
 		}
