@@ -8,16 +8,24 @@ public class Player {
 	private static int playerCounter = 1;
 	private int playerNumber;
 	private int balance = 0;
-	private int totalValue = 0;
+	private int totalValue = 1000;
 	private String name = "";
 	private GUI_Player carObject;
 	private boolean hasJailCard = false;
-	private int house = 0;
-	private int hotel = 0;
+	private int houseOwned = 0;
+	private int hotelOwned = 0;
 
 	public Player() {
 		playerNumber = playerCounter++;
 
+	}
+	
+	public int houseOwned() {
+		return houseOwned;
+	}
+	
+	public int hotelOwned() {
+		return hotelOwned;
 	}
 	
 	public int getPlayerNumber() {
