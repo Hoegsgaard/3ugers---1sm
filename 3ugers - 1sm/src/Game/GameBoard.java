@@ -147,23 +147,25 @@ public class GameBoard {
 		fields[field].setTitle(name);
 		fields[field].setSubText("Pris: " + price);
 		fields[field].setBackGroundColor(color);
-		ownable[field] = true;
-		((GUI_Street) fields[field]).setOwnerName(null);
+		for(int i = 0; i < ownable.length; i++) {
+			ownable[i] = false;
+		}
+//		((GUI_Street) fields[field]).setOwnerName(null);
 		pirceForHouse = housePrice;
 		fieldPrice[field] = price;
 		
 	}
 	
 	private void brewShipSetSetup() {
-		ownable[12] = true;
+		ownable[12] = false;
 		((GUI_Brewery) fields[12]).setOwnerName(null);
 		setPrice(12, 150);
 		
-		ownable[28] = true;
+		ownable[28] = false;
 		((GUI_Brewery) fields[28]).setOwnerName(null);
 		setPrice(28, 150);
 		for (int i = 5; i < 40; i = i + 10) {
-			ownable[i] = true;
+			ownable[i] = false;
 			((GUI_Shipping)fields[i]).setOwnerName(null);
 			setPrice(i, 200);
 		}

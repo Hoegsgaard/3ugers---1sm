@@ -115,6 +115,7 @@ public class Controller {
 		movePlayer(player, gui, sum);
 		buyField(player, gui);
 		
+		
 	}
 
 	private void takeRound(GUI gui) {
@@ -136,22 +137,22 @@ public class Controller {
 
 	public void buyField(Player player, GUI gui) {
 		
-		if (board.getOwnable(player.getCurrentField())) {
+		if (!board.getOwnable(player.getCurrentField())) {
 			if (player.getCurrentField() == 12 || player.getCurrentField() == 28) {
 				// setOwner(player);
 				board.getBrewery(player.getCurrentField()).setBorder(player.getCarObject().getPrimaryColor());
-				board.setOwnable(player.getCurrentField(), false);
+				board.setOwnable(player.getCurrentField(), true);
 				player.changeBalance(-150);
 			} else if (player.getCurrentField() == 5 || player.getCurrentField() == 15 
 					|| player.getCurrentField() == 25 || player.getCurrentField() == 35) {
 				// setOwner(player);
 				board.getShipping(player.getCurrentField()).setBorder(player.getCarObject().getPrimaryColor());
-				board.setOwnable(player.getCurrentField(), false);
+				board.setOwnable(player.getCurrentField(), true);
 				player.changeBalance(-200);
 			} else {
 				setOwner(player);
 				board.getStreet(player.getCurrentField()).setBorder(player.getCarObject().getPrimaryColor());
-				board.setOwnable(player.getCurrentField(), false);
+				board.setOwnable(player.getCurrentField(), true);
 				player.changeBalance(-board.getPrice(player.getCurrentField()));
 //				payRent(player, gui);
 			}
