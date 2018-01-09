@@ -78,6 +78,9 @@ public class Player {
 	}
 	
 	public void setTotalValue(int val) {
+		totalValue = val;
+	}
+	public void changeTotalValue(int val) {
 		totalValue = totalValue + val;
 	}
 	

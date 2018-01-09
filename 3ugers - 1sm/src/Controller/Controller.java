@@ -144,15 +144,18 @@ public class Controller {
 				setOwner(player);
 				board.getStreet(player.getCurrentField()).setBorder(player.getCarObject().getPrimaryColor());
 				board.setOwnable(player.getCurrentField(), false);
-				player.changeBalance(-board.getPrice(player.getCurrentField()));
+				int price = board.getPrice(player.getCurrentField());
+				player.changeBalance(-price);
 			}
 		}
 
 	private void payRent(Player player, GUI gui, int diceSum) {
 		int rent = 0;
+		String OOwner = "";
 		
 		if (player.getCurrentField() == 12 || player.getCurrentField() == 28) {
 			String owner = ((GUI_Brewery) gui.getFields()[player.getCurrentField()]).getOwnerName();
+			OOwner = owner;
 			int countBrew = 0;
 			if (owner.equals(((GUI_Brewery) gui.getFields()[12]).getOwnerName()) && owner.equals(((GUI_Brewery) gui.getFields()[28]).getOwnerName())) {
 				countBrew = 2;
@@ -163,6 +166,7 @@ public class Controller {
 		}
 		else if (player.getCurrentField() == 5 || player.getCurrentField() == 15 || player.getCurrentField() == 25 || player.getCurrentField() == 35) {
 			String owner = ((GUI_Shipping) gui.getFields()[player.getCurrentField()]).getOwnerName();
+			OOwner = owner;
 			int countShip = 0;
 			
 			for (int i = 5; i < 39; i = i +10) {
@@ -174,9 +178,16 @@ public class Controller {
 		}
 		else {
 			String owner = ((GUI_Street) gui.getFields()[player.getCurrentField()]).getOwnerName();
+			OOwner = owner;
 			rent = board.getRentStreet(player.getCurrentField());
 		}
-		System.out.println(rent);
+		//Leje betales, fra spiller til ejer
+		player.changeBalance(-rent);
+		for (int i = 0; i < players.length; i++) {
+			if (OOwner.equals(players[i].getName())) {
+				players[i].changeBalance(rent);
+			}
+		}
 	}
 
 	private void takeRound(GUI gui) {
