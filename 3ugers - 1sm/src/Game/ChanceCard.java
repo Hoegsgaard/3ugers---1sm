@@ -213,7 +213,6 @@ public class ChanceCard {
 		gui.displayChanceCard(message);
 	}
 	
-	/* Work in progress.. */
 	// Coal prices
 	
 	
