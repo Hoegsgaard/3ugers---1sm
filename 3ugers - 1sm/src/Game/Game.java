@@ -9,14 +9,14 @@ public class Game {
 	public Game() {
 	}
 	
-	GameBoard board = new GameBoard();
+	
 
-	public void runGame() {
-		board.createBoard();
-		
-		
-		
-	}
+//	public void runGame() {
+//		board.createBoard();
+//		
+//		
+//		
+//	}
 
 // Method that accepts amount of players, and their names.
 private void enterPlayers(GUI gui) {
