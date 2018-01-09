@@ -12,6 +12,8 @@ public class Player {
 	private String name = "";
 	private GUI_Player carObject;
 	private boolean hasJailCard = false;
+	private int house = 0;
+	private int hotel = 0;
 
 	public Player() {
 		playerNumber = playerCounter++;
@@ -70,6 +72,7 @@ public class Player {
 	public void setTotalValue(int val) {
 		totalValue = totalValue + val;
 	}
+	
 }
 
 

@@ -199,6 +199,14 @@ public class Controller {
 	}
 
 
-
+	// Bankrupt
+//	public void bankrupt(Player player) {
+//		if (player.balance -  = 0) {
+//			for
+//			board.getStreet(player.getCurrentField()).setBorder(Color.BLACK);
+//			board.setOwnable(player.getCurrentField(), true);
+//		}	
+//	}
+	
 
 }
