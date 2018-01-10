@@ -27,7 +27,6 @@ public class Controller {
 	DiceController diceController2 = new DiceController();
 	ChanceCard cc;
 	MoveController move = new MoveController();
-	BuyProperty Buy;
 	Jail jail = new Jail();
 	boolean winner = false;
 	boolean rollCounter = false;
@@ -105,10 +104,12 @@ public class Controller {
 
 		for (int i = 0; i < players.length; i++) {
 			gui.getFields()[0].setCar(players[i].getCarObject(), true);
+			
 		}
 	}
 
 	private void takeTurn(Player player, GUI gui) {
+		BuyProperty Buy = new BuyProperty();
 		if (player.getBankrupt() == false) {
 			if (player.getInJail()) {
 				jail.getOutOfJail(player, gui);
@@ -116,46 +117,54 @@ public class Controller {
 			if (!player.getInJail()) {
 				player.changeTotalValue();
 				turn = true;
+				rollCounter = false;
 				while (turn) {
 					turnchoice = true;
 					while (turnchoice) {
 						switch (view.rollDiceButton(gui, player)) {
 						case "Rul":
-							if(rollCounter) {
-							int sum = diceController.roll() + diceController2.roll();
-							if ((player.getCurrentField() + sum) > 39) {
-								sum -= 40;
-								player.changeBalance(200);
-							}
-							gui.setDice(diceController.getFaceValue(), diceController2.getFaceValue());
-							move.movePlayer(player, gui, sum);
-							move.moveToJail(player, gui);
-							if (board.getOwnable(player.getCurrentField())) {
-								buyField(player, gui);
-							} else {
-								if (player.getCurrentField() != 2 && player.getCurrentField() != 7
-										&& player.getCurrentField() != 17 && player.getCurrentField() != 22
-										&& player.getCurrentField() != 33 && player.getCurrentField() != 36
-										&& player.getCurrentField() != 10 && player.getCurrentField() != 20
-										&& player.getCurrentField() != 30 && player.getCurrentField() != 0
-										&& player.getCurrentField() != 4 && player.getCurrentField() != 38) {
-									payRent(player, gui, sum);
+							if (!rollCounter) {
+								rollCounter = true;
+								//int sum = diceController.roll() + diceController2.roll();
+								int sum = 1;
+								if ((player.getCurrentField() + sum) > 39) {
+									sum -= 40;
+									player.changeBalance(200);
 								}
-							}
-							if (player.getCurrentField() == 2 || player.getCurrentField() == 7
-									|| player.getCurrentField() == 17 || player.getCurrentField() == 22
-									|| player.getCurrentField() == 33 || player.getCurrentField() == 36) {
-								cc.drawCard(player, players);
-							} else if (gui.getFields()[player.getCurrentField()] == gui.getFields()[38]) {
-								eksTax(player, gui);
-							} else if (gui.getFields()[player.getCurrentField()] == gui.getFields()[4]) {
-								stageTax(player, gui);
-							}
-							}
-							turnchoice = false;
-							break;
+								gui.setDice(diceController.getFaceValue(), diceController2.getFaceValue());
+								move.movePlayer(player, gui, sum);
+								move.moveToJail(player, gui);
+								if (board.getOwnable(player.getCurrentField())) {
+									buyField(player, gui);
+								} else {
+									if (player.getCurrentField() != 2 && player.getCurrentField() != 7
+											&& player.getCurrentField() != 17 && player.getCurrentField() != 22
+											&& player.getCurrentField() != 33 && player.getCurrentField() != 36
+											&& player.getCurrentField() != 10 && player.getCurrentField() != 20
+											&& player.getCurrentField() != 30 && player.getCurrentField() != 0
+											&& player.getCurrentField() != 4 && player.getCurrentField() != 38) {
+										payRent(player, gui, sum);
+									}
+								}
+								if (player.getCurrentField() == 2 || player.getCurrentField() == 7
+										|| player.getCurrentField() == 17 || player.getCurrentField() == 22
+										|| player.getCurrentField() == 33 || player.getCurrentField() == 36) {
+									cc.drawCard(player, players);
+								} else if (gui.getFields()[player.getCurrentField()] == gui.getFields()[38]) {
+									eksTax(player, gui);
+								} else if (gui.getFields()[player.getCurrentField()] == gui.getFields()[4]) {
+									stageTax(player, gui);
+								}
+
+								turnchoice = false;
+								break;
+							}else {
+								gui.displayChanceCard("Byg et Hus eller slut din tur");
+							}	break;
 						case "Byg hus":
 							System.out.println("BYG ET HUS");
+//							Buy.ownerOfFieldName(player.getCurrentField(), gui);
+							Buy.isAllOwendInSameColor(gui, player);
 							turnchoice = false;
 							break;
 						case "Slut tur":
@@ -163,10 +172,11 @@ public class Controller {
 							turn = false;
 							System.out.println("næste");
 							break;
+
 						}
+						bankrupt(player, gui);
+						haveWeAWinner(player, gui);
 					}
-					bankrupt(player, gui);
-					haveWeAWinner(player, gui);
 				}
 			}
 		}
@@ -198,6 +208,7 @@ public class Controller {
 				int price = board.getPrice(player.getCurrentField());
 				player.changeBalance(-price);
 				player.setFieldValue(price);
+				
 			}
 		}
 	}
@@ -279,7 +290,7 @@ public class Controller {
 			}
 		}
 	}
-	
+
 	//
 	public void findWinner(Player player, GUI gui) {
 		String winner = "";
@@ -290,7 +301,7 @@ public class Controller {
 			}
 		}
 	}
-	
+
 	//
 	public void haveWeAWinner(Player player, GUI gui) {
 		int count = 0;
@@ -299,10 +310,10 @@ public class Controller {
 				count++;
 			}
 		}
-		if (count == players.length -1) {
+		if (count == players.length - 1) {
 			winner = true;
 			findWinner(player, gui);
-		}	
+		}
 	}
 
 	// TAX
