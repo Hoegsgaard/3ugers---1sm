@@ -8,7 +8,7 @@ public class Player {
 	private static int playerCounter = 1;
 	private int playerNumber;
 	private int balance = 0;
-	private int totalValue = 1000;
+	private int totalValue = 0;
 	private String name = "";
 	private GUI_Player carObject;
 	private boolean hasJailCard = false;
@@ -55,6 +55,8 @@ public class Player {
 	public void changeBalance(int balance) {
 		this.balance += balance;
 		carObject.setBalance(this.balance);
+		changeTotalValue(balance);
+		
 	}
 	
 	public String getName() {
@@ -78,6 +80,9 @@ public class Player {
 	}
 	
 	public void setTotalValue(int val) {
+		totalValue = val;
+	}
+	public void changeTotalValue(int val) {
 		totalValue = totalValue + val;
 	}
 	
