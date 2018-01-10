@@ -109,7 +109,7 @@ public class Controller {
 
 		}
 
-		int sum = 1 + 2;
+		int sum = diceController.roll() + diceController2.roll();
 		if ((player.getCurrentField() + sum) > 39) {
 			sum -= 40;
 			player.changeBalance(200);
