@@ -8,6 +8,7 @@ import Game.Game;
 import Game.GameBoard;
 import Game.Jail;
 import Game.Player;
+import Game.BuyProperty;
 import View.Display;
 import gui_fields.GUI_Brewery;
 import gui_fields.GUI_Player;
@@ -26,6 +27,7 @@ public class Controller {
 	DiceController diceController2 = new DiceController();
 	ChanceCard cc;
 	MoveController move = new MoveController();
+	BuyProperty Buy;
 
 	public void runGame() {
 		board.createBoard();
@@ -90,6 +92,11 @@ public class Controller {
 		}
 
 	}
+	
+	public Player getPlayerOwner(Player player) {
+		return player;
+		
+	}
 
 	private void initPlayers(GUI gui) {
 
@@ -116,9 +123,8 @@ public class Controller {
 		gui.setDice(diceController.getFaceValue(), diceController2.getFaceValue());
 
 		move.movePlayer(player, gui, sum);
-
 		move.moveToJail(player, gui);
-
+		
 		if (board.getOwnable(player.getCurrentField())) {
 			buyField(player, gui);
 		} else {
