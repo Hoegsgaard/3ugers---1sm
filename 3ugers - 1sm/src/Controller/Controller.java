@@ -18,7 +18,7 @@ import gui_main.GUI;
 
 public class Controller {
 	boolean turn = true;
-	boolean gameOver = false;
+	boolean turnchoice = true;
 	GameBoard board = new GameBoard();
 	Display view = new Display();
 	Game game = new Game();
@@ -29,6 +29,8 @@ public class Controller {
 	MoveController move = new MoveController();
 	BuyProperty Buy;
 	Jail jail = new Jail();
+	boolean winner = false;
+	boolean rollCounter = false;
 
 	public void runGame() {
 		board.createBoard();
@@ -36,7 +38,7 @@ public class Controller {
 		cc = new ChanceCard(gui);
 		addPlayers(gui);
 		initPlayers(gui);
-		while (!gameOver) {
+		while (!winner) {
 			takeRound(gui);
 		}
 
@@ -107,54 +109,65 @@ public class Controller {
 	}
 
 	private void takeTurn(Player player, GUI gui) {
-		if (player.getInJail()) {
-			jail.getOutOfJail(player, gui);
-		}
-		if (!player.getInJail()) {
-			view.rollDiceButton(gui);
-
-			int sum = diceController.roll() + diceController2.roll();
-			if ((player.getCurrentField() + sum) > 39) {
-				sum -= 40;
-				player.changeBalance(200);
+		if (player.getBankrupt() == false) {
+			if (player.getInJail()) {
+				jail.getOutOfJail(player, gui);
 			}
-			gui.setDice(diceController.getFaceValue(), diceController2.getFaceValue());
-			move.movePlayer(player, gui, sum);
-			move.moveToJail(player, gui);
-
-			if (board.getOwnable(player.getCurrentField())) {
-				buyField(player, gui);
-			} else {
-				if (player.getCurrentField() != 2 && player.getCurrentField() != 7 && player.getCurrentField() != 17
-						&& player.getCurrentField() != 22 && player.getCurrentField() != 33
-						&& player.getCurrentField() != 36 && player.getCurrentField() != 10
-						&& player.getCurrentField() != 20 && player.getCurrentField() != 30
-						&& player.getCurrentField() != 0 && player.getCurrentField() != 4
-						&& player.getCurrentField() != 38) {
-					payRent(player, gui, sum);
-				}
-				if (board.getOwnable(player.getCurrentField())) {
-					buyField(player, gui);
-				} else {
-					if (player.getCurrentField() != 2 && player.getCurrentField() != 7 && player.getCurrentField() != 17
-							&& player.getCurrentField() != 22 && player.getCurrentField() != 33
-							&& player.getCurrentField() != 36 && player.getCurrentField() != 10
-							&& player.getCurrentField() != 20 && player.getCurrentField() != 30
-							&& player.getCurrentField() != 0 && player.getCurrentField() != 4
-							&& player.getCurrentField() != 38) {
-						payRent(player, gui, sum);
+			if (!player.getInJail()) {
+				player.changeTotalValue();
+				turn = true;
+				while (turn) {
+					turnchoice = true;
+					while (turnchoice) {
+						switch (view.rollDiceButton(gui, player)) {
+						case "Rul":
+							if(rollCounter) {
+							int sum = diceController.roll() + diceController2.roll();
+							if ((player.getCurrentField() + sum) > 39) {
+								sum -= 40;
+								player.changeBalance(200);
+							}
+							gui.setDice(diceController.getFaceValue(), diceController2.getFaceValue());
+							move.movePlayer(player, gui, sum);
+							move.moveToJail(player, gui);
+							if (board.getOwnable(player.getCurrentField())) {
+								buyField(player, gui);
+							} else {
+								if (player.getCurrentField() != 2 && player.getCurrentField() != 7
+										&& player.getCurrentField() != 17 && player.getCurrentField() != 22
+										&& player.getCurrentField() != 33 && player.getCurrentField() != 36
+										&& player.getCurrentField() != 10 && player.getCurrentField() != 20
+										&& player.getCurrentField() != 30 && player.getCurrentField() != 0
+										&& player.getCurrentField() != 4 && player.getCurrentField() != 38) {
+									payRent(player, gui, sum);
+								}
+							}
+							if (player.getCurrentField() == 2 || player.getCurrentField() == 7
+									|| player.getCurrentField() == 17 || player.getCurrentField() == 22
+									|| player.getCurrentField() == 33 || player.getCurrentField() == 36) {
+								cc.drawCard(player, players);
+							} else if (gui.getFields()[player.getCurrentField()] == gui.getFields()[38]) {
+								eksTax(player, gui);
+							} else if (gui.getFields()[player.getCurrentField()] == gui.getFields()[4]) {
+								stageTax(player, gui);
+							}
+							}
+							turnchoice = false;
+							break;
+						case "Byg hus":
+							System.out.println("BYG ET HUS");
+							turnchoice = false;
+							break;
+						case "Slut tur":
+							turnchoice = false;
+							turn = false;
+							System.out.println("næste");
+							break;
+						}
 					}
+					bankrupt(player, gui);
+					haveWeAWinner(player, gui);
 				}
-				if (player.getCurrentField() == 2 || player.getCurrentField() == 7 || player.getCurrentField() == 17
-						|| player.getCurrentField() == 22 || player.getCurrentField() == 33
-						|| player.getCurrentField() == 36) {
-					cc.drawCard(player, players);
-				} else if (gui.getFields()[player.getCurrentField()] == gui.getFields()[38]) {
-					eksTax(player, gui);
-				} else if (gui.getFields()[player.getCurrentField()] == gui.getFields()[4]) {
-					stageTax(player, gui);
-				}
-				player.setTotalValue();
 			}
 		}
 	}
@@ -233,7 +246,7 @@ public class Controller {
 
 	private void takeRound(GUI gui) {
 		for (int i = 0; i < players.length; i++) {
-			if (!gameOver) {
+			if (!winner) {
 				takeTurn(players[i], gui);
 			}
 		}
@@ -255,13 +268,42 @@ public class Controller {
 	}
 
 	// Bankrupt
-	// public void bankrupt(Player player) {
-	// if (player.balance - = 0) {
-	// for
-	// board.getStreet(player.getCurrentField()).setBorder(Color.BLACK);
-	// board.setOwnable(player.getCurrentField(), true);
-	// }
-	// }
+	public void bankrupt(Player player, GUI gui) {
+		for (int i = 0; i < players.length; i++) {
+			if (player.getBalance() < 0) {
+				gui.getFields()[player.getCurrentField()].setCar(player.getCarObject(), false);
+				player.setBalance(0);
+				player.setTotalValue(0);
+				player.setBankrupt(true);
+				turn = false;
+			}
+		}
+	}
+	
+	//
+	public void findWinner(Player player, GUI gui) {
+		String winner = "";
+		for (int i = 0; i < players.length; i++) {
+			if (players[i].getBankrupt() == false) {
+				winner = players[i].getName();
+				gui.displayChanceCard("Tillykke! " + winner + " har vundet");
+			}
+		}
+	}
+	
+	//
+	public void haveWeAWinner(Player player, GUI gui) {
+		int count = 0;
+		for (int i = 0; i < players.length; i++) {
+			if (players[i].getBankrupt() == true) {
+				count++;
+			}
+		}
+		if (count == players.length -1) {
+			winner = true;
+			findWinner(player, gui);
+		}	
+	}
 
 	// TAX
 	public void eksTax(Player player, GUI gui) {

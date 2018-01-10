@@ -1,5 +1,6 @@
 package View;
 
+import Game.Player;
 import gui_main.GUI;
 
 public class Display {
@@ -11,10 +12,8 @@ public class Display {
 		return amountOfPlayers;
 	}
 
-	public void rollDiceButton(GUI gui) {
-		gui.getUserButtonPressed("Hvad vil du gøre?", "Roll","Byg hus", "Slut tur");
-//		gui.getUserButtonPressed("to", "Byg hus");
-//		gui.getUserButtonPressed("tre", "Slut tur");
+	public String rollDiceButton(GUI gui, Player player) {
+		return gui.getUserButtonPressed("Det er " + player.getName() + "'s tur!", "Rul","Byg hus", "Slut tur");
 	}
 
 	public Boolean stageTax(GUI gui) {

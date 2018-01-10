@@ -16,6 +16,7 @@ public class Player {
 	private boolean hasJailCard = false;
 	private int houseOwned = 0;
 	private int hotelOwned = 0;
+	private boolean bankrupt = false;
 
 	public Player() {
 		playerNumber = playerCounter++;
@@ -53,6 +54,9 @@ public class Player {
 	public int getBalance() {
 		return balance;
 	}
+	public void setBalance(int val) {
+		balance = val;
+	}
 
 	public void changeBalance(int balance) {
 		this.balance += balance;
@@ -87,7 +91,11 @@ public class Player {
 		return totalValue;
 	}
 	
-	public void setTotalValue() {
+	public void setTotalValue(int val) {
+		totalValue = val;
+	}
+	
+	public void changeTotalValue() {
 		totalValue = getBalance() + getFieldValue();
 	}	
 	public int setFieldValue(int val) {
@@ -96,6 +104,13 @@ public class Player {
 	public int getFieldValue() {
 		return fieldvalue;
 	}
+	public void setBankrupt(boolean bank) {
+		bankrupt = bank;
+	}
+	public boolean getBankrupt() {
+		return bankrupt;
+	}
+	
 }
 
 
