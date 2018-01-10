@@ -116,7 +116,7 @@ public class Controller {
 		gui.setDice(diceController.getFaceValue(), diceController2.getFaceValue());
 
 		move.movePlayer(player, gui, sum);
-
+		
 		move.moveToJail(player, gui);
 
 		if (board.getOwnable(player.getCurrentField())) {
@@ -139,8 +139,6 @@ public class Controller {
 			stageTax(player, gui);
 		}
 		player.setTotalValue();
-		System.out.println(player.getTotalValue());
-
 	}
 
 	public void buyField(Player player, GUI gui) {

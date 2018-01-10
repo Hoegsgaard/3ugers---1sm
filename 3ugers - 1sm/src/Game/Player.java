@@ -12,6 +12,7 @@ public class Player {
 	private int totalValue = 0;
 	private String name = "";
 	private GUI_Player carObject;
+	private boolean inJail = false;
 	private boolean hasJailCard = false;
 	private int houseOwned = 0;
 	private int hotelOwned = 0;
@@ -72,6 +73,14 @@ public class Player {
 
 	public void setHasJailCard(boolean hasJailCard) {
 		this.hasJailCard = hasJailCard;
+	}
+	
+	public boolean getInJail() {
+		return inJail;
+	}
+	
+	public void setInJail(boolean inJail) {
+		this.inJail = inJail;
 	}
 	
 	public int getTotalValue() {
