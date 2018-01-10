@@ -28,6 +28,7 @@ public class Controller {
 	ChanceCard cc;
 	MoveController move = new MoveController();
 	BuyProperty Buy;
+	Jail jail = new Jail();
 
 	public void runGame() {
 		board.createBoard();
@@ -121,8 +122,12 @@ public class Controller {
 			player.changeBalance(200);
 		}
 		gui.setDice(diceController.getFaceValue(), diceController2.getFaceValue());
-
 		move.movePlayer(player, gui, sum);
+		if(!player.getInJail()) {
+			move.movePlayer(player, gui, sum);
+		}else {
+			jail.getOutOfJail(player, gui);
+		}
 		move.moveToJail(player, gui);
 		
 		if (board.getOwnable(player.getCurrentField())) {
@@ -144,7 +149,7 @@ public class Controller {
 		} else if (gui.getFields()[player.getCurrentField()] == gui.getFields()[4]) {
 			stageTax(player, gui);
 		}
-
+		player.setTotalValue();
 	}
 
 	public void buyField(Player player, GUI gui) {
@@ -154,6 +159,7 @@ public class Controller {
 				board.getBrewery(player.getCurrentField()).setBorder(player.getCarObject().getPrimaryColor());
 				board.setOwnable(player.getCurrentField(), false);
 				player.changeBalance(-150);
+				player.setFieldValue(150);
 			}
 		} else if (player.getCurrentField() == 5 || player.getCurrentField() == 15 || player.getCurrentField() == 25
 				|| player.getCurrentField() == 35) {
@@ -162,6 +168,7 @@ public class Controller {
 				board.getShipping(player.getCurrentField()).setBorder(player.getCarObject().getPrimaryColor());
 				board.setOwnable(player.getCurrentField(), false);
 				player.changeBalance(-200);
+				player.setFieldValue(200);
 			}
 		} else {
 			if (view.buyBut(gui)) {
@@ -170,6 +177,7 @@ public class Controller {
 				board.setOwnable(player.getCurrentField(), false);
 				int price = board.getPrice(player.getCurrentField());
 				player.changeBalance(-price);
+				player.setFieldValue(price);
 			}
 		}
 	}

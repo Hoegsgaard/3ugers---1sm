@@ -1,5 +1,6 @@
 package Game;
 
+import Controller.MoveController;
 import gui_main.GUI;
 
 public class ChanceCard {
@@ -14,6 +15,7 @@ public class ChanceCard {
 			"parkeringTicket", "parkeringTicket", "goToJail", "goToJail", "goToJail", "getOutOfJail", "getOutOfJail" };
 
 	private GUI gui;
+	private MoveController move = new MoveController();
 
 	public ChanceCard(GUI gui) {
 		this.gui = gui;
@@ -120,10 +122,10 @@ public class ChanceCard {
 		
 			// Pay money
 		case "coalPrices":
-			coalPrices(player, gui, player.houseOwned(), player.hotelOwned(), "Kul og kokspriserne er steget, og De skal betale: kr. 25 pr hus og kr. 125 per Hotel.");
+			coalPrices(player, gui, "Kul og kokspriserne er steget, og De skal betale: kr. 25 pr hus og kr. 125 per Hotel.");
 			break;
 		case "propertyTax":
-			propertyTax(player, gui, player.houseOwned(), player.hotelOwned(), "Ejendomsskat er steget, ekstraudgifterne er: kr. 50 per hus og kr. 125 per Hotel.");
+			propertyTax(player, gui, "Ejendomsskat er steget, ekstraudgifterne er: kr. 50 per hus og kr. 125 per Hotel.");
 			break;
 		case "tire":
 			payMoney(player, gui, 100, "Du har anskaffet et nyt dæk til din bil. Indbetal kr. 100.");
@@ -193,8 +195,12 @@ public class ChanceCard {
 	// // Move steps (this chance card moves a player forwards or backwards on the
 	// board)
 	public void moveSteps(Player player, int steps, GUI gui, String message) {
-		movePlayerDist(player, gui, steps);
+		if(player.getCurrentField() == 3) {
 		gui.displayChanceCard(message);
+		move.movePlayer(player, gui, 36);
+		}
+		gui.displayChanceCard(message);
+		move.movePlayer(player, gui, steps);
 	 }
 
 	// Get money (this chance card adds money to the players balance)
@@ -214,7 +220,8 @@ public class ChanceCard {
 	}
 	
 	// Coal prices
-	public void coalPrices(Player player, GUI gui, int houseOwned, int hotelOwned, String message) {
+	public void coalPrices(Player player,GUI gui, String message) {
+		gui.displayChanceCard(message);
 		if (player.houseOwned() > 0 || player.hotelOwned() > 0) {
 			player.changeBalance(- (25 * player.houseOwned()));
 			player.changeBalance(- (125 * player.hotelOwned()));
@@ -226,7 +233,8 @@ public class ChanceCard {
 	}
 	
 	// Property tax
-	public void propertyTax(Player player, GUI gui, int houseOwned, int hotelOwned, String message) {
+	public void propertyTax(Player player, GUI gui, String message) {
+		gui.displayChanceCard(message);
 		if (player.houseOwned() > 0 || player.hotelOwned() > 0) {
 			player.changeBalance(- (50 * player.houseOwned()));
 			player.changeBalance(- (125 * player.hotelOwned()));
@@ -262,7 +270,7 @@ public class ChanceCard {
 		// Removes the brick from the current field.
 		gui.getFields()[player.getCurrentField()].setCar(player.getCarObject(), false);
 		// Updates the player object.
-		if (player.getCurrentField() + dist > 39) {
+		if ((player.getCurrentField() + dist) > 39) {
 			dist -= 40;
 			player.changeBalance(200);
 		}

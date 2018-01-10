@@ -26,4 +26,8 @@ public class Display {
 	public Boolean buyBut(GUI gui) {
 		return gui.getUserLeftButtonPressed("Vil du købe dette felt?", "Ja", "Nej");
 	}
+	
+	public Boolean getOutBut(GUI gui) {
+		return gui.getUserLeftButtonPressed("Hvordan vil du komme ud af fængsel", "100 kr", "Slå 2 ens");
+	}
 }

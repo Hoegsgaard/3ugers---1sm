@@ -19,10 +19,8 @@ public class MoveController {
 	}
 	
 	public void moveToJail(Player player, GUI gui) {
-		if(player.getCurrentField() == 30) {
-			setPlayerPos(player, player.getCurrentField()-20, gui);
-			
-		}
+		jail = new Jail();
+		jail.goToJail(player, gui);
 	}
 	
 	
