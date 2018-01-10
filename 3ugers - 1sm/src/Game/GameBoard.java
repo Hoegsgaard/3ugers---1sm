@@ -24,6 +24,9 @@ public class GameBoard {
 	boolean[] ownable = new boolean[40];
 	int[] housePrice = { 50, 100, 150, 200 };
 	int pirceForHouse;
+	boolean Street = true;
+	boolean Brewery = true;
+	boolean shipping = true;
 	
 	int[][] rent = new int[][] {
 		{0}, //Start
@@ -211,6 +214,7 @@ public class GameBoard {
 		}
 		return rent;
 	}
+	
 public int getRentShipping(int count) {
 	int pay = 0;
 	switch(count) {

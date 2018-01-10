@@ -142,17 +142,17 @@ public class ChanceCard {
 			payMoney(player, gui, 20, "Du har måttet vedtage en parkeringsbøde. Betal kr. 20 til banken.");
 			break;
 
-		// Go to jail
-		case "goToJail":
-			goToJail(player, 30, gui,
-					"Gå i fængsel. Ryk direkte til fængsel. Selv om De passerer >>Start<<, indkasserer du ikke kr. 200.");
-			break;
-
-		// Get out of jail
-		case "getOutOfJail":
-			getOutOfJail(player,
-					"I anledning af Kongens fødelsdag benådes du herved for fængsel. Dette kort kan opbevares, indtil du får brug for det eller du kan sælge det.");
-			break;
+//		// Go to jail
+//		case "goToJail":
+//			goToJail(player, 30, gui,
+//					"Gå i fængsel. Ryk direkte til fængsel. Selv om De passerer >>Start<<, indkasserer du ikke kr. 200.");
+//			break;
+//
+//		// Get out of jail
+//		case "getOutOfJail":
+//			getOutOfJail(player,
+//					"I anledning af Kongens fødelsdag benådes du herved for fængsel. Dette kort kan opbevares, indtil du får brug for det eller du kan sælge det.");
+//			break;
 		}
 	}
 

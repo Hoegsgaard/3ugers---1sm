@@ -6,6 +6,7 @@ import Game.ChanceCard;
 import Game.Dice;
 import Game.Game;
 import Game.GameBoard;
+import Game.Jail;
 import Game.Player;
 import View.Display;
 import gui_fields.GUI_Brewery;
@@ -22,10 +23,10 @@ public class Controller {
 	Game game = new Game();
 	Player[] players;
 	DiceController diceController = new DiceController();
-	Dice d1 = new Dice(6);
-	Dice d2 = new Dice(6);
 	DiceController diceController2 = new DiceController();
 	ChanceCard cc;
+	MoveController move = new MoveController();
+	
 
 	public void runGame() {
 		board.createBoard();
@@ -114,7 +115,14 @@ public class Controller {
 			player.changeBalance(200);
 		}
 		gui.setDice(diceController.getFaceValue(), diceController2.getFaceValue());
-		movePlayer(player, gui, sum);
+		
+		move.movePlayer(player, gui, sum);
+		
+		move.moveToJail(player, gui);
+		
+		
+		
+		
 		if (board.getOwnable(player.getCurrentField())) {
 			buyField(player, gui);
 		}
@@ -126,34 +134,40 @@ public class Controller {
 				payRent(player, gui, sum);
 			}
 		}
+		if (player.getCurrentField() == 2 || player.getCurrentField() == 7 || player.getCurrentField() == 17
+				|| player.getCurrentField() == 22 || player.getCurrentField() == 33 || player.getCurrentField() == 36) {
+			cc.drawCard(player, players);
+		}else if (gui.getFields()[player.getCurrentField()] == gui.getFields()[38]) {
+			eksTax(player, gui);
+		} else if (gui.getFields()[player.getCurrentField()] == gui.getFields()[4]) {
+			stageTax(player, gui);
+		}
+		
+		
 	}
 
 	public void buyField(Player player, GUI gui) {
 			if (player.getCurrentField() == 12 || player.getCurrentField() == 28) {
-				if (view.buyBut(gui)) { //Købsknap
+				if (view.buyBut(gui)) { 
 				setOwner(player);
 				board.getBrewery(player.getCurrentField()).setBorder(player.getCarObject().getPrimaryColor());
 				board.setOwnable(player.getCurrentField(), false);
 				player.changeBalance(-150);
-				}
 			} else if (player.getCurrentField() == 5 || player.getCurrentField() == 15 || player.getCurrentField() == 25
 					|| player.getCurrentField() == 35) {
-				if (view.buyBut(gui)) {
 				setOwner(player);
 				board.getShipping(player.getCurrentField()).setBorder(player.getCarObject().getPrimaryColor());
 				board.setOwnable(player.getCurrentField(), false);
 				player.changeBalance(-200);
-				}
 			} else {
-				if (view.buyBut(gui)) {
 				setOwner(player);
 				board.getStreet(player.getCurrentField()).setBorder(player.getCarObject().getPrimaryColor());
 				board.setOwnable(player.getCurrentField(), false);
 				int price = board.getPrice(player.getCurrentField());
 				player.changeBalance(-price);
-				}
 			}
 		}
+	}
 
 	private void payRent(Player player, GUI gui, int diceSum) {
 		int rent = 0;
@@ -220,37 +234,9 @@ public class Controller {
 
 	}
 
-	public void setPlayerPos(Player player, int field, GUI gui) {
-		gui.getFields()[player.getCurrentField()].setCar(player.getCarObject(), false);
-		player.setCurrentField(field);
-		gui.getFields()[player.getCurrentField()].setCar(player.getCarObject(), true);
-	}
+	
 
-	public void movePlayer(Player player, GUI gui, int dist) {
-		// Removes the brick from the current field.
-		gui.getFields()[player.getCurrentField()].setCar(player.getCarObject(), false);
-		// Updates the player object.
-		player.setCurrentField(player.getCurrentField() + dist);
-		// Places the player's brick on the new field.
-		gui.getFields()[player.getCurrentField()].setCar(player.getCarObject(), true);
 
-		// Checks if they player has to go to jail or draw a chancecard.
-		if (player.getCurrentField() == 2 || player.getCurrentField() == 7 || player.getCurrentField() == 17
-				|| player.getCurrentField() == 22 || player.getCurrentField() == 33 || player.getCurrentField() == 36) {
-			cc.drawCard(player, players);
-		} else if (gui.getFields()[player.getCurrentField()] == gui.getFields()[30]) {
-			goToJail(player, gui);
-		} else if (gui.getFields()[player.getCurrentField()] == gui.getFields()[38]) {
-			eksTax(player, gui);
-		} else if (gui.getFields()[player.getCurrentField()] == gui.getFields()[4]) {
-			stageTax(player, gui);
-		}
-
-	}
-
-	public void goToJail(Player player, GUI gui) {
-		setPlayerPos(player, 10, gui);
-	}
 
 	// Bankrupt
 	// public void bankrupt(Player player) {
