@@ -27,7 +27,7 @@ public class Jail {
 			else {
 				player.setInJail(true);
 			}
-		}//Problemer
+		}
 	}	
 	
 	public void getOutOfJail(Player player, GUI gui) {
