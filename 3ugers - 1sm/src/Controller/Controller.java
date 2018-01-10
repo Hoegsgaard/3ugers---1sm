@@ -130,7 +130,7 @@ public class Controller {
 
 	public void buyField(Player player, GUI gui) {
 			if (player.getCurrentField() == 12 || player.getCurrentField() == 28) {
-				if (view.buyBut(gui)) {
+				if (view.buyBut(gui)) { //Købsknap
 				setOwner(player);
 				board.getBrewery(player.getCurrentField()).setBorder(player.getCarObject().getPrimaryColor());
 				board.setOwnable(player.getCurrentField(), false);
