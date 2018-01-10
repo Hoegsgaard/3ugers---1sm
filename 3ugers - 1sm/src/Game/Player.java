@@ -8,6 +8,7 @@ public class Player {
 	private static int playerCounter = 1;
 	private int playerNumber;
 	private int balance = 0;
+	private int fieldvalue = 0;
 	private int totalValue = 0;
 	private String name = "";
 	private GUI_Player carObject;
@@ -55,7 +56,6 @@ public class Player {
 	public void changeBalance(int balance) {
 		this.balance += balance;
 		carObject.setBalance(this.balance);
-		changeTotalValue(balance);
 	}
 	
 	public String getName() {
@@ -78,13 +78,15 @@ public class Player {
 		return totalValue;
 	}
 	
-	public void setTotalValue(int val) {
-		totalValue = val;
+	public void setTotalValue() {
+		totalValue = getBalance() + getFieldValue();
+	}	
+	public int setFieldValue(int val) {
+		return fieldvalue = fieldvalue + val;
 	}
-	public void changeTotalValue(int val) {
-		totalValue = totalValue + val;
+	public int getFieldValue() {
+		return fieldvalue;
 	}
-	
 }
 
 

@@ -138,6 +138,8 @@ public class Controller {
 		} else if (gui.getFields()[player.getCurrentField()] == gui.getFields()[4]) {
 			stageTax(player, gui);
 		}
+		player.setTotalValue();
+		System.out.println(player.getTotalValue());
 
 	}
 
@@ -148,6 +150,7 @@ public class Controller {
 				board.getBrewery(player.getCurrentField()).setBorder(player.getCarObject().getPrimaryColor());
 				board.setOwnable(player.getCurrentField(), false);
 				player.changeBalance(-150);
+				player.setFieldValue(150);
 			}
 		} else if (player.getCurrentField() == 5 || player.getCurrentField() == 15 || player.getCurrentField() == 25
 				|| player.getCurrentField() == 35) {
@@ -156,6 +159,7 @@ public class Controller {
 				board.getShipping(player.getCurrentField()).setBorder(player.getCarObject().getPrimaryColor());
 				board.setOwnable(player.getCurrentField(), false);
 				player.changeBalance(-200);
+				player.setFieldValue(200);
 			}
 		} else {
 			if (view.buyBut(gui)) {
@@ -164,6 +168,7 @@ public class Controller {
 				board.setOwnable(player.getCurrentField(), false);
 				int price = board.getPrice(player.getCurrentField());
 				player.changeBalance(-price);
+				player.setFieldValue(price);
 			}
 		}
 	}
