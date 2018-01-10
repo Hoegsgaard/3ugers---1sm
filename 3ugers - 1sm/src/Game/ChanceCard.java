@@ -119,8 +119,8 @@ public class ChanceCard {
 		case "gageforhøjelse":
 			getMoney(player, gui, 25, "Grundet på dyrtiden har du fået gageforhøjelse. Modtag kr. 25.");
 			break;
-		// New method
-		// Pay money
+		
+			// Pay money
 		case "coalPrices":
 			coalPrices(player, gui, "Kul og kokspriserne er steget, og De skal betale: kr. 25 pr hus og kr. 125 per Hotel.");
 			break;
