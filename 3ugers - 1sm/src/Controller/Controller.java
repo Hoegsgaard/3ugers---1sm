@@ -100,48 +100,45 @@ public class Controller {
 	}
 
 	private void takeTurn(Player player, GUI gui) {
-		if (player.getBalance() == 0) {
-
-			gui.getFields()[player.getCurrentField()].setCar(player.getCarObject(), false);
-		}
-		if (turn) {
+		if (player.getInJail()) {
+			jail.getOutOfJail(player, gui);
+		} 
+		if(!player.getInJail()) {
 			view.rollDiceButton(gui);
 
-		}
-
-		int sum = diceController.roll() + diceController2.roll();
-		if ((player.getCurrentField() + sum) > 39) {
-			sum -= 40;
-			player.changeBalance(200);
-		}
-		gui.setDice(diceController.getFaceValue(), diceController2.getFaceValue());
-		if(!player.getInJail()) {
-			move.movePlayer(player, gui, sum);
-		}else {
-			jail.getOutOfJail(player, gui);
-		}
-		move.moveToJail(player, gui);
-
-		if (board.getOwnable(player.getCurrentField())) {
-			buyField(player, gui);
-		} else {
-			if (player.getCurrentField() != 2 && player.getCurrentField() != 7 && player.getCurrentField() != 17
-					&& player.getCurrentField() != 22 && player.getCurrentField() != 33
-					&& player.getCurrentField() != 36 && player.getCurrentField() != 10
-					&& player.getCurrentField() != 20 && player.getCurrentField() != 30 && player.getCurrentField() != 0
-					&& player.getCurrentField() != 4 && player.getCurrentField() != 38) {
-				payRent(player, gui, sum);
+			int sum = diceController.roll() + diceController2.roll();
+			if ((player.getCurrentField() + sum) > 39) {
+				sum -= 40;
+				player.changeBalance(200);
 			}
+			gui.setDice(diceController.getFaceValue(), diceController2.getFaceValue());
+			move.movePlayer(player, gui, sum);
+
+			move.moveToJail(player, gui);
+
+			if (board.getOwnable(player.getCurrentField())) {
+				buyField(player, gui);
+			} else {
+				if (player.getCurrentField() != 2 && player.getCurrentField() != 7 && player.getCurrentField() != 17
+						&& player.getCurrentField() != 22 && player.getCurrentField() != 33
+						&& player.getCurrentField() != 36 && player.getCurrentField() != 10
+						&& player.getCurrentField() != 20 && player.getCurrentField() != 30
+						&& player.getCurrentField() != 0 && player.getCurrentField() != 4
+						&& player.getCurrentField() != 38) {
+					payRent(player, gui, sum);
+				}
+			}
+			if (player.getCurrentField() == 2 || player.getCurrentField() == 7 || player.getCurrentField() == 17
+					|| player.getCurrentField() == 22 || player.getCurrentField() == 33
+					|| player.getCurrentField() == 36) {
+				cc.drawCard(player, players);
+			} else if (gui.getFields()[player.getCurrentField()] == gui.getFields()[38]) {
+				eksTax(player, gui);
+			} else if (gui.getFields()[player.getCurrentField()] == gui.getFields()[4]) {
+				stageTax(player, gui);
+			}
+			player.setTotalValue();
 		}
-		if (player.getCurrentField() == 2 || player.getCurrentField() == 7 || player.getCurrentField() == 17
-				|| player.getCurrentField() == 22 || player.getCurrentField() == 33 || player.getCurrentField() == 36) {
-			cc.drawCard(player, players);
-		} else if (gui.getFields()[player.getCurrentField()] == gui.getFields()[38]) {
-			eksTax(player, gui);
-		} else if (gui.getFields()[player.getCurrentField()] == gui.getFields()[4]) {
-			stageTax(player, gui);
-		}
-		player.setTotalValue();
 	}
 
 	public void buyField(Player player, GUI gui) {

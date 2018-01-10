@@ -36,8 +36,12 @@ public class Jail {
 			player.changeBalance(-100);
 		}
 		else {
-			if (diceController.roll() == diceController2.roll()) {
-				player.setHasJailCard(false);
+			int rollOne = diceController.roll();
+			int rollTow = diceController2.roll();
+			gui.setDice(diceController.getFaceValue(), diceController2.getFaceValue());
+			if (rollOne == rollTow) {
+				player.setInJail(false);
+				
 			}
 		}
 	}
