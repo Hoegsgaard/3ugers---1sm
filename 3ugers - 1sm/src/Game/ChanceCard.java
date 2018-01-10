@@ -122,10 +122,10 @@ public class ChanceCard {
 		// New method
 		// Pay money
 		case "coalPrices":
-			coalPrices(player, gui, player.houseOwned(), player.hotelOwned(), "Kul og kokspriserne er steget, og De skal betale: kr. 25 pr hus og kr. 125 per Hotel.");
+			coalPrices(player, gui, "Kul og kokspriserne er steget, og De skal betale: kr. 25 pr hus og kr. 125 per Hotel.");
 			break;
 		case "propertyTax":
-			propertyTax(player, gui, player.houseOwned(), player.hotelOwned(), "Ejendomsskat er steget, ekstraudgifterne er: kr. 50 per hus og kr. 125 per Hotel.");
+			propertyTax(player, gui, "Ejendomsskat er steget, ekstraudgifterne er: kr. 50 per hus og kr. 125 per Hotel.");
 			break;
 		case "tire":
 			payMoney(player, gui, 100, "Du har anskaffet et nyt dæk til din bil. Indbetal kr. 100.");
@@ -220,7 +220,8 @@ public class ChanceCard {
 	}
 	
 	// Coal prices
-	public void coalPrices(Player player, GUI gui, int houseOwned, int hotelOwned, String message) {
+	public void coalPrices(Player player,GUI gui, String message) {
+		gui.displayChanceCard(message);
 		if (player.houseOwned() > 0 || player.hotelOwned() > 0) {
 			player.changeBalance(- (25 * player.houseOwned()));
 			player.changeBalance(- (125 * player.hotelOwned()));
@@ -232,7 +233,8 @@ public class ChanceCard {
 	}
 	
 	// Property tax
-	public void propertyTax(Player player, GUI gui, int houseOwned, int hotelOwned, String message) {
+	public void propertyTax(Player player, GUI gui, String message) {
+		gui.displayChanceCard(message);
 		if (player.houseOwned() > 0 || player.hotelOwned() > 0) {
 			player.changeBalance(- (50 * player.houseOwned()));
 			player.changeBalance(- (125 * player.hotelOwned()));
