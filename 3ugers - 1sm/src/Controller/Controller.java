@@ -155,16 +155,20 @@ public class Controller {
 				player.changeBalance(-150);
 			} else if (player.getCurrentField() == 5 || player.getCurrentField() == 15 || player.getCurrentField() == 25
 					|| player.getCurrentField() == 35) {
+				if (view.buyBut(gui)) {
 				setOwner(player);
 				board.getShipping(player.getCurrentField()).setBorder(player.getCarObject().getPrimaryColor());
 				board.setOwnable(player.getCurrentField(), false);
 				player.changeBalance(-200);
+				}
 			} else {
+				if (view.buyBut(gui)) {
 				setOwner(player);
 				board.getStreet(player.getCurrentField()).setBorder(player.getCarObject().getPrimaryColor());
 				board.setOwnable(player.getCurrentField(), false);
 				int price = board.getPrice(player.getCurrentField());
 				player.changeBalance(-price);
+				}
 			}
 		}
 	}
