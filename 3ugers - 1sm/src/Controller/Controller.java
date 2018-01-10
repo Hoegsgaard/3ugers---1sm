@@ -148,6 +148,7 @@ public class Controller {
 
 	public void buyField(Player player, GUI gui) {
 			if (player.getCurrentField() == 12 || player.getCurrentField() == 28) {
+				if (view.buyBut(gui)) { 
 				setOwner(player);
 				board.getBrewery(player.getCurrentField()).setBorder(player.getCarObject().getPrimaryColor());
 				board.setOwnable(player.getCurrentField(), false);
@@ -166,6 +167,7 @@ public class Controller {
 				player.changeBalance(-price);
 			}
 		}
+	}
 
 	private void payRent(Player player, GUI gui, int diceSum) {
 		int rent = 0;
