@@ -56,7 +56,6 @@ public class Player {
 		this.balance += balance;
 		carObject.setBalance(this.balance);
 		changeTotalValue(balance);
-		
 	}
 	
 	public String getName() {

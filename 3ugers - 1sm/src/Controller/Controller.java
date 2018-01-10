@@ -26,7 +26,6 @@ public class Controller {
 	DiceController diceController2 = new DiceController();
 	ChanceCard cc;
 	MoveController move = new MoveController();
-	
 
 	public void runGame() {
 		board.createBoard();
@@ -115,51 +114,51 @@ public class Controller {
 			player.changeBalance(200);
 		}
 		gui.setDice(diceController.getFaceValue(), diceController2.getFaceValue());
-		
+
 		move.movePlayer(player, gui, sum);
-		
+
 		move.moveToJail(player, gui);
-		
-		
-		
-		
+
 		if (board.getOwnable(player.getCurrentField())) {
 			buyField(player, gui);
-		}
-		else {
+		} else {
 			if (player.getCurrentField() != 2 && player.getCurrentField() != 7 && player.getCurrentField() != 17
-					&& player.getCurrentField() != 22 && player.getCurrentField() != 33 && player.getCurrentField() != 36 
-					&& player.getCurrentField() != 10 && player.getCurrentField() != 20 && player.getCurrentField() != 30 
-					&& player.getCurrentField() != 0 && player.getCurrentField() != 4 && player.getCurrentField() != 38) {
+					&& player.getCurrentField() != 22 && player.getCurrentField() != 33
+					&& player.getCurrentField() != 36 && player.getCurrentField() != 10
+					&& player.getCurrentField() != 20 && player.getCurrentField() != 30 && player.getCurrentField() != 0
+					&& player.getCurrentField() != 4 && player.getCurrentField() != 38) {
 				payRent(player, gui, sum);
 			}
 		}
 		if (player.getCurrentField() == 2 || player.getCurrentField() == 7 || player.getCurrentField() == 17
 				|| player.getCurrentField() == 22 || player.getCurrentField() == 33 || player.getCurrentField() == 36) {
 			cc.drawCard(player, players);
-		}else if (gui.getFields()[player.getCurrentField()] == gui.getFields()[38]) {
+		} else if (gui.getFields()[player.getCurrentField()] == gui.getFields()[38]) {
 			eksTax(player, gui);
 		} else if (gui.getFields()[player.getCurrentField()] == gui.getFields()[4]) {
 			stageTax(player, gui);
 		}
-		
-		
+
 	}
 
 	public void buyField(Player player, GUI gui) {
-			if (player.getCurrentField() == 12 || player.getCurrentField() == 28) {
-				if (view.buyBut(gui)) { 
+		if (player.getCurrentField() == 12 || player.getCurrentField() == 28) {
+			if (view.buyBut(gui)) {
 				setOwner(player);
 				board.getBrewery(player.getCurrentField()).setBorder(player.getCarObject().getPrimaryColor());
 				board.setOwnable(player.getCurrentField(), false);
 				player.changeBalance(-150);
-			} else if (player.getCurrentField() == 5 || player.getCurrentField() == 15 || player.getCurrentField() == 25
-					|| player.getCurrentField() == 35) {
+			}
+		} else if (player.getCurrentField() == 5 || player.getCurrentField() == 15 || player.getCurrentField() == 25
+				|| player.getCurrentField() == 35) {
+			if (view.buyBut(gui)) {
 				setOwner(player);
 				board.getShipping(player.getCurrentField()).setBorder(player.getCarObject().getPrimaryColor());
 				board.setOwnable(player.getCurrentField(), false);
 				player.changeBalance(-200);
-			} else {
+			}
+		} else {
+			if (view.buyBut(gui)) {
 				setOwner(player);
 				board.getStreet(player.getCurrentField()).setBorder(player.getCarObject().getPrimaryColor());
 				board.setOwnable(player.getCurrentField(), false);
@@ -172,36 +171,37 @@ public class Controller {
 	private void payRent(Player player, GUI gui, int diceSum) {
 		int rent = 0;
 		String OOwner = "";
-		
+
 		if (player.getCurrentField() == 12 || player.getCurrentField() == 28) {
 			String owner = ((GUI_Brewery) gui.getFields()[player.getCurrentField()]).getOwnerName();
 			OOwner = owner;
 			int countBrew = 0;
-			if (owner.equals(((GUI_Brewery) gui.getFields()[12]).getOwnerName()) && owner.equals(((GUI_Brewery) gui.getFields()[28]).getOwnerName())) {
+			if (owner.equals(((GUI_Brewery) gui.getFields()[12]).getOwnerName())
+					&& owner.equals(((GUI_Brewery) gui.getFields()[28]).getOwnerName())) {
 				countBrew = 2;
+			} else {
+				countBrew = 1;
 			}
-			else {countBrew = 1;}
-			
+
 			rent = board.getRentBrewery(diceSum, countBrew);
-		}
-		else if (player.getCurrentField() == 5 || player.getCurrentField() == 15 || player.getCurrentField() == 25 || player.getCurrentField() == 35) {
+		} else if (player.getCurrentField() == 5 || player.getCurrentField() == 15 || player.getCurrentField() == 25
+				|| player.getCurrentField() == 35) {
 			String owner = ((GUI_Shipping) gui.getFields()[player.getCurrentField()]).getOwnerName();
 			OOwner = owner;
 			int countShip = 0;
-			
-			for (int i = 5; i < 39; i = i +10) {
+
+			for (int i = 5; i < 39; i = i + 10) {
 				if (owner.equals(((GUI_Shipping) gui.getFields()[i]).getOwnerName())) {
 					countShip++;
 				}
 			}
 			rent = board.getRentShipping(countShip);
-		}
-		else {
+		} else {
 			String owner = ((GUI_Street) gui.getFields()[player.getCurrentField()]).getOwnerName();
 			OOwner = owner;
 			rent = board.getRentStreet(player.getCurrentField());
 		}
-		//Leje betales, fra spiller til ejer
+		// Leje betales, fra spiller til ejer
 		player.changeBalance(-rent);
 		for (int i = 0; i < players.length; i++) {
 			if (OOwner.equals(players[i].getName())) {
@@ -221,22 +221,17 @@ public class Controller {
 	public void setOwner(Player player) {
 		if (player.getCurrentField() == 12 || player.getCurrentField() == 28) {
 			board.getBrewery(player.getCurrentField()).setOwnableLabel("Owner : ");
-			board.getBrewery(player.getCurrentField()).setOwnerName(player.getName());	
-		}
-		else if (player.getCurrentField() == 5 || player.getCurrentField() == 15 || player.getCurrentField() == 25 || player.getCurrentField() == 35) {
+			board.getBrewery(player.getCurrentField()).setOwnerName(player.getName());
+		} else if (player.getCurrentField() == 5 || player.getCurrentField() == 15 || player.getCurrentField() == 25
+				|| player.getCurrentField() == 35) {
 			board.getShipping(player.getCurrentField()).setOwnableLabel("Owner : ");
-			board.getShipping(player.getCurrentField()).setOwnerName(player.getName());	
-		}
-		else {
-		board.getStreet(player.getCurrentField()).setOwnableLabel("Owner : ");
-		board.getStreet(player.getCurrentField()).setOwnerName(player.getName());
+			board.getShipping(player.getCurrentField()).setOwnerName(player.getName());
+		} else {
+			board.getStreet(player.getCurrentField()).setOwnableLabel("Owner : ");
+			board.getStreet(player.getCurrentField()).setOwnerName(player.getName());
 		}
 
 	}
-
-	
-
-
 
 	// Bankrupt
 	// public void bankrupt(Player player) {
