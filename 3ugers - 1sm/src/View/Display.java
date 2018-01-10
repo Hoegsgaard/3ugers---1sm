@@ -12,9 +12,9 @@ public class Display {
 	}
 
 	public void rollDiceButton(GUI gui) {
-		gui.getUserButtonPressed("Hvad vil du gøre?", "Roll");
-		gui.getUserButtonPressed("to", "Byg hus");
-		gui.getUserButtonPressed("tre", "Slut tur");
+		gui.getUserButtonPressed("Hvad vil du gøre?", "Roll","Byg hus", "Slut tur");
+//		gui.getUserButtonPressed("to", "Byg hus");
+//		gui.getUserButtonPressed("tre", "Slut tur");
 	}
 
 	public Boolean stageTax(GUI gui) {

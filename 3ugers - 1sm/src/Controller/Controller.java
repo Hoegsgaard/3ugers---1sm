@@ -120,11 +120,6 @@ public class Controller {
 			}
 			gui.setDice(diceController.getFaceValue(), diceController2.getFaceValue());
 			move.movePlayer(player, gui, sum);
-			if (!player.getInJail()) {
-				move.movePlayer(player, gui, sum);
-			} else {
-				jail.getOutOfJail(player, gui);
-			}
 			move.moveToJail(player, gui);
 
 			if (board.getOwnable(player.getCurrentField())) {
@@ -138,11 +133,6 @@ public class Controller {
 						&& player.getCurrentField() != 38) {
 					payRent(player, gui, sum);
 				}
-				gui.setDice(diceController.getFaceValue(), diceController2.getFaceValue());
-				move.movePlayer(player, gui, sum);
-
-				move.moveToJail(player, gui);
-
 				if (board.getOwnable(player.getCurrentField())) {
 					buyField(player, gui);
 				} else {
