@@ -26,6 +26,7 @@ public class Controller {
 	DiceController diceController2 = new DiceController();
 	ChanceCard cc;
 	MoveController move = new MoveController();
+	Jail jail = new Jail();
 
 	public void runGame() {
 		board.createBoard();
@@ -114,9 +115,11 @@ public class Controller {
 			player.changeBalance(200);
 		}
 		gui.setDice(diceController.getFaceValue(), diceController2.getFaceValue());
-
-		move.movePlayer(player, gui, sum);
-		
+		if(!player.getInJail()) {
+			move.movePlayer(player, gui, sum);
+		}else {
+			jail.getOutOfJail(player, gui);
+		}
 		move.moveToJail(player, gui);
 
 		if (board.getOwnable(player.getCurrentField())) {

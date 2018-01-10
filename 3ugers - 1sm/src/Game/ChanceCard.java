@@ -1,5 +1,6 @@
 package Game;
 
+import Controller.MoveController;
 import gui_main.GUI;
 
 public class ChanceCard {
@@ -14,6 +15,7 @@ public class ChanceCard {
 			"parkeringTicket", "parkeringTicket", "goToJail", "goToJail", "goToJail", "getOutOfJail", "getOutOfJail" };
 
 	private GUI gui;
+	private MoveController move = new MoveController();
 
 	public ChanceCard(GUI gui) {
 		this.gui = gui;
@@ -193,8 +195,12 @@ public class ChanceCard {
 	// // Move steps (this chance card moves a player forwards or backwards on the
 	// board)
 	public void moveSteps(Player player, int steps, GUI gui, String message) {
-		movePlayerDist(player, gui, steps);
+		if(player.getCurrentField() == 3) {
 		gui.displayChanceCard(message);
+		move.movePlayer(player, gui, 36);
+		}
+		gui.displayChanceCard(message);
+		move.movePlayer(player, gui, steps);
 	 }
 
 	// Get money (this chance card adds money to the players balance)
@@ -262,7 +268,7 @@ public class ChanceCard {
 		// Removes the brick from the current field.
 		gui.getFields()[player.getCurrentField()].setCar(player.getCarObject(), false);
 		// Updates the player object.
-		if (player.getCurrentField() + dist > 39) {
+		if ((player.getCurrentField() + dist) > 39) {
 			dist -= 40;
 			player.changeBalance(200);
 		}
