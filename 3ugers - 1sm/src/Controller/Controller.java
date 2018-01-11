@@ -31,6 +31,7 @@ public class Controller {
 	boolean winner = false;
 	boolean rollCounter = false;
 	BuyProperty Buy = new BuyProperty();
+	boolean start = true;
 
 	public void runGame() {
 		board.createBoard();
@@ -119,6 +120,7 @@ public class Controller {
 						case "Rul":
 							if (!rollCounter) {
 								rollCounter = true;
+								
 								//int sum = diceController.roll() + diceController2.roll();
 								int sum = 1;
 								if ((player.getCurrentField() + sum) > 39) {
@@ -161,7 +163,7 @@ public class Controller {
 							Buy.choiceOfArea(test, gui, player, board);
 							//Buy.isAllOwendInSameColor(gui, player);
 							}catch(NullPointerException e) {
-								System.out.println("something");
+								gui.displayChanceCard("Du ejer ikke Alle de felter");
 							}
 							turnchoice = false;
 							break;

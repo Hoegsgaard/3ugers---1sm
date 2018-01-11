@@ -69,7 +69,7 @@ public class BuyProperty {
 	public void getGreen(GUI gui, Player player, GameBoard board) {
 		if (ownerOfFieldName(11, gui).equals(ownerOfFieldName(13, gui))
 				&& ownerOfFieldName(11, gui).equals(ownerOfFieldName(14, gui))
-				&& player.getName().equals(ownerOfFieldName(11, gui)) && counterGreen < 4) {
+				&& player.getName().equals(ownerOfFieldName(11, gui))) {
 			if (numberOffGreen == 0 && counterGreen <= 3) {
 				counterGreen++;
 				((GUI_Street) gui.getFields()[11]).setHouses(counterGreen);
@@ -204,7 +204,7 @@ public class BuyProperty {
 			player.setHouseValue(price);
 		}
 	}
-
+	
 	public void buildHouse(GUI gui, int field) {
 		((GUI_Street) gui.getFields()[field]).setHouses(1);
 
