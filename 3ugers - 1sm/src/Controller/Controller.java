@@ -62,12 +62,6 @@ public class Controller {
 			// Asks the user for a name.
 			players[i].setName(gui.getUserString(("Enter the name of player " + (i + 1))));
 			players[i].setCarObject(new GUI_Player(players[i].getName()));
-
-			// Sets the players balance. 20 - ((AmountOfPlayers - 2) * 2) is an equation
-			// that gives the following results:
-			// 16 if AmountOfPlayers = 4.
-			// 18 if AmountOfPlayers = 3.
-			// 20 if AmountOfPlayers = 2.
 			players[i].changeBalance(1500);
 			// Sets the colour of the cars manually, so they dont end up the same by chance.
 			switch (i) {
@@ -125,8 +119,7 @@ public class Controller {
 						case "Rul":
 							if (!rollCounter) {
 								rollCounter = true;
-								//int sum = diceController.roll() + diceController2.roll();
-								int sum = 1;
+								int sum = diceController.roll() + diceController2.roll();
 								if ((player.getCurrentField() + sum) > 39) {
 									sum -= 40;
 									player.changeBalance(200);
