@@ -109,7 +109,7 @@ public class BuyProperty {
 				} else if (hotelGreen == 1) {
 					((GUI_Street) gui.getFields()[13]).setHotel(true);
 					board.changeNumOffBuild(13, 1);
-					hotelPink = 2;
+					hotelGreen = 2;
 				} else {
 					((GUI_Street) gui.getFields()[14]).setHotel(true);
 					board.changeNumOffBuild(14, 1);
@@ -226,7 +226,7 @@ public class BuyProperty {
 
 			if (numberOffWhite == 0 && counterWhite == 4) {// HOTEL
 				if (hotelWhite == 0) {
-					((GUI_Street) gui.getFields()[6]).setHotel(true);
+					((GUI_Street) gui.getFields()[26]).setHotel(true);
 					board.changeNumOffBuild(26, 1);
 					hotelWhite = 1;
 				} else if (hotelWhite == 1) {

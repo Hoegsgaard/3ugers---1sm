@@ -73,9 +73,9 @@ public class ChanceCard {
 		case "goThreeStepsBack":
 			if(player.getCurrentField() == 2) {
 				gui.displayChanceCard("Ryk tre felter tilbage");
-				move.movePlayer(player, gui, 39);
+				move.setPlayerPos(player, 39, gui);
 				}else {
-			moveSteps(player, -3, gui, "Ryk tre felter tilbage");
+			moveSteps(player, -3, gui, "Ryk tre felter 0ilbage");
 			break;
 				}
 			
@@ -150,17 +150,17 @@ public class ChanceCard {
 			payMoney(player, gui, 20, "Du har måttet vedtage en parkeringsbøde. Betal kr. 20 til banken.");
 			break;
 
-//		// Go to jail
-//		case "goToJail":
-//			goToJail(player, 30, gui,
-//					"Gå i fængsel. Ryk direkte til fængsel. Selv om De passerer >>Start<<, indkasserer du ikke kr. 200.");
-//			break;
-//
-//		// Get out of jail
-//		case "getOutOfJail":
-//			getOutOfJail(player,
-//					"I anledning af Kongens fødelsdag benådes du herved for fængsel. Dette kort kan opbevares, indtil du får brug for det eller du kan sælge det.");
-//			break;
+		// Go to jail
+		case "goToJail":
+			goToJail(player, 30, gui,
+					"Gå i fængsel. Ryk direkte til fængsel. Selv om De passerer >>Start<<, indkasserer du ikke kr. 200.");
+			break;
+
+		// Get out of jail
+		case "getOutOfJail":
+			getOutOfJail(player,
+					"I anledning af Kongens fødelsdag benådes du herved for fængsel. Dette kort kan opbevares, indtil du får brug for det eller du kan sælge det.");
+			break;
 		}
 	}
 
@@ -264,21 +264,6 @@ public class ChanceCard {
 	public void getOutOfJail(Player player, String message) {
 		player.setHasJailCard(true);
 		gui.displayChanceCard(message);
-	}
-
-	/////////////////
-	// Move funktions
-	public void movePlayerDist(Player player, GUI gui, int dist) {
-		// Removes the brick from the current field.
-		gui.getFields()[player.getCurrentField()].setCar(player.getCarObject(), false);
-		// Updates the player object.
-		if ((player.getCurrentField() + dist) > 39) {
-			dist -= 40;
-			player.changeBalance(200);
-		}
-		player.setCurrentField(player.getCurrentField() + dist);
-		// Places the player's brick on the new field.
-		gui.getFields()[player.getCurrentField()].setCar(player.getCarObject(), true);
 	}
 
 	public void ifPassStart(Player player, int field) {

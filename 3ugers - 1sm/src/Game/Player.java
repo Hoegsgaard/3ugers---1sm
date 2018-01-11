@@ -97,7 +97,7 @@ public class Player {
 	}
 	
 	public void changeTotalValue() {
-		totalValue = getBalance() + getFieldValue() + getHousevalue();
+		totalValue = getBalance() + getFieldValue() + getHouseValue();
 	}	
 	public int setFieldValue(int val) {
 		return fieldvalue = fieldvalue + val;
@@ -111,7 +111,7 @@ public class Player {
 	public boolean getBankrupt() {
 		return bankrupt;
 	}
-	public int getHousevalue() {
+	public int getHouseValue() {
 		return fieldvalue;
 	}
 	public void setHouseValue(int val) {

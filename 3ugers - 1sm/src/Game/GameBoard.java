@@ -30,47 +30,46 @@ public class GameBoard {
 	boolean shipping = true;
 
 	int[][] rent = new int[][] { 
-			{ 0 }, // Start
-			{ 2, 10, 30, 90, 160, 250 }, 
-			{ 0 }, // ChanceCard
-			{ 4, 20, 60, 180, 320, 540 }, 
-			{ 0 }, // StatsSkat
-			{ 25, 50, 100, 200 }, // Shiping
-			{ 6, 30, 90, 270, 400, 550 }, 
-			{ 0 }, // ChanceCard
-			{ 6, 30, 90, 270, 400, 550 }, 
-			{ 8, 40, 100, 300, 450, 600 }, 
-			{ 0 }, // JAil
-			{ 10, 50, 150, 450, 625, 750 }, 
-			{ 0 }, // bryggeri
-			{ 10, 50, 150, 450, 625, 750 }, 
-			{ 12, 60, 180, 500, 700, 900 }, 
-			{ 25, 50, 100, 200 }, // Shiping
-			{ 14, 70, 200, 550, 750, 950 }, 
-			{ 0 }, // ChanceCard
-			{ 14, 70, 200, 550, 750, 950 }, 
-			{ 16, 80, 220, 600, 800, 1000 }, 
-			{ 0 }, // Park
-			{ 18, 90, 250, 700, 875, 1050 }, 
-			{ 0 }, // ChanceCard
-			{ 18, 90, 250, 700, 875, 1050 }, 
-			{ 20, 100, 300, 750, 925, 1100 }, 
-			{ 25, 50, 100, 200 }, // Shiping
-			{ 22, 110, 330, 800, 975, 1150 }, 
-			{ 22, 110, 330, 800, 975, 1150 }, 
-			{ 0 }, // bryggeri
-			{ 22, 120, 360, 850, 1025, 1200 }, 
-			{ 0 }, // GoTOJail
-			{ 26, 130, 390, 900, 1100, 1275 }, 
-			{ 26, 130, 390, 900, 1100, 1275 }, 
-			{ 0 }, // ChanceCard
-			{ 28, 150, 450, 1000, 1200, 1400 }, 
-			{ 25, 50, 100, 200 }, // Shiping
-			{ 0 }, // ChanceCard
-			{ 35, 200, 500, 1100, 1300, 1500 }, 
-			{ 0 }, // EkstraSkat
-			{ 50, 200, 600, 1400, 1700, 2000 },
-
+		{ 0 }, // Start
+		{ 2, 10, 30, 90, 160, 250 }, 
+		{ 0 }, // ChanceCard
+		{ 4, 20, 60, 180, 320, 540 }, 
+		{ 0 }, // StatsSkat
+		{ 25, 50, 100, 200 }, // Shiping
+		{ 6, 30, 90, 270, 400, 550 }, 
+		{ 0 }, // ChanceCard
+		{ 6, 30, 90, 270, 400, 550 }, 
+		{ 8, 40, 100, 300, 450, 600 }, 
+		{ 0 }, // JAil
+		{ 10, 50, 150, 450, 625, 750 }, 
+		{ 0 }, // bryggeri
+		{ 10, 50, 150, 450, 625, 750 }, 
+		{ 12, 60, 180, 500, 700, 900 }, 
+		{ 25, 50, 100, 200 }, // Shiping
+		{ 14, 70, 200, 550, 750, 950 }, 
+		{ 0 }, // ChanceCard	
+		{ 14, 70, 200, 550, 750, 950 }, 
+		{ 16, 80, 220, 600, 800, 1000 }, 
+		{ 0 }, // Park
+		{ 18, 90, 250, 700, 875, 1050 }, 
+		{ 0 }, // ChanceCard
+		{ 18, 90, 250, 700, 875, 1050 }, 
+		{ 20, 100, 300, 750, 925, 1100 }, 
+		{ 25, 50, 100, 200 }, // Shiping
+		{ 22, 110, 330, 800, 975, 1150 }, 
+		{ 22, 110, 330, 800, 975, 1150 }, 
+		{ 0 }, // bryggeri
+		{ 22, 120, 360, 850, 1025, 1200 }, 
+		{ 0 }, // GoTOJail
+		{ 26, 130, 390, 900, 1100, 1275 }, 
+		{ 26, 130, 390, 900, 1100, 1275 }, 
+		{ 0 }, // ChanceCard
+		{ 28, 150, 450, 1000, 1200, 1400 }, 
+		{ 25, 50, 100, 200 }, // Shiping
+		{ 0 }, // ChanceCard
+		{ 35, 200, 500, 1100, 1300, 1500 }, 
+		{ 0 }, // EkstraSkat
+		{ 50, 200, 600, 1400, 1700, 2000 },
 	};
 
 	public void createBoard() {
@@ -250,13 +249,43 @@ public class GameBoard {
 	public int pirceForHouse(int val) {
 		return housePrice[val];
 	}
+
 	public int getNumOffBuild(int field) {
 		return NumOffBuild[field];
 	}
+
 	public void setNumOffBuild(int field, int num) {
-		NumOffBuild[field]= 0;
+		NumOffBuild[field] = 0;
 	}
+
 	public void changeNumOffBuild(int field, int num) {
 		NumOffBuild[field] = getNumOffBuild(field) + num;
+	}
+
+	public void sellAll(Player player, GUI gui) {
+		for (int i = 0; i < fields.length; i++) {
+			if (i != 2 && i != 7 && i != 17 && i != 22 && i != 33 && i != 36 && i != 10 && i != 20 && i != 30 && i != 0
+					&& i != 4 && i != 38) {
+				// ALT HVAD DER IKKE KAN KØBES ER UDELUKKET
+
+				// ØL
+				if (i == 12 || i == 28) {
+					if (player.getName().equals(((GUI_Brewery) gui.getFields()[i]).getOwnerName())) {
+						setOwnable(i, true);
+						((GUI_Brewery) gui.getFields()[i]).setBorder(Color.black);
+					}
+				} else if (i == 5 || i == 15 || i == 25 || i == 35) {
+					if (player.getName().equals(((GUI_Shipping) gui.getFields()[i]).getOwnerName())) {
+						setOwnable(i, true);
+						((GUI_Shipping) gui.getFields()[i]).setBorder(Color.BLACK);
+					}
+				} else {
+					if (player.getName().equals(((GUI_Street) gui.getFields()[i]).getOwnerName())) {
+						setOwnable(i, true);
+						((GUI_Street) gui.getFields()[i]).setBorder(Color.BLACK);
+					}
+				}
+			}
+		}
 	}
 }
