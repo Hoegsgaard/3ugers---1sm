@@ -161,7 +161,7 @@ public class Controller {
 							Buy.choiceOfArea(test, gui, player, board);
 							//Buy.isAllOwendInSameColor(gui, player);
 							}catch(NullPointerException e) {
-								System.out.println("something");
+								gui.displayChanceCard("Du ejer ikke Alle de felter");
 							}
 							turnchoice = false;
 							break;

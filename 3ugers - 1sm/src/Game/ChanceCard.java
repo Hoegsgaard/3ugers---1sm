@@ -71,8 +71,14 @@ public class ChanceCard {
 					"Tag med Øresundsbåden.. Flyt brikken frem, og hvis du passerer >>Start<< indkasser kr. 200.");
 			break;
 		case "goThreeStepsBack":
+			if(player.getCurrentField() == 2) {
+				gui.displayChanceCard("Ryk tre felter tilbage");
+				move.movePlayer(player, gui, 39);
+				}else {
 			moveSteps(player, -3, gui, "Ryk tre felter tilbage");
 			break;
+				}
+			
 		case "goToStart":
 			moveTo(player, 0, gui, "Ryk frem til >>Start<<");
 			break;
@@ -195,10 +201,6 @@ public class ChanceCard {
 	// // Move steps (this chance card moves a player forwards or backwards on the
 	// board)
 	public void moveSteps(Player player, int steps, GUI gui, String message) {
-		if(player.getCurrentField() == 2) {
-		gui.displayChanceCard(message);
-		move.movePlayer(player, gui, 39);
-		}
 		gui.displayChanceCard(message);
 		move.movePlayer(player, gui, steps);
 	 }
