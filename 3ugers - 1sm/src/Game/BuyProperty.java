@@ -182,7 +182,8 @@ public class BuyProperty {
 			player.setHouseValue(price);
 		}
 	}
-
+// Køb hus done
+	
 	public void buildHouse(GUI gui, int field) {
 		((GUI_Street) gui.getFields()[field]).setHouses(1);
 
