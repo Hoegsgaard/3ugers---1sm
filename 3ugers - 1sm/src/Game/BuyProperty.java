@@ -8,10 +8,11 @@ public class BuyProperty {
 	Controller cont = new Controller();
 	boolean playerCanBuy = false;
 	int counter = 0;
+	
 	public BuyProperty() {
 
 	}
-
+	
 	boolean[] sameColor = { false, false, false, false, false, false, false, false };
 
 	public String ownerOfFieldName(int field, GUI gui) {

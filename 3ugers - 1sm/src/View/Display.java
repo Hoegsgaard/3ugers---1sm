@@ -29,4 +29,8 @@ public class Display {
 	public Boolean getOutBut(GUI gui) {
 		return gui.getUserLeftButtonPressed("Hvordan vil du komme ud af fængsel", "100 kr", "Slå 2 ens");
 	}
+	
+	public String buildOnColor(GUI gui) {
+		return gui.getUserSelection("Hvor vil du bygge?", "Cyan", "Pink", "Grøn", "Grå", "Rød", "Hvid", "Gul", "Lilla");
+	}
 }
