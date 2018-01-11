@@ -100,7 +100,7 @@ public class Controller {
 
 		for (int i = 0; i < players.length; i++) {
 			gui.getFields()[0].setCar(players[i].getCarObject(), true);
-			
+
 		}
 	}
 
@@ -120,9 +120,7 @@ public class Controller {
 						case "Rul":
 							if (!rollCounter) {
 								rollCounter = true;
-								
-								//int sum = diceController.roll() + diceController2.roll();
-								int sum = 1;
+								int sum = diceController.roll() + diceController2.roll();
 								if ((player.getCurrentField() + sum) > 39) {
 									sum -= 40;
 									player.changeBalance(200);
@@ -160,15 +158,16 @@ public class Controller {
 
 								turnchoice = false;
 								break;
-							}else {
+							} else {
 								gui.displayChanceCard("Byg et Hus eller slut din tur");
-							}	break;
+							}
+							break;
 						case "Byg hus":
 							try {
-							String test = view.buildOnColor(gui);
-							Buy.choiceOfArea(test, gui, player, board);
-							//Buy.isAllOwendInSameColor(gui, player);
-							}catch(NullPointerException e) {
+								String test = view.buildOnColor(gui);
+								Buy.choiceOfArea(test, gui, player, board);
+								// Buy.isAllOwendInSameColor(gui, player);
+							} catch (NullPointerException e) {
 								gui.displayChanceCard("Du ejer ikke Alle de felter");
 							}
 							turnchoice = false;
@@ -213,7 +212,7 @@ public class Controller {
 				int price = board.getPrice(player.getCurrentField());
 				player.changeBalance(-price);
 				player.setFieldValue(price);
-				
+
 			}
 		}
 	}
@@ -289,6 +288,7 @@ public class Controller {
 			if (player.getBalance() < 0) {
 				gui.getFields()[player.getCurrentField()].setCar(player.getCarObject(), false);
 				player.setBalance(0);
+				player.getCarObject();
 				player.setTotalValue(0);
 				player.setBankrupt(true);
 				turn = false;
@@ -320,6 +320,7 @@ public class Controller {
 			findWinner(player, gui);
 		}
 	}
+
 	// TAX
 	public void eksTax(Player player, GUI gui) {
 		player.changeBalance(-100);
