@@ -162,7 +162,6 @@ public class Controller {
 								gui.displayChanceCard("Byg et Hus eller slut din tur");
 							}	break;
 						case "Byg hus":
-							System.out.println("BYG ET HUS");
 //							Buy.ownerOfFieldName(player.getCurrentField(), gui);
 							Buy.isAllOwendInSameColor(gui, player);
 							turnchoice = false;
@@ -170,7 +169,6 @@ public class Controller {
 						case "Slut tur":
 							turnchoice = false;
 							turn = false;
-							System.out.println("næste");
 							break;
 
 						}

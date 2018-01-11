@@ -1,17 +1,19 @@
 package Game;
 
 import gui_main.GUI;
-import Controller.Controller;
 import gui_fields.GUI_Street;
 
 public class BuyProperty {
 	boolean playerCanBuy = false;
+
 	int counterCyan, counter2 = 0;
 
+
+	
 	public BuyProperty() {
 
 	}
-
+	
 	boolean[] sameColor = { false, false, false, false, false, false, false, false };
 
 	public String ownerOfFieldName(int field, GUI gui) {
