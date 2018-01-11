@@ -169,7 +169,7 @@ public class ChanceCard {
 
 	// Go to next Shipping Company
 	public void goToNextShippingCompany(Player player, GUI gui, String message) {
-		if (player.getCurrentField() > 35 && player.getCurrentField() < 5) {
+		if (player.getCurrentField() >= 35 && player.getCurrentField() <= 5) {
 			if (player.getCurrentField() > 35) {
 				player.changeBalance(200);
 			}
@@ -195,9 +195,9 @@ public class ChanceCard {
 	// // Move steps (this chance card moves a player forwards or backwards on the
 	// board)
 	public void moveSteps(Player player, int steps, GUI gui, String message) {
-		if(player.getCurrentField() == 3) {
+		if(player.getCurrentField() == 2) {
 		gui.displayChanceCard(message);
-		move.movePlayer(player, gui, 36);
+		move.movePlayer(player, gui, 39);
 		}
 		gui.displayChanceCard(message);
 		move.movePlayer(player, gui, steps);
