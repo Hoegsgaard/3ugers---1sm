@@ -149,6 +149,9 @@ public class Controller {
 									if (board.getOwnable(player.getCurrentField())) {
 										buyField(player, gui);
 									}
+									if (player.getInJail()) {
+										jail.getOutOfJail(player, gui);
+									}
 								} else if (gui.getFields()[player.getCurrentField()] == gui.getFields()[38]) {
 									eksTax(player, gui);
 								} else if (gui.getFields()[player.getCurrentField()] == gui.getFields()[4]) {
