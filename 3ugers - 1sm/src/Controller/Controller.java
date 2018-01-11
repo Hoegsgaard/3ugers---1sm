@@ -146,6 +146,9 @@ public class Controller {
 										|| player.getCurrentField() == 17 || player.getCurrentField() == 22
 										|| player.getCurrentField() == 33 || player.getCurrentField() == 36) {
 									cc.drawCard(player, players);
+									if (board.getOwnable(player.getCurrentField())) {
+										buyField(player, gui);
+									}
 								} else if (gui.getFields()[player.getCurrentField()] == gui.getFields()[38]) {
 									eksTax(player, gui);
 								} else if (gui.getFields()[player.getCurrentField()] == gui.getFields()[4]) {
@@ -314,7 +317,6 @@ public class Controller {
 			findWinner(player, gui);
 		}
 	}
-
 	// TAX
 	public void eksTax(Player player, GUI gui) {
 		player.changeBalance(-100);
