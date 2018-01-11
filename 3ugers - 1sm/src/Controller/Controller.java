@@ -30,6 +30,7 @@ public class Controller {
 	Jail jail = new Jail();
 	boolean winner = false;
 	boolean rollCounter = false;
+	BuyProperty Buy = new BuyProperty();
 
 	public void runGame() {
 		board.createBoard();
@@ -109,7 +110,6 @@ public class Controller {
 	}
 
 	private void takeTurn(Player player, GUI gui) {
-		BuyProperty Buy = new BuyProperty();
 		if (player.getBankrupt() == false) {
 			if (player.getInJail()) {
 				jail.getOutOfJail(player, gui);
