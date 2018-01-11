@@ -162,8 +162,13 @@ public class Controller {
 								gui.displayChanceCard("Byg et Hus eller slut din tur");
 							}	break;
 						case "Byg hus":
-//							Buy.ownerOfFieldName(player.getCurrentField(), gui);
-							Buy.isAllOwendInSameColor(gui, player);
+							try {
+							String test = view.buildOnColor(gui);
+							Buy.choiceOfArea(test, gui, player);
+							//Buy.isAllOwendInSameColor(gui, player);
+							}catch(NullPointerException e) {
+								System.out.println("something");
+							}
 							turnchoice = false;
 							break;
 						case "Slut tur":

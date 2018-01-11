@@ -15,7 +15,7 @@ public class BuyProperty {
 	}
 	
 	boolean[] sameColor = { false, false, false, false, false, false, false, false };
-
+	
 	public String ownerOfFieldName(int field, GUI gui) {
 		return ((GUI_Street) gui.getFields()[field]).getOwnerName();
 
@@ -72,10 +72,40 @@ public class BuyProperty {
 		}
 
 	}
+	public void getCyan (GUI gui, Player player) {
+		if (ownerOfFieldName(1, gui).equals(ownerOfFieldName(3, gui))
+				&& player.getName().equals(ownerOfFieldName(3, gui)) && counterCyan < 4) {
+			counterCyan++;
+			((GUI_Street) gui.getFields()[1]).setHouses(counterCyan);
+
+		}
+	}
+	public void getPink (GUI gui, Player player) {
+		if (ownerOfFieldName(6, gui).equals(ownerOfFieldName(8, gui))
+				&& ownerOfFieldName(6, gui).equals(ownerOfFieldName(9, gui))
+				&& player.getName().equals(ownerOfFieldName(6, gui)) && counter2 <= 4) {
+			counter2++;
+			System.out.println("HAaalo!");
+			((GUI_Street) gui.getFields()[6]).setHouses(counter2);
+		}
+	}
+	
 
 	public void buildHouse(GUI gui, int field) {
 		((GUI_Street) gui.getFields()[field]).setHouses(1);
 
+	}
+	
+	public void choiceOfArea(String choice, GUI gui, Player player) {
+		switch(choice) {
+		case "Cyan":
+			getCyan(gui, player);
+			break;
+		case "Pink":
+			getPink(gui, player);
+			break;
+		
+		}
 	}
 
 }
