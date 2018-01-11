@@ -119,7 +119,8 @@ public class Controller {
 						case "Rul":
 							if (!rollCounter) {
 								rollCounter = true;
-								int sum = diceController.roll() + diceController2.roll();
+								//int sum = diceController.roll() + diceController2.roll();
+								int sum = 1;
 								if ((player.getCurrentField() + sum) > 39) {
 									sum -= 40;
 									player.changeBalance(200);
@@ -157,7 +158,7 @@ public class Controller {
 						case "Byg hus":
 							try {
 							String test = view.buildOnColor(gui);
-							Buy.choiceOfArea(test, gui, player);
+							Buy.choiceOfArea(test, gui, player, board);
 							//Buy.isAllOwendInSameColor(gui, player);
 							}catch(NullPointerException e) {
 								System.out.println("something");

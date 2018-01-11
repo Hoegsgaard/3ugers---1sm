@@ -9,6 +9,7 @@ public class Player {
 	private int playerNumber;
 	private int balance = 0;
 	private int fieldvalue = 0;
+	private int housevalue = 0;
 	private int totalValue = 0;
 	private String name = "";
 	private GUI_Player carObject;
@@ -96,7 +97,7 @@ public class Player {
 	}
 	
 	public void changeTotalValue() {
-		totalValue = getBalance() + getFieldValue();
+		totalValue = getBalance() + getFieldValue() + getHousevalue();
 	}	
 	public int setFieldValue(int val) {
 		return fieldvalue = fieldvalue + val;
@@ -110,7 +111,12 @@ public class Player {
 	public boolean getBankrupt() {
 		return bankrupt;
 	}
-	
+	public int getHousevalue() {
+		return fieldvalue;
+	}
+	public void setHouseValue(int val) {
+		housevalue = housevalue + val;
+	}
 }
 
 
