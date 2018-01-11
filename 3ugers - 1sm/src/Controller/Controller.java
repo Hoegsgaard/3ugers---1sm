@@ -31,6 +31,7 @@ public class Controller {
 	boolean winner = false;
 	boolean rollCounter = false;
 	BuyProperty Buy = new BuyProperty();
+	boolean start = true;
 
 	public void runGame() {
 		board.createBoard();
@@ -62,7 +63,7 @@ public class Controller {
 			// Asks the user for a name.
 			players[i].setName(gui.getUserString(("Enter the name of player " + (i + 1))));
 			players[i].setCarObject(new GUI_Player(players[i].getName()));
-			players[i].changeBalance(1500);
+			players[i].changeBalance(20000);
 			// Sets the colour of the cars manually, so they dont end up the same by chance.
 			switch (i) {
 			case 0:
@@ -112,6 +113,11 @@ public class Controller {
 				player.changeTotalValue();
 				turn = true;
 				rollCounter = false;
+				
+				if(start) {
+					move.setPlayerPos(player, 30, gui);
+					start = false;
+				}
 				while (turn) {
 					turnchoice = true;
 					while (turnchoice) {
@@ -119,6 +125,7 @@ public class Controller {
 						case "Rul":
 							if (!rollCounter) {
 								rollCounter = true;
+								
 								//int sum = diceController.roll() + diceController2.roll();
 								int sum = 1;
 								if ((player.getCurrentField() + sum) > 39) {
