@@ -81,7 +81,6 @@ public class Trade {
 						tradeWhitsNumOffField++;
 					}
 				}
-
 			}
 		}
 		String[] tradeWhitsFields = new String[tradeWhitsNumOffField];
@@ -142,7 +141,7 @@ public class Trade {
 						tradePlayer = players[x];
 					}
 				}
-
+				
 				if (i != 2 && i != 7 && i != 17 && i != 22 && i != 33 && i != 36 && i != 10 && i != 20 && i != 30
 						&& i != 0 && i != 4 && i != 38) {
 					if (i == 12 || i == 28) {
@@ -163,8 +162,6 @@ public class Trade {
 					}
 				}
 			}
-
 		}
 	}
-
 }
