@@ -20,7 +20,7 @@ public class GameBoard {
 
 	GUI_Field[] fields = new GUI_Field[40];
 
-	int[] fieldPrice = new int[40];
+	final int[] fieldPrice = new int[40];
 	boolean[] ownable = new boolean[40];
 	int[] NumOffBuild = new int[40];
 	int[] housePrice = { 50, 100, 150, 200 };
