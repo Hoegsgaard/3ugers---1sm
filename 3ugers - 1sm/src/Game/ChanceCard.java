@@ -75,9 +75,10 @@ public class ChanceCard {
 				gui.displayChanceCard("Ryk tre felter tilbage");
 				move.setPlayerPos(player, 39, gui);
 				}else {
-			moveSteps(player, -3, gui, "Ryk tre felter 0ilbage");
-			break;
+			moveSteps(player, -3, gui, "Ryk tre felter tilbage");
 				}
+			break;
+				
 			
 		case "goToStart":
 			moveTo(player, 0, gui, "Ryk frem til >>Start<<");
