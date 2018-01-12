@@ -212,9 +212,7 @@ public class GameBoard {
 	}
 
 	public int getRentStreet(int field) {
-		int k = rent[field][getNumOffBuild(field)];
-		System.out.println(k);
-		return k;
+		return rent[field][getNumOffBuild(field)];
 	}
 
 	public int getRentBrewery(int sum, int count) {
