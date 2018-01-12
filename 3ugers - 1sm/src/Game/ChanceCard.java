@@ -249,7 +249,9 @@ public class ChanceCard {
 	// Pay money (this chance card draws money from the players balance)
 	public void payMoney(Player player, GUI gui, int money, String message) {
 		player.changeBalance(money);
+		if (message != null) {
 		gui.displayChanceCard(message);
+	}
 	}
 
 	// Go to jail
@@ -263,7 +265,9 @@ public class ChanceCard {
 	// Get out of jail
 	public void getOutOfJail(Player player, String message) {
 		player.setHasJailCard(true);
+		 if (message != null) {
 		gui.displayChanceCard(message);
+		 }
 	}
 
 	public void ifPassStart(Player player, int field) {
