@@ -49,7 +49,6 @@ public class Controller {
 	public Player[] getPlayers() {
 		return players;
 	}
-
 	public void addPlayers(GUI gui) {
 		int AmountOfPlayers = view.enterPlayers(gui);
 
