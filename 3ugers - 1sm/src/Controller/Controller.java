@@ -7,6 +7,7 @@ import Game.Game;
 import Game.GameBoard;
 import Game.Jail;
 import Game.Player;
+import Game.Trade;
 import Game.BuyProperty;
 import View.Display;
 import gui_fields.GUI_Brewery;
@@ -31,6 +32,7 @@ public class Controller {
 	boolean rollCounter = false;
 	BuyProperty Buy = new BuyProperty();
 	boolean start = true;
+	Trade trade = new Trade();
 
 	public void runGame() {
 		board.createBoard();
@@ -139,9 +141,10 @@ public class Controller {
 									if (board.getOwnable(player.getCurrentField())) {
 										buyField(player, gui);
 									}
-									payRent(player, gui, sum);
-									if (player.getInJail()) {
-										jail.getOutOfJail(player, gui);
+									else {payRent(player, gui, sum);
+									}
+									if (player.getCurrentField() == 30) {
+										jail.goToJail(player, gui);
 									}
 								} else if (gui.getFields()[player.getCurrentField()] == gui.getFields()[38]) {
 									eksTax(player, gui);
@@ -165,6 +168,14 @@ public class Controller {
 							}
 							turnchoice = false;
 							break;
+
+						case "Byt":
+							try {
+								trade.trede(gui, players, player, view);
+							} catch (NullPointerException e) {
+								System.out.println("Felt ejes endnu ikke");
+							}
+							break;
 						case "Slut tur":
 							turnchoice = false;
 							turn = false;
@@ -177,6 +188,7 @@ public class Controller {
 				}
 			}
 		}
+
 	}
 
 	public void buyField(Player player, GUI gui) {
@@ -214,10 +226,8 @@ public class Controller {
 		int rent = 0;
 		int field = player.getCurrentField();
 		String OOwner = "";
-		if (field != 2 && field != 7 && field != 17
-				&& field != 22 && field != 33 && field != 36
-				&& field != 10 && field != 20 && field != 30
-				&& field != 0 && field != 4 && field != 38) {
+		if (field != 2 && field != 7 && field != 17 && field != 22 && field != 33 && field != 36 && field != 10
+				&& field != 20 && field != 30 && field != 0 && field != 4 && field != 38) {
 
 			if (player.getCurrentField() == 12 || player.getCurrentField() == 28) {
 				String owner = ((GUI_Brewery) gui.getFields()[player.getCurrentField()]).getOwnerName();

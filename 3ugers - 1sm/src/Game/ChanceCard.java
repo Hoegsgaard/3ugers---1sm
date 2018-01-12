@@ -75,9 +75,10 @@ public class ChanceCard {
 				gui.displayChanceCard("Ryk tre felter tilbage");
 				move.setPlayerPos(player, 39, gui);
 				}else {
-			moveSteps(player, -3, gui, "Ryk tre felter 0ilbage");
-			break;
+			moveSteps(player, -3, gui, "Ryk tre felter tilbage");
 				}
+			break;
+				
 			
 		case "goToStart":
 			moveTo(player, 0, gui, "Ryk frem til >>Start<<");
@@ -249,7 +250,9 @@ public class ChanceCard {
 	// Pay money (this chance card draws money from the players balance)
 	public void payMoney(Player player, GUI gui, int money, String message) {
 		player.changeBalance(money);
+		if (message != null) {
 		gui.displayChanceCard(message);
+	}
 	}
 
 	// Go to jail
@@ -263,7 +266,9 @@ public class ChanceCard {
 	// Get out of jail
 	public void getOutOfJail(Player player, String message) {
 		player.setHasJailCard(true);
+		 if (message != null) {
 		gui.displayChanceCard(message);
+		 }
 	}
 
 	public void ifPassStart(Player player, int field) {
