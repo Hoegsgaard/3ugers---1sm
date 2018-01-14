@@ -5,9 +5,6 @@ import gui_main.GUI;
 
 public class ChanceCard {
 
-	public ChanceCard() {
-	}
-
 	String[] chanceCard = { "moveToRådhuspladsen", "moveToGrønningen", "takeØresundsbanen", "goThreeStepsBack",
 			"goThreeStepsBack", "goToStart", "goToNextShippingCompany", "sammenskudsgilde", "nyttehaven", "klude",
 			"abonnementskort", "manufakturvarer", "assistenthus", "aktier", "legater", "præmieoblikation",
