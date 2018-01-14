@@ -10,7 +10,7 @@ public class Trade {
 	public Trade() {
 	}
 	
-	public void trede(GUI gui, Player[] players, Player player, Display view) {
+	public void trade(GUI gui, Player[] players, Player player, Display view) {
 		String[] playersName = new String[players.length];
 		for (int i = 0; i < players.length; i++) {
 			playersName[i] = players[i].getName();
@@ -36,8 +36,8 @@ public class Trade {
 			}
 		}
 		String[] traderField = new String[traderNumOffField];
+		int tradeCounter = 0;
 		for (int i = 0; i < 40; i++) {
-			int tradeWhitsCounter = 0;
 			if (i != 2 && i != 7 && i != 17 && i != 22 && i != 33 && i != 36 && i != 10 && i != 20 && i != 30 && i != 0
 					&& i != 4 && i != 38) {
 				String fieldName = "";
@@ -54,9 +54,9 @@ public class Trade {
 						fieldName = ((GUI_Street) gui.getFields()[i]).getTitle();
 					}
 				}
-				if (tradeWhitsCounter < traderField.length && fieldName != "") {
-					traderField[tradeWhitsCounter] = fieldName;
-					tradeWhitsCounter++;
+				if (tradeCounter < traderField.length && fieldName != "") {
+					traderField[tradeCounter] = fieldName;
+					tradeCounter++;
 				}
 			}
 		}

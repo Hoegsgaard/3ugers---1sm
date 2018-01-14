@@ -121,14 +121,14 @@ public class GameController {
 										|| player.getCurrentField() == 33 || player.getCurrentField() == 36) {
 									cc.drawCard(player, players);
 									buyOrPayrent(player,gui, sum);
-									if (player.getCurrentField() == 30) {
-										move.moveOutOfJail(player, gui);
-									}
 								} else if (gui.getFields()[player.getCurrentField()] == gui.getFields()[38]) {
 									eksTax(player, gui);
 								} else if (gui.getFields()[player.getCurrentField()] == gui.getFields()[4]) {
 									stageTax(player, gui);
 								}
+									if (player.getCurrentField() == 30) {
+										move.moveOutOfJail(player, gui);
+									}
 								turnchoice = false;
 								break;
 							} else {
@@ -147,7 +147,7 @@ public class GameController {
 							break;
 						case "Byt":
 							try {
-								trade.trede(gui, players, player, view);
+								trade.trade(gui, players, player, view);
 							} catch (NullPointerException e) {
 								gui.displayChanceCard("Der er ikke noget at bytte med");
 							}
