@@ -12,8 +12,5 @@ public class Main {
 		dice1.roll();
 		Game matador = new Game();
 		controller.runGame();
-		
-		
-
 	}
 }
