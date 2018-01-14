@@ -31,17 +31,19 @@ public class GameController {
 	BuyProperty Buy = new BuyProperty();
 	boolean start = true;
 	Trade trade = new Trade();
-	
+	// the method that runs the game
 	public void runGame() {
 		board.createBoard();
 		GUI gui = new GUI(board.getFields());
 		cc = new ChanceCard(gui);
 		addPlayers(gui);
 		initPlayers(gui);
+		//keeps going until af winner is found
 		while (!winner) {
 			takeRound(gui);
 		}
 	}
+	//add the number of players can only bed be between 2-6 players
 	public void addPlayers(GUI gui) {
 		int AmountOfPlayers = view.enterPlayers(gui);
 		while (AmountOfPlayers > 6 || AmountOfPlayers < 2) {
@@ -79,15 +81,18 @@ public class GameController {
 			gui.addPlayer(players[i].getCarObject());
 		}
 	}
+	// initilize the players, and puts them on the gameboards start field
 	private void initPlayers(GUI gui) {
 		for (int i = 0; i < players.length; i++) {
 			gui.getFields()[0].setCar(players[i].getCarObject(), true);
 		}
 	}
+	// takes the turn of the current player
 	private void takeTurn(Player player, GUI gui) {
+		//if the player is not bankrupt the player is allowed a turn
 		if (player.getBankrupt() == false) {
-			if (player.getInJail()) {
-				jail.getOutOfJail(player, gui);
+			if (player.getInJail()) {			//if the player is in jail he gets the opptunity to pay or roll out
+				jail.getOutOfJail(player, gui); 
 			}
 			if (!player.getInJail()) {
 				player.changeTotalValue();
@@ -119,9 +124,7 @@ public class GameController {
 								} else if (gui.getFields()[player.getCurrentField()] == gui.getFields()[4]) {
 									stageTax(player, gui);
 								}
-									if (player.getCurrentField() == 30) {
-										move.moveOutOfJail(player, gui);
-									}
+								move.moveToJail(player, gui);									
 								turnchoice = false;
 								break;
 							} else {

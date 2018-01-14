@@ -22,7 +22,4 @@ public class MoveController {
 		player.setCurrentField(field);
 		gui.getFields()[player.getCurrentField()].setCar(player.getCarObject(), true);
 	}
-	public void moveOutOfJail(Player player, GUI gui) {
-		jail.goToJail(player, gui);
-	}
 }
