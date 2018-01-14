@@ -1,9 +1,9 @@
 package Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.Before;
 import org.junit.jupiter.api.Test;
 
 import Controller.DiceController;
@@ -27,13 +27,13 @@ class JUnitMonopoly {
 	GameController GameController;
 	GameBoard board;
 	
-	@BeforeEach
+	@Before
 	public void setup() {
 		pTest = new Player();
 		pTest2 = new Player();
 		move = new MoveController();
 		TestSpiller = new GUI_Player("TestDummy");
-		TestSpiller2 = new GUI_Player("TestDummy");
+		TestSpiller2 = new GUI_Player("TestDummy2");
 		gui = new GUI();
 		cc = new ChanceCard(gui);
 		GameController = new GameController();
