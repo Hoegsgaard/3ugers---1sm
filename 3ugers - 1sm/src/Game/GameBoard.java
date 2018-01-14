@@ -137,7 +137,7 @@ public class GameBoard {
 		createStreet(37, "Frederiksberggade", Color.magenta, 350);
 		fields[38] = new GUI_Tax();
 		fields[38].setTitle("Ekstraordinær skat");
-		fields[38].setSubText("Betal 2000");
+		fields[38].setSubText("Betal 100");
 		createStreet(39, "Rådhuspladsen", Color.magenta, 400);
 		brewShipSetSetup();
 	}
