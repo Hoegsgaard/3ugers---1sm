@@ -257,6 +257,8 @@ public class GameBoard {
 					if (player.getName().equals(((GUI_Street) gui.getFields()[i]).getOwnerName())) {
 						setOwnable(i, true);
 						((GUI_Street) gui.getFields()[i]).setBorder(Color.BLACK);
+						((GUI_Street) gui.getFields()[i]).setHotel(false);
+						((GUI_Street) gui.getFields()[i]).setHouses(0);
 					}
 				}
 			}
