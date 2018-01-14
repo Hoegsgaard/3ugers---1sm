@@ -23,13 +23,9 @@ public class ChanceCard {
 	}
 
 	public void shuffle(String[] chanceCard) {
-
 		for (int i = 0; i < chanceCard.length; i++) { // goes length of array times
-
 			int currentValue = 0;
-
 			boolean run = true;
-
 			// runs until different index than current index
 			while (run) {
 				currentValue = (int) (Math.random() * chanceCard.length); // returns 0- max index value of array
@@ -45,9 +41,6 @@ public class ChanceCard {
 			chanceCard[currentValue] = a;
 		}
 	}
-
-	// Work in progress
-
 	// Trækker et kort, kalder metoden og lægger det nederst i bunken
 	public void drawCard(Player player, Player[] players) {
 		String card = chanceCard[0];
@@ -55,11 +48,8 @@ public class ChanceCard {
 			chanceCard[i - 1] = chanceCard[i];
 		}
 		chanceCard[chanceCard.length - 1] = card;
-
-		// Switch case
 		switch (card) {
-
-		// Move cards
+		//Move Cards
 		case "moveToRådhuspladsen":
 			moveTo(player, 39, gui, "Tag ind til Rådhuspladsen");
 			break;
@@ -67,19 +57,17 @@ public class ChanceCard {
 			moveTo(player, 24, gui, "Ryk frem til Grønningen. Hvis du passerer >>Start<< indkasser da kr. 200.");
 			break;
 		case "takeØresundsbåden":
-			moveTo(player, 5, gui,
-					"Tag med Øresundsbåden.. Flyt brikken frem, og hvis du passerer >>Start<< indkasser kr. 200.");
+			moveTo(player, 5, gui,"Tag med Øresundsbåden.. Flyt brikken frem, og hvis du passerer >>Start<< indkasser kr. 200.");
 			break;
 		case "goThreeStepsBack":
 			if(player.getCurrentField() == 2) {
 				gui.displayChanceCard("Ryk tre felter tilbage");
 				move.setPlayerPos(player, 39, gui);
-				}else {
+				}
+			else {
 			moveSteps(player, -3, gui, "Ryk tre felter tilbage");
 				}
 			break;
-				
-			
 		case "goToStart":
 			moveTo(player, 0, gui, "Ryk frem til >>Start<<");
 			break;
@@ -89,7 +77,6 @@ public class ChanceCard {
 							+ "og betal ejeren to gange den leje, han ellers er berettiget til. "
 							+ "Hvis selskabet ikke er ejet af nogen, kan De købe det af banken.");
 			break;
-
 		// Get money
 		case "sammenskudsgilde":
 			getMoney(player, gui, 25, "De har lagt penge ud til sammenskudsgilde. "
@@ -126,7 +113,6 @@ public class ChanceCard {
 		case "gageforhøjelse":
 			getMoney(player, gui, 25, "Grundet på dyrtiden har du fået gageforhøjelse. Modtag kr. 25.");
 			break;
-		
 			// Pay money
 		case "coalPrices":
 			coalPrices(player, gui, "Kul og kokspriserne er steget, og De skal betale: kr. 25 pr hus og kr. 125 per Hotel.");
@@ -150,13 +136,11 @@ public class ChanceCard {
 		case "parkeringTicket":
 			payMoney(player, gui, 20, "Du har måttet vedtage en parkeringsbøde. Betal kr. 20 til banken.");
 			break;
-
 		// Go to jail
 		case "goToJail":
 			goToJail(player, 30, gui,
 					"Gå i fængsel. Ryk direkte til fængsel. Selv om De passerer >>Start<<, indkasserer du ikke kr. 200.");
 			break;
-
 		// Get out of jail
 		case "getOutOfJail":
 			getOutOfJail(player,
@@ -164,7 +148,6 @@ public class ChanceCard {
 			break;
 		}
 	}
-
 	// Move to (this chance card sets a player on a field)
 	public void moveTo(Player player, int field, GUI gui, String message) {
 		gui.getFields()[player.getCurrentField()].setCar(player.getCarObject(), false);
@@ -173,7 +156,6 @@ public class ChanceCard {
 		gui.displayChanceCard(message);
 		ifPassStart(player, field);
 	}
-
 	// Go to next Shipping Company
 	public void goToNextShippingCompany(Player player, GUI gui, String message) {
 		if (player.getCurrentField() >= 35 && player.getCurrentField() <= 5) {
@@ -198,20 +180,17 @@ public class ChanceCard {
 		}
 		gui.displayChanceCard(message);
 	}
-
 	// // Move steps (this chance card moves a player forwards or backwards on the
 	// board)
 	public void moveSteps(Player player, int steps, GUI gui, String message) {
 		gui.displayChanceCard(message);
 		move.movePlayer(player, gui, steps);
 	 }
-
 	// Get money (this chance card adds money to the players balance)
 	public void getMoney(Player player, GUI gui, int money, String message) {
 		player.changeBalance(money);
 		gui.displayChanceCard(message);
 	}
-
 	// Scholarships
 	public void scholarship(Player player, GUI gui, int money, String message) {
 		if (player.getTotalValue() <= 750) {
@@ -221,7 +200,6 @@ public class ChanceCard {
 		}
 		gui.displayChanceCard(message);
 	}
-	
 	// Coal prices
 	public void coalPrices(Player player,GUI gui, String message) {
 		gui.displayChanceCard(message);
@@ -231,10 +209,8 @@ public class ChanceCard {
 		}
 		else if (player.houseOwned() == 0 && player.hotelOwned() == 0) {
 			player.changeBalance(0);
-		}
-			
+		}	
 	}
-	
 	// Property tax
 	public void propertyTax(Player player, GUI gui, String message) {
 		gui.displayChanceCard(message);
@@ -246,7 +222,6 @@ public class ChanceCard {
 			player.changeBalance(0);
 		}
 	}
-
 	// Pay money (this chance card draws money from the players balance)
 	public void payMoney(Player player, GUI gui, int money, String message) {
 		player.changeBalance(money);
@@ -254,7 +229,6 @@ public class ChanceCard {
 		gui.displayChanceCard(message);
 	}
 	}
-
 	// Go to jail
 	public void goToJail(Player player, int field, GUI gui, String message) {
 		gui.getFields()[player.getCurrentField()].setCar(player.getCarObject(), false);
@@ -262,7 +236,6 @@ public class ChanceCard {
 		gui.getFields()[player.getCurrentField()].setCar(player.getCarObject(), true);
 		gui.displayChanceCard(message);
 	}
-
 	// Get out of jail
 	public void getOutOfJail(Player player, String message) {
 		player.setHasJailCard(true);
@@ -270,7 +243,6 @@ public class ChanceCard {
 		gui.displayChanceCard(message);
 		 }
 	}
-
 	public void ifPassStart(Player player, int field) {
 		if (player.getCurrentField() > field) {
 			player.changeBalance(200);

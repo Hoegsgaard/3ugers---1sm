@@ -15,11 +15,8 @@ import gui_main.GUI;
 
 public class GameBoard {
 	public GameBoard() {
-
 	}
-
 	GUI_Field[] fields = new GUI_Field[40];
-
 	final int[] fieldPrice = new int[40];
 	boolean[] ownable = new boolean[40];
 	int[] NumOffBuild = new int[40];
@@ -28,7 +25,6 @@ public class GameBoard {
 	boolean Street = true;
 	boolean Brewery = true;
 	boolean shipping = true;
-
 	int[][] rent = new int[][] { 
 		{ 0 }, // Start
 		{ 2, 10, 30, 90, 160, 250 }, 
@@ -71,7 +67,7 @@ public class GameBoard {
 		{ 0 }, // EkstraSkat
 		{ 50, 200, 600, 1400, 1700, 2000 },
 	};
-
+	
 	public void createBoard() {
 		GUI.setNull_fields_allowed(true);
 		startOpNumOffBuild();
@@ -155,12 +151,10 @@ public class GameBoard {
 		((GUI_Street) fields[field]).setOwnerName(null);
 		fieldPrice[field] = price;
 	}
-
 	private void brewShipSetSetup() {
 		ownable[12] = true;
 		((GUI_Brewery) fields[12]).setOwnerName(null);
 		setPrice(12, 150);
-
 		ownable[28] = true;
 		((GUI_Brewery) fields[28]).setOwnerName(null);
 		setPrice(28, 150);
@@ -174,19 +168,15 @@ public class GameBoard {
 	public GUI_Field[] getFields() {
 		return fields;
 	}
-
-	//
 	public void startOpNumOffBuild() {
 		for (int i = 0; i < NumOffBuild.length; i++) {
 			NumOffBuild[i] = 0;
 		}
 	}
-
 	// Ownable get og set
 	public boolean getOwnable(int field) {
 		return ownable[field];
 	}
-
 	public void setOwnable(int field, boolean own) {
 		ownable[field] = own;
 	}
@@ -194,27 +184,21 @@ public class GameBoard {
 	public GUI_Street getStreet(int field) {
 		return ((GUI_Street) fields[field]);
 	}
-
 	public GUI_Brewery getBrewery(int field) {
 		return ((GUI_Brewery) fields[field]);
 	}
-
 	public GUI_Shipping getShipping(int field) {
 		return ((GUI_Shipping) fields[field]);
 	}
-
 	public int getPrice(int field) {
 		return fieldPrice[field];
 	}
-
 	public void setPrice(int fields, int price) {
 		fieldPrice[fields] = price;
 	}
-
 	public int getRentStreet(int field) {
 		return rent[field][getNumOffBuild(field)];
 	}
-
 	public int getRentBrewery(int sum, int count) {
 		int rent = 0;
 		if (count == 1) {
@@ -224,7 +208,6 @@ public class GameBoard {
 		}
 		return rent;
 	}
-
 	public int getRentShipping(int count) {
 		int pay = 0;
 		switch (count) {
@@ -243,41 +226,34 @@ public class GameBoard {
 		}
 		return pay;
 	}
-
+	
 	public int pirceForHouse(int val) {
 		return housePrice[val];
 	}
-
 	public int getNumOffBuild(int field) {
 		return NumOffBuild[field];
 	}
-
 	public void setNumOffBuild(int field, int num) {
 		NumOffBuild[field] = 0;
 	}
-
 	public void changeNumOffBuild(int field, int num) {
 		NumOffBuild[field] = getNumOffBuild(field) + num;
 	}
-
 	public void sellAll(Player player, GUI gui) {
-		for (int i = 0; i < fields.length; i++) {
+		for (int i = 0; i < fields.length; i++) { // ALT HVAD DER IKKE KAN KØBES ER UDELUKKET
 			if (i != 2 && i != 7 && i != 17 && i != 22 && i != 33 && i != 36 && i != 10 && i != 20 && i != 30 && i != 0
 					&& i != 4 && i != 38) {
-				// ALT HVAD DER IKKE KAN KØBES ER UDELUKKET
-
-				// ØL
-				if (i == 12 || i == 28) {
+				if (i == 12 || i == 28) { //Hvis spilleren står på et bryggeri
 					if (player.getName().equals(((GUI_Brewery) gui.getFields()[i]).getOwnerName())) {
 						setOwnable(i, true);
 						((GUI_Brewery) gui.getFields()[i]).setBorder(Color.black);
 					}
-				} else if (i == 5 || i == 15 || i == 25 || i == 35) {
+				} else if (i == 5 || i == 15 || i == 25 || i == 35) { //Hvis spilleren står på et shipperi?
 					if (player.getName().equals(((GUI_Shipping) gui.getFields()[i]).getOwnerName())) {
 						setOwnable(i, true);
 						((GUI_Shipping) gui.getFields()[i]).setBorder(Color.BLACK);
 					}
-				} else {
+				} else { // Kun Streets er tilbage
 					if (player.getName().equals(((GUI_Street) gui.getFields()[i]).getOwnerName())) {
 						setOwnable(i, true);
 						((GUI_Street) gui.getFields()[i]).setBorder(Color.BLACK);

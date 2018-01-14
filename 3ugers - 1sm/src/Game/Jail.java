@@ -12,9 +12,6 @@ public class Jail {
 	DiceController diceController = new DiceController();
 	DiceController diceController2 = new DiceController();
 	
-	
-
-	
 	public void goToJail(Player player, GUI gui) {
 		if(player.getCurrentField() == 30) {
 			gui.getFields()[player.getCurrentField()].setCar(player.getCarObject(), false);
@@ -28,7 +25,6 @@ public class Jail {
 			}
 		}
 	}	
-	
 	public void getOutOfJail(Player player, GUI gui) {
 		if (view.getOutBut(gui)) {
 			player.setInJail(false);
@@ -39,8 +35,7 @@ public class Jail {
 			int rollTow = diceController2.roll();
 			gui.setDice(diceController.getFaceValue(), diceController2.getFaceValue());
 			if (rollOne == rollTow) {
-				player.setInJail(false);
-				
+				player.setInJail(false);			
 			}
 		}
 	}

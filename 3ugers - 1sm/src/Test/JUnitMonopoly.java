@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import View.Display;
 import Controller.Main;
-import Controller.Controller;
+import Controller.GameController;
 import Controller.MoveController;
 import Controller.DiceController;
 import Game.BuyProperty;

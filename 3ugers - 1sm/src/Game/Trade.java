@@ -7,18 +7,15 @@ import gui_fields.GUI_Street;
 import gui_main.GUI;
 
 public class Trade {
-
 	public Trade() {
-		// TODO Auto-generated constructor stub
 	}
-
+	
 	public void trede(GUI gui, Player[] players, Player player, Display view) {
 		String[] playersName = new String[players.length];
 		for (int i = 0; i < players.length; i++) {
 			playersName[i] = players[i].getName();
 		}
 		String tradeWhit = view.tradeWith(gui, playersName);
-
 		int traderNumOffField = 0;
 		for (int i = 0; i < 40; i++) {
 			if (i != 2 && i != 7 && i != 17 && i != 22 && i != 33 && i != 36 && i != 10 && i != 20 && i != 30 && i != 0
@@ -63,7 +60,6 @@ public class Trade {
 				}
 			}
 		}
-
 		int tradeWhitsNumOffField = 0;
 		for (int i = 0; i < 40; i++) {
 			if (i != 2 && i != 7 && i != 17 && i != 22 && i != 33 && i != 36 && i != 10 && i != 20 && i != 30 && i != 0
@@ -108,13 +104,10 @@ public class Trade {
 				}
 			}
 		}
-
 		String iTrade = view.iTrade(gui, traderField);
 		String iWant = view.iWant(gui, tradeWhitsFields);
-
 		boolean deal = view.deal(gui, "Vil du bytte: " + iTrade + " For: " + iWant);
 		if (deal) {
-
 			for (int i = 0; i < 40; i++) {
 				if (i != 2 && i != 7 && i != 17 && i != 22 && i != 33 && i != 36 && i != 10 && i != 20 && i != 30
 						&& i != 0 && i != 4 && i != 38) {
@@ -140,8 +133,7 @@ public class Trade {
 					if (players[x].getName().equals(tradeWhit)) {
 						tradePlayer = players[x];
 					}
-				}
-				
+				}			
 				if (i != 2 && i != 7 && i != 17 && i != 22 && i != 33 && i != 36 && i != 10 && i != 20 && i != 30
 						&& i != 0 && i != 4 && i != 38) {
 					if (i == 12 || i == 28) {

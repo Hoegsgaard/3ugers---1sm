@@ -15,7 +15,7 @@ import gui_fields.GUI_Shipping;
 import gui_fields.GUI_Street;
 import gui_main.GUI;
 
-public class Controller {
+public class GameController {
 	boolean turn = true;
 	boolean turnchoice = true;
 	GameBoard board = new GameBoard();
@@ -31,7 +31,7 @@ public class Controller {
 	BuyProperty Buy = new BuyProperty();
 	boolean start = true;
 	Trade trade = new Trade();
-
+	
 	public void runGame() {
 		board.createBoard();
 		GUI gui = new GUI(board.getFields());
@@ -42,18 +42,15 @@ public class Controller {
 			takeRound(gui);
 		}
 	}
-	
 	public Player[] getPlayers() {
 		return players;
 	}
-	
 	public void addPlayers(GUI gui) {
 		int AmountOfPlayers = view.enterPlayers(gui);
 
 		while (AmountOfPlayers > 6 || AmountOfPlayers < 2) {
 			AmountOfPlayers = (gui.getUserInteger("How many players? Min. 2 and Max. 6."));
 		}
-
 		players = new Player[AmountOfPlayers];
 		// Creates one player at a time
 		for (int i = 0; i < players.length; i++) {
@@ -86,18 +83,14 @@ public class Controller {
 			gui.addPlayer(players[i].getCarObject());
 		}
 	}
-
 	public Player getPlayerOwner(Player player) {
 		return player;
 	}
-
 	private void initPlayers(GUI gui) {
 		for (int i = 0; i < players.length; i++) {
 			gui.getFields()[0].setCar(players[i].getCarObject(), true);
-
 		}
 	}
-
 	private void takeTurn(Player player, GUI gui) {
 		if (player.getBankrupt() == false) {
 			if (player.getInJail()) {
@@ -171,7 +164,6 @@ public class Controller {
 			}
 		}
 	}
-
 	public void buyField(Player player, GUI gui) {
 		if (player.getCurrentField() == 12 || player.getCurrentField() == 28) {
 			if (view.buyBut(gui)) {
@@ -202,7 +194,6 @@ public class Controller {
 			}
 		}
 	}
-
 	private void payRent(Player player, GUI gui, int diceSum) {
 		int rent = 0;
 		int field = player.getCurrentField();
@@ -225,7 +216,6 @@ public class Controller {
 				String owner = ((GUI_Shipping) gui.getFields()[player.getCurrentField()]).getOwnerName();
 				OOwner = owner;
 				int countShip = 0;
-
 				for (int i = 5; i < 39; i = i + 10) {
 					if (owner.equals(((GUI_Shipping) gui.getFields()[i]).getOwnerName())) {
 						countShip++;
@@ -246,7 +236,6 @@ public class Controller {
 			}
 		}
 	}
-
 	private void takeRound(GUI gui) {
 		for (int i = 0; i < players.length; i++) {
 			if (!winner) {
@@ -254,7 +243,6 @@ public class Controller {
 			}
 		}
 	}
-
 	public void setOwner(Player player) {
 		if (player.getCurrentField() == 12 || player.getCurrentField() == 28) {
 			board.getBrewery(player.getCurrentField()).setOwnableLabel("Owner : ");
@@ -267,9 +255,7 @@ public class Controller {
 			board.getStreet(player.getCurrentField()).setOwnableLabel("Owner : ");
 			board.getStreet(player.getCurrentField()).setOwnerName(player.getName());
 		}
-
 	}
-
 	// Bankrupt
 	public void bankrupt(Player player, GUI gui) {
 		for (int i = 0; i < players.length; i++) {
@@ -290,8 +276,6 @@ public class Controller {
 		else {payRent(player, gui, sum);
 		}
 	}
-
-	//
 	public void findWinner(GUI gui) {
 		String winner = "";
 		for (int i = 0; i < players.length; i++) {
@@ -301,8 +285,6 @@ public class Controller {
 			}
 		}
 	}
-
-	//
 	public void haveWeAWinner(Player player, GUI gui) {
 		int count = 0;
 		for (int i = 0; i < players.length; i++) {
@@ -315,13 +297,11 @@ public class Controller {
 			findWinner(gui);
 		}
 	}
-
 	// TAX
 	public void eksTax(Player player, GUI gui) {
 		player.changeBalance(-100);
 		gui.displayChanceCard("Ekatraordinær skat, betal 100kr.");
 	}
-
 	public void stageTax(Player player, GUI gui) {
 		if (view.stageTax(gui)) {
 			player.changeBalance(-200);
