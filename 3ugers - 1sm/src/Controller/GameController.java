@@ -47,7 +47,6 @@ public class GameController {
 	}
 	public void addPlayers(GUI gui) {
 		int AmountOfPlayers = view.enterPlayers(gui);
-
 		while (AmountOfPlayers > 6 || AmountOfPlayers < 2) {
 			AmountOfPlayers = (gui.getUserInteger("How many players? Min. 2 and Max. 6."));
 		}
