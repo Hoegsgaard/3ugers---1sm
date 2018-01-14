@@ -27,9 +27,6 @@ public class Player {
 	public int hotelOwned() {
 		return hotelOwned;
 	}
-	public int getPlayerNumber() {
-		return playerNumber;
-	}
 	public GUI_Player getCarObject() {
 		return carObject;
 	}	

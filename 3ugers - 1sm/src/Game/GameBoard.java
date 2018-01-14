@@ -233,9 +233,6 @@ public class GameBoard {
 	public int getNumOffBuild(int field) {
 		return NumOffBuild[field];
 	}
-	public void setNumOffBuild(int field, int num) {
-		NumOffBuild[field] = 0;
-	}
 	public void changeNumOffBuild(int field, int num) {
 		NumOffBuild[field] = getNumOffBuild(field) + num;
 	}

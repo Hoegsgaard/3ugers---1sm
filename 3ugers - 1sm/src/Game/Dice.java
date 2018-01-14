@@ -6,9 +6,6 @@ public class Dice {
 
 	public Dice(int sides) {
 		this.sides = sides;
-	}
-	public int getFaceValue() {
-		return currentFaceValue;
 	}	
 	public int getSides() {		
 		return sides;
