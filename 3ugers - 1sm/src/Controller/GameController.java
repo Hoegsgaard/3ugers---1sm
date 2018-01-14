@@ -42,9 +42,6 @@ public class GameController {
 			takeRound(gui);
 		}
 	}
-	public Player[] getPlayers() {
-		return players;
-	}
 	public void addPlayers(GUI gui) {
 		int AmountOfPlayers = view.enterPlayers(gui);
 		while (AmountOfPlayers > 6 || AmountOfPlayers < 2) {
@@ -81,9 +78,6 @@ public class GameController {
 			}
 			gui.addPlayer(players[i].getCarObject());
 		}
-	}
-	public Player getPlayerOwner(Player player) {
-		return player;
 	}
 	private void initPlayers(GUI gui) {
 		for (int i = 0; i < players.length; i++) {
