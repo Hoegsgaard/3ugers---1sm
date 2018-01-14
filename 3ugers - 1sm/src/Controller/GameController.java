@@ -94,83 +94,84 @@ public class GameController {
 			if (player.getInJail()) {			//if the player is in jail he gets the opptunity to pay or roll out
 				jail.getOutOfJail(player, gui); 
 			}
-			if (!player.getInJail()) {
+			if (!player.getInJail()) {  		//if the player is not in jail he then gets to take his turn
 				player.changeTotalValue();
 				turn = true;
 				rollCounter = false;
-				while (turn) {
+				while (turn) {			// the outer loop runs until the player end his turn
 					turnchoice = true;
-					while (turnchoice) {
+					while (turnchoice) { 	// while this loops control's the type of actions the player can make
 						switch (view.rollDiceButton(gui, player)) {
 						case "Rul":
 							if (!rollCounter) {
 								rollCounter = true;
 								int sum = diceController.roll() + diceController2.roll();
-								if ((player.getCurrentField() + sum) > 39) {
-									sum -= 40;
+								if ((player.getCurrentField() + sum) > 39) { 	//when the player need to loop over 
+									sum -= 40;									// the start area
 									player.changeBalance(200);
 								}
 								gui.setDice(diceController.getFaceValue(), diceController2.getFaceValue());
-								move.movePlayer(player, gui, sum);
-								move.moveToJail(player, gui);
-								buyOrPayrent(player, gui, sum);
+								move.movePlayer(player, gui, sum);		//moves the player, based on his roll
+								move.moveToJail(player, gui);			//send the player to jail if he landed field 30
+								buyOrPayrent(player, gui, sum);		// buy the field if not owned else pay rent
+								//checks for card draw fields
 								if (player.getCurrentField() == 2 || player.getCurrentField() == 7
 										|| player.getCurrentField() == 17 || player.getCurrentField() == 22
 										|| player.getCurrentField() == 33 || player.getCurrentField() == 36) {
-									cc.drawCard(player, players);
-									buyOrPayrent(player,gui, sum);
+									cc.drawCard(player, players);	//draws a card
+									buyOrPayrent(player,gui, sum);	//buy or payrent if the player has been moved
 								} else if (gui.getFields()[player.getCurrentField()] == gui.getFields()[38]) {
-									eksTax(player, gui);
+									eksTax(player, gui); // pays ekstra tax
 								} else if (gui.getFields()[player.getCurrentField()] == gui.getFields()[4]) {
-									stageTax(player, gui);
+									stageTax(player, gui);	//pay captial tax
 								}
-								move.moveToJail(player, gui);									
-								turnchoice = false;
-								break;
+								move.moveToJail(player, gui); // move to jail if a car should have send the player to field 30								
+								turnchoice = false; // makes it so the player can not roll again
+								break;	//
 							} else {
 								gui.displayChanceCard("Du har rykket");
 							}
 							break;
 						case "Byg hus":
 							try {
-								String test = view.buildOnColor(gui);
-								Buy.choiceOfArea(test, gui, player, board);
-								// Buy.isAllOwendInSameColor(gui, player);
+								String colorChoice = view.buildOnColor(gui);
+								Buy.choiceOfArea(colorChoice, gui, player, board);//lets the player choose where to build
 							} catch (NullPointerException e) {
 								gui.displayChanceCard("Du ejer ikke alle felterne i denne farve");
+								//a null pointer will be triggered if a player does not own the fields in the same color
 							}
 							turnchoice = false;
 							break;
 						case "Byt":
 							try {
-								trade.trade(gui, players, player, view);
+								trade.trade(gui, players, player, view);	// calls the trade funktion
 							} catch (NullPointerException e) {
 								gui.displayChanceCard("Der er ikke noget at bytte med");
 							}
 							break;
-						case "Slut tur":
+						case "Slut tur": // end the turn of the current player
 							turnchoice = false;
 							turn = false;
 							break;
 						}
-						bankrupt(player, gui);
-						haveWeAWinner(player, gui);
+						bankrupt(player, gui);	// checks to see if we anyone should have gone bankrupt
+						haveWeAWinner(player, gui); // checks if there are a winner
 					}
 				}
 			}
 		}
 	}
-	public void buyField(Player player, GUI gui) {
+	public void buyField(Player player, GUI gui) { //buy field method
 		if (player.getCurrentField() == 12 || player.getCurrentField() == 28) {
 			if (view.buyBut(gui)) {
-				setOwner(player);
+				setOwner(player);   //buy brewery if its not owned
 				board.getBrewery(player.getCurrentField()).setBorder(player.getCarObject().getPrimaryColor());
-				board.setOwnable(player.getCurrentField(), false);
+				board.setOwnable(player.getCurrentField(), false); // makes it so others cant buy the field
 				player.changeBalance(-150);
 				player.setFieldValue(150);
 			}
 		} else if (player.getCurrentField() == 5 || player.getCurrentField() == 15 || player.getCurrentField() == 25
-				|| player.getCurrentField() == 35) {
+				|| player.getCurrentField() == 35) { //checks if its shipping field and buys if not owned
 			if (view.buyBut(gui)) {
 				setOwner(player);
 				board.getShipping(player.getCurrentField()).setBorder(player.getCarObject().getPrimaryColor());
@@ -180,7 +181,8 @@ public class GameController {
 			}
 		} else {
 			if (view.buyBut(gui)) {
-				setOwner(player);
+				setOwner(player); // sets the owner of the street
+				//makes it so the boarder matches the color of the player who bought
 				board.getStreet(player.getCurrentField()).setBorder(player.getCarObject().getPrimaryColor());
 				board.setOwnable(player.getCurrentField(), false);
 				int price = board.getPrice(player.getCurrentField());
@@ -190,23 +192,23 @@ public class GameController {
 			}
 		}
 	}
-	private void payRent(Player player, GUI gui, int diceSum) {
+	private void payRent(Player player, GUI gui, int diceSum) { //pay rent
 		int rent = 0;
 		int field = player.getCurrentField();
 		String OOwner = "";
 		if (field != 2 && field != 7 && field != 17 && field != 22 && field != 33 && field != 36 && field != 10
-				&& field != 20 && field != 30 && field != 0 && field != 4 && field != 38) {
-			if (player.getCurrentField() == 12 || player.getCurrentField() == 28) {
+				&& field != 20 && field != 30 && field != 0 && field != 4 && field != 38) { //checks for special fields
+			if (player.getCurrentField() == 12 || player.getCurrentField() == 28) {  // check if brewery
 				String owner = ((GUI_Brewery) gui.getFields()[player.getCurrentField()]).getOwnerName();
 				OOwner = owner;
 				int countBrew = 0;
 				if (owner.equals(((GUI_Brewery) gui.getFields()[12]).getOwnerName())
 						&& owner.equals(((GUI_Brewery) gui.getFields()[28]).getOwnerName())) {
-					countBrew = 2;
+					countBrew = 2; // if the owner has 2 brewery then 2 facktor the rent
 				} else {
-					countBrew = 1;
+					countBrew = 1; 
 				}
-				rent = board.getRentBrewery(diceSum, countBrew);
+				rent = board.getRentBrewery(diceSum, countBrew); // calculate the price of based on current roll and amount of brewery owned
 			} else if (player.getCurrentField() == 5 || player.getCurrentField() == 15 || player.getCurrentField() == 25
 					|| player.getCurrentField() == 35) {
 				String owner = ((GUI_Shipping) gui.getFields()[player.getCurrentField()]).getOwnerName();
@@ -217,13 +219,13 @@ public class GameController {
 						countShip++;
 					}
 				}
-				rent = board.getRentShipping(countShip);
+				rent = board.getRentShipping(countShip); // calculate rent based on owned shipping
 			} else {
 				String owner = ((GUI_Street) gui.getFields()[player.getCurrentField()]).getOwnerName();
 				OOwner = owner;
 				rent = board.getRentStreet(player.getCurrentField());
 			}
-			// Leje betales, fra spiller til ejer
+			// rent gets paid from one player to another
 			player.changeBalance(-rent);
 			for (int i = 0; i < players.length; i++) {
 				if (OOwner.equals(players[i].getName())) {
@@ -232,59 +234,59 @@ public class GameController {
 			}
 		}
 	}
-	private void takeRound(GUI gui) {
+	private void takeRound(GUI gui) {  
 		for (int i = 0; i < players.length; i++) {
 			if (!winner) {
-				takeTurn(players[i], gui);
+				takeTurn(players[i], gui); //when a player is done with a turn, find the next player's turn
 			}
 		}
 	}
-	public void setOwner(Player player) {
-		if (player.getCurrentField() == 12 || player.getCurrentField() == 28) {
+	public void setOwner(Player player) { //if a field is bought set a owner
+		if (player.getCurrentField() == 12 || player.getCurrentField() == 28) {  
 			board.getBrewery(player.getCurrentField()).setOwnableLabel("Owner : ");
-			board.getBrewery(player.getCurrentField()).setOwnerName(player.getName());
+			board.getBrewery(player.getCurrentField()).setOwnerName(player.getName()); // set the name of player
 		} else if (player.getCurrentField() == 5 || player.getCurrentField() == 15 || player.getCurrentField() == 25
 				|| player.getCurrentField() == 35) {
 			board.getShipping(player.getCurrentField()).setOwnableLabel("Owner : ");
-			board.getShipping(player.getCurrentField()).setOwnerName(player.getName());
+			board.getShipping(player.getCurrentField()).setOwnerName(player.getName()); //set the name of player
 		} else {
 			board.getStreet(player.getCurrentField()).setOwnableLabel("Owner : ");
-			board.getStreet(player.getCurrentField()).setOwnerName(player.getName());
+			board.getStreet(player.getCurrentField()).setOwnerName(player.getName()); // set the name of player
 		}
 	}
 	// Bankrupt
-	public void bankrupt(Player player, GUI gui) {
-		for (int i = 0; i < players.length; i++) {
-			if (player.getBalance() < 0) {
-				gui.getFields()[player.getCurrentField()].setCar(player.getCarObject(), false);
-				player.setBalance(0);
+	public void bankrupt(Player player, GUI gui) { //bankrupt
+		for (int i = 0; i < players.length; i++) { 
+			if (player.getBalance() < 0) {		// if players balance is lower than 0 
+				gui.getFields()[player.getCurrentField()].setCar(player.getCarObject(), false); //removes the car
+				player.setBalance(0); 	
 				player.setTotalValue(0);
-				player.setBankrupt(true);
-				turn = false;
-				board.sellAll(player, gui);
+				player.setBankrupt(true); // makes him bankrupt so he wont have a turn
+				turn = false;			
+				board.sellAll(player, gui);		//sell all his field and houses
 			}
 		}
 	}
 	public void buyOrPayrent(Player player, GUI gui, int sum) {
 		if (board.getOwnable(player.getCurrentField())) {
-			buyField(player, gui);
+			buyField(player, gui);		//buy the field if not owned
 		}
-		else {payRent(player, gui, sum);
+		else {payRent(player, gui, sum); 	// pay rent if owned
 		}
 	}
 	public void findWinner(GUI gui) {
 		String winner = "";
 		for (int i = 0; i < players.length; i++) {
-			if (players[i].getBankrupt() == false) {
-				winner = players[i].getName();
-				gui.displayChanceCard("Tillykke! " + winner + " har vundet");
+			if (players[i].getBankrupt() == false) {	//loops until there only is 1 player left
+				winner = players[i].getName();		// find the winners name
+				gui.displayChanceCard("Tillykke! " + winner + " har vundet");	//display winner message
 			}
 		}
 	}
-	public void haveWeAWinner(Player player, GUI gui) {
+	public void haveWeAWinner(Player player, GUI gui) {	
 		int count = 0;
 		for (int i = 0; i < players.length; i++) {
-			if (players[i].getBankrupt() == true) {
+			if (players[i].getBankrupt() == true) {	
 				count++;
 			}
 		}
@@ -294,15 +296,15 @@ public class GameController {
 		}
 	}
 	// TAX
-	public void eksTax(Player player, GUI gui) {
+	public void eksTax(Player player, GUI gui) {  // pays tax
 		player.changeBalance(-100);
 		gui.displayChanceCard("Ekatraordinær skat, betal 100kr.");
 	}
-	public void stageTax(Player player, GUI gui) {
+	public void stageTax(Player player, GUI gui) { // pays tax based on player choice
 		if (view.stageTax(gui)) {
 			player.changeBalance(-200);
 		} else {
-			int tax = player.getTotalValue() * 10 / 100;
+			int tax = player.getTotalValue() * 10 / 100;	// 10% of total value
 			player.changeBalance(-tax);
 		}
 	}
