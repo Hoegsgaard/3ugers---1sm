@@ -156,7 +156,7 @@ public class Controller {
 							try {
 								trade.trede(gui, players, player, view);
 							} catch (NullPointerException e) {
-								System.out.println("Der kunne ikke byttes");
+								gui.displayChanceCard("Der er ikke noget at bytte med");
 							}
 							break;
 						case "Slut tur":
