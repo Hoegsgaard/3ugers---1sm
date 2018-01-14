@@ -1,23 +1,16 @@
 package Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import View.Display;
-import Controller.Main;
+import Controller.DiceController;
 import Controller.GameController;
 import Controller.MoveController;
-import Controller.DiceController;
-import Game.BuyProperty;
-import Game.Dice;
 import Game.ChanceCard;
 import Game.GameBoard;
-import Game.Jail;
 import Game.Player;
 import gui_fields.GUI_Player;
 import gui_main.GUI;
@@ -26,53 +19,52 @@ class JUnitMonopoly {
 
 	Player pTest;
 	Player pTest2;
-	GUI_Player spiller;
+	GUI_Player TestSpiller;
+	GUI_Player TestSpiller2;
 	GUI gui;
 	ChanceCard cc;
 	MoveController move;
-
+	GameController GameController;
+	GameBoard board;
+	
 	@BeforeEach
 	public void setup() {
 		pTest = new Player();
 		pTest2 = new Player();
 		move = new MoveController();
-		spiller = new GUI_Player("TestDummy");
+		TestSpiller = new GUI_Player("TestDummy");
+		TestSpiller2 = new GUI_Player("TestDummy");
 		gui = new GUI();
 		cc = new ChanceCard(gui);
+		GameController = new GameController();
+		board = new GameBoard();
 
-		gui.addPlayer(spiller);
-		pTest.setCarObject(spiller);
-		pTest2.setCarObject(spiller);
+		gui.addPlayer(TestSpiller);
+		gui.addPlayer(TestSpiller2);
+		pTest.setCarObject(TestSpiller);
+		pTest2.setCarObject(TestSpiller2);
 	}
 
 	// Dice test 2 stk
 
 	boolean exceed = false;
-
 	@Test
 	// This test check that each face value is hit approximately the statistically
 	// predicted amount of times.
-
 	public void testSum() {
 		DiceController dice = new DiceController();
 		int amountOfRolls = 10000000;
 		double maxDev = 0.05;
-
 		// Array that contains amount of hits for each face value.
-
 		int[] values = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-
 		// rolls a die twice, sums the two face values, and increments the corresponding
 		// element in values[].
-
 		for (int i = 0; i < amountOfRolls; i++) {
 			values[dice.roll() + dice.roll() - 2]++;
 		}
 		double level;
-
 		// This for-loop controls that the elements in values[], do not exceed some
 		// arbitrary margin of error.
-
 		for (int i = 0; i < 5; i++) {
 			level = (double) (i + 1) / 36.0;
 			if ((double) values[i] < (amountOfRolls * level) * (1 - maxDev)
@@ -163,14 +155,45 @@ class JUnitMonopoly {
 	}
 	
 //	@Test
+	//hvis den ikke snart goer som den skal ...
 //	public void testFindAWinner() {
 //		
 //		pTest.changeBalance(1000);
 //		pTest2.changeBalance(0);
 //		move.movePlayer(pTest2, gui, 38);
+//		win.findWinner(pTest, gui);
+//		turn.
 //		
-//		assertTrue(pTest.);
+//		assertTrue(0);
 //		
 //	}
 	
+	@Test
+	public void testBuyField() {
+		board.createBoard();
+		move.setPlayerPos(pTest, 3, gui);
+		GameController.buyField(pTest, gui);
+		assertTrue(board.getOwnable(3) ==  false);
+		
+	}
+	
+	@Test
+	public void testBuildHouse() {
+		board.createBoard();
+		move.movePlayer(pTest, gui, 1);
+		GameController.setOwner(pTest);
+
+		move.movePlayer(pTest, gui, 3);
+		GameController.setOwner(pTest);
+		board.changeNumOffBuild(3, 1);
+		board.changeNumOffBuild(1, 1);
+		assertTrue(board.getNumOffBuild(1) == 1);
+	}
+	
+	@Test
+	public void testBankrupt() {
+		pTest.setTotalValue(-1);
+		GameController.bankrupt(pTest, gui);
+		assertTrue(pTest.getBankrupt() == true);
+	}
 }
