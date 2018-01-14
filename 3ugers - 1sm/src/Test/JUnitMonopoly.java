@@ -38,7 +38,6 @@ class JUnitMonopoly {
 		cc = new ChanceCard(gui);
 		GameController = new GameController();
 		board = new GameBoard();
-
 		gui.addPlayer(TestSpiller);
 		gui.addPlayer(TestSpiller2);
 		pTest.setCarObject(TestSpiller);
@@ -173,8 +172,7 @@ class JUnitMonopoly {
 		board.createBoard();
 		move.setPlayerPos(pTest, 3, gui);
 		GameController.buyField(pTest, gui);
-		assertTrue(board.getOwnable(3) ==  false);
-		
+		assertTrue(board.getOwnable(3) == false);	
 	}
 	
 	@Test
@@ -182,7 +180,6 @@ class JUnitMonopoly {
 		board.createBoard();
 		move.movePlayer(pTest, gui, 1);
 		GameController.setOwner(pTest);
-
 		move.movePlayer(pTest, gui, 3);
 		GameController.setOwner(pTest);
 		board.changeNumOffBuild(3, 1);

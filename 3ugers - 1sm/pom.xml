@@ -54,8 +54,8 @@
 		<dependencies>
 			<dependency>
 				<groupId>org.junit.jupiter</groupId>
-				<artifactId>junit-jupiter-api</artifactId>
-				<version>5.1.0-M1</version>
+				<artifactId>junit-jupiter-engine</artifactId>
+				<version>5.0.0-M1</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
