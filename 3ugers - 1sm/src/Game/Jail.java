@@ -8,7 +8,6 @@ import gui_main.GUI;
 
 public class Jail {
 	boolean inJail = false;
-	MoveController move = new MoveController();
 	Display view = new Display();
 	DiceController diceController = new DiceController();
 	DiceController diceController2 = new DiceController();

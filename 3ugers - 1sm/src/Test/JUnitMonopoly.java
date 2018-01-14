@@ -15,7 +15,6 @@ import Controller.MoveController;
 import Controller.DiceController;
 import Game.BuyProperty;
 import Game.Dice;
-import Game.Game;
 import Game.ChanceCard;
 import Game.GameBoard;
 import Game.Jail;
@@ -29,7 +28,6 @@ class JUnitMonopoly {
 	Player pTest2;
 	GUI_Player spiller;
 	GUI gui;
-	Game Game;
 	ChanceCard cc;
 	MoveController move;
 
@@ -40,7 +38,6 @@ class JUnitMonopoly {
 		move = new MoveController();
 		spiller = new GUI_Player("TestDummy");
 		gui = new GUI();
-		Game = new Game();
 		cc = new ChanceCard(gui);
 
 		gui.addPlayer(spiller);

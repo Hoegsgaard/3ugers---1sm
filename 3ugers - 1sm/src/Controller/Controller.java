@@ -3,7 +3,6 @@ package Controller;
 import java.awt.Color;
 
 import Game.ChanceCard;
-import Game.Game;
 import Game.GameBoard;
 import Game.Jail;
 import Game.Player;
@@ -21,7 +20,6 @@ public class Controller {
 	boolean turnchoice = true;
 	GameBoard board = new GameBoard();
 	Display view = new Display();
-	Game game = new Game();
 	Player[] players;
 	DiceController diceController = new DiceController();
 	DiceController diceController2 = new DiceController();
@@ -43,12 +41,12 @@ public class Controller {
 		while (!winner) {
 			takeRound(gui);
 		}
-
 	}
-
+	
 	public Player[] getPlayers() {
 		return players;
 	}
+	
 	public void addPlayers(GUI gui) {
 		int AmountOfPlayers = view.enterPlayers(gui);
 
@@ -86,18 +84,14 @@ public class Controller {
 				break;
 			}
 			gui.addPlayer(players[i].getCarObject());
-
 		}
-
 	}
 
 	public Player getPlayerOwner(Player player) {
 		return player;
-
 	}
 
 	private void initPlayers(GUI gui) {
-
 		for (int i = 0; i < players.length; i++) {
 			gui.getFields()[0].setCar(players[i].getCarObject(), true);
 
@@ -128,33 +122,24 @@ public class Controller {
 								gui.setDice(diceController.getFaceValue(), diceController2.getFaceValue());
 								move.movePlayer(player, gui, sum);
 								move.moveToJail(player, gui);
-								if (board.getOwnable(player.getCurrentField())) {
-									buyField(player, gui);
-								} else {
-									payRent(player, gui, sum);
-								}
+								buyOrPayrent(player, gui, sum);
 								if (player.getCurrentField() == 2 || player.getCurrentField() == 7
 										|| player.getCurrentField() == 17 || player.getCurrentField() == 22
 										|| player.getCurrentField() == 33 || player.getCurrentField() == 36) {
 									cc.drawCard(player, players);
-									if (board.getOwnable(player.getCurrentField())) {
-										buyField(player, gui);
-									}
-									else {payRent(player, gui, sum);
-									}
+									buyOrPayrent(player,gui, sum);
 									if (player.getCurrentField() == 30) {
-										jail.goToJail(player, gui);
+										move.moveOutOfJail(player, gui);
 									}
 								} else if (gui.getFields()[player.getCurrentField()] == gui.getFields()[38]) {
 									eksTax(player, gui);
 								} else if (gui.getFields()[player.getCurrentField()] == gui.getFields()[4]) {
 									stageTax(player, gui);
 								}
-
 								turnchoice = false;
 								break;
 							} else {
-								gui.displayChanceCard("Byg et Hus eller slut din tur");
+								gui.displayChanceCard("Du har rykket");
 							}
 							break;
 						case "Byg hus":
@@ -163,23 +148,21 @@ public class Controller {
 								Buy.choiceOfArea(test, gui, player, board);
 								// Buy.isAllOwendInSameColor(gui, player);
 							} catch (NullPointerException e) {
-								gui.displayChanceCard("Du ejer ikke Alle de felter");
+								gui.displayChanceCard("Du ejer ikke alle felterne i denne farve");
 							}
 							turnchoice = false;
 							break;
-
 						case "Byt":
 							try {
 								trade.trede(gui, players, player, view);
 							} catch (NullPointerException e) {
-								System.out.println("Felt ejes endnu ikke");
+								System.out.println("Der kunne ikke byttes");
 							}
 							break;
 						case "Slut tur":
 							turnchoice = false;
 							turn = false;
 							break;
-
 						}
 						bankrupt(player, gui);
 						haveWeAWinner(player, gui);
@@ -187,7 +170,6 @@ public class Controller {
 				}
 			}
 		}
-
 	}
 
 	public void buyField(Player player, GUI gui) {
@@ -227,7 +209,6 @@ public class Controller {
 		String OOwner = "";
 		if (field != 2 && field != 7 && field != 17 && field != 22 && field != 33 && field != 36 && field != 10
 				&& field != 20 && field != 30 && field != 0 && field != 4 && field != 38) {
-
 			if (player.getCurrentField() == 12 || player.getCurrentField() == 28) {
 				String owner = ((GUI_Brewery) gui.getFields()[player.getCurrentField()]).getOwnerName();
 				OOwner = owner;
@@ -238,7 +219,6 @@ public class Controller {
 				} else {
 					countBrew = 1;
 				}
-
 				rent = board.getRentBrewery(diceSum, countBrew);
 			} else if (player.getCurrentField() == 5 || player.getCurrentField() == 15 || player.getCurrentField() == 25
 					|| player.getCurrentField() == 35) {
@@ -303,9 +283,16 @@ public class Controller {
 			}
 		}
 	}
+	public void buyOrPayrent(Player player, GUI gui, int sum) {
+		if (board.getOwnable(player.getCurrentField())) {
+			buyField(player, gui);
+		}
+		else {payRent(player, gui, sum);
+		}
+	}
 
 	//
-	public void findWinner(Player player, GUI gui) {
+	public void findWinner(GUI gui) {
 		String winner = "";
 		for (int i = 0; i < players.length; i++) {
 			if (players[i].getBankrupt() == false) {
@@ -325,7 +312,7 @@ public class Controller {
 		}
 		if (count == players.length - 1) {
 			winner = true;
-			findWinner(player, gui);
+			findWinner(gui);
 		}
 	}
 

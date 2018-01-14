@@ -6,7 +6,7 @@ import Game.Player;
 
 
 public class MoveController {
-	Jail jail;
+	Jail jail = new Jail();
 	
 	public void movePlayer(Player player, GUI gui, int dist) {
 		
@@ -19,7 +19,6 @@ public class MoveController {
 	}
 	
 	public void moveToJail(Player player, GUI gui) {
-		jail = new Jail();
 		jail.goToJail(player, gui);
 	}
 	
@@ -29,6 +28,10 @@ public class MoveController {
 		gui.getFields()[player.getCurrentField()].setCar(player.getCarObject(), false);
 		player.setCurrentField(field);
 		gui.getFields()[player.getCurrentField()].setCar(player.getCarObject(), true);
+	}
+	
+	public void moveOutOfJail(Player player, GUI gui) {
+		jail.getOutOfJail(player, gui);
 	}
 
 }
