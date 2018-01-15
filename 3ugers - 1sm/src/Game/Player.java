@@ -4,8 +4,6 @@ import gui_fields.GUI_Player;
 
 public class Player { 
 	private int currentField = 0;
-	private static int playerCounter = 1;
-	private int playerNumber;
 	private int balance = 0;
 	private int fieldvalue = 0;
 	private int housevalue = 0;
@@ -19,7 +17,7 @@ public class Player {
 	private boolean bankrupt = false;
 
 	public Player() {
-		playerNumber = playerCounter++;
+		
 	}
 	public int houseOwned() {	
 		return houseOwned;	   

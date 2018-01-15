@@ -114,60 +114,46 @@ class JUnitMonopoly {
 		assertFalse(exceed);
 	}
 
-//	@Test
-//	public void testJailCard() {
-//		cc.getOutOfJail(pTest, null);
-//		assertTrue(pTest.getHasJailCard());
-//	}
-//
-//	@Test
-//	public void testChanceCardGoToMove() {
-//		cc.moveTo(pTest, 0, gui, "hi");
-//		boolean succeeded = false;
-//		pTest.setBalance(200);
-//		if (pTest.getCurrentField() == 0 && pTest.getBalance() == 200) {
-//			succeeded = true;
-//		}
-//		assertTrue(succeeded);
-//	}
-//
-//	@Test
-//	public void testChanceCardPayMoney() {
-//		cc.payMoney(pTest, gui, 100, null);
-//		assertTrue(pTest.getBalance() == 100);
-//	}
-//
-//	@Test
-//	public void testChanceCardGetMoney() {
-//		cc.getMoney(pTest, gui, 100, "Din præmieobligation er kommet ud. De Modtager kr. 100 af banken.");
-//		assertTrue(pTest.getBalance() == 100);
-//	}
-//
-//	@Test
-//	public void testMoveTo() {
-//		cc.moveTo(pTest, 15, gui, "Go somewhere");
-//		assertTrue(pTest.getCurrentField() == 15);
-//	}
+
+
+	@Test
+	public void testJailCard() {
+		cc.getOutOfJail(pTest, null);
+		assertTrue(pTest.getHasJailCard() == true);
+	}
+
+	@Test
+	public void testChanceCardGoToMove() {
+		cc.moveTo(pTest, 0, gui, "hi");
+		boolean succeeded = false;
+		pTest.setBalance(200);
+		if (pTest.getCurrentField() == 0 && pTest.getBalance() == 200) {
+			succeeded = true;
+		}
+		assertTrue(succeeded);
+	}
+
+	@Test
+	public void testChanceCardPayMoney() {
+		cc.payMoney(pTest, gui, 100, null);
+		pTest.setBalance(1000);
+		cc.payMoney(pTest, gui, 100, "Betal for vogn vask og smørning kr. 100.");
+		assertEquals(pTest.getBalance(), 900);
+	}
+
+	@Test
 	
-//	@Test
-//	public void testMovePlayer(GUI gui, Player pTest) {
-//		
-//		assertEquals(expected, actual);
-//	}
-//	
-//	@Test
-	//hvis den ikke snart goer som den skal ...
-//	public void testFindAWinner() {
-//		
-//		pTest.changeBalance(1000);
-//		pTest2.changeBalance(0);
-//		move.movePlayer(pTest2, gui, 38);
-//		win.findWinner(pTest, gui);
-//		turn.
-//		
-//		assertTrue(0);
-//		
-//	}
+	public void testChanceCardGetMoney() {
+		cc.getMoney(pTest, gui, 100, "Din præmieobligation er kommet ud. De Modtager kr. 100 af banken.");
+		assertTrue(pTest.getBalance() == 100);
+	}
+
+	@Test
+	public void testMoveTo() {
+		cc.moveTo(pTest, 15, gui, "Go somewhere");
+		int field = pTest.getCurrentField();
+		assertTrue(field == 15);
+	}
 	
 	@Test
 	public void testBuyField() {
@@ -176,7 +162,7 @@ class JUnitMonopoly {
 		GameController.buyField(pTest, gui);
 		assertTrue(board.getOwnable(3) == false);	
 	}
-	
+	//new
 	@Test
 	public void testBuildHouse() {
 		board.createBoard();

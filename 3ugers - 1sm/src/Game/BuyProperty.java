@@ -15,6 +15,7 @@ public class BuyProperty {
 
 	}
 
+
 	public String ownerOfFieldName(int field, GUI gui) {  //get the name of the player of the currentfield
 		return ((GUI_Street) gui.getFields()[field]).getOwnerName();
 
