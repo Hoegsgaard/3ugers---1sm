@@ -19,8 +19,8 @@ public class Player {
 	public Player() {
 		
 	}
-	public int houseOwned() {
-		return houseOwned;
+	public int houseOwned() {	
+		return houseOwned;	   
 	}
 	public int hotelOwned() {
 		return hotelOwned;
@@ -28,7 +28,7 @@ public class Player {
 	public GUI_Player getCarObject() {
 		return carObject;
 	}	
-	public void setCarObject(GUI_Player obj) {
+	public void setCarObject(GUI_Player obj) {	
 		this.carObject = obj;
 	}
 	public int getCurrentField() {
