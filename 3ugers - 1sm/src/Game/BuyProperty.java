@@ -15,44 +15,44 @@ public class BuyProperty {
 
 	}
 
-	public String ownerOfFieldName(int field, GUI gui) {
+	public String ownerOfFieldName(int field, GUI gui) {  //get the name of the player of the currentfield
 		return ((GUI_Street) gui.getFields()[field]).getOwnerName();
 
 	}
 
-	public void buildCyan(GUI gui, Player player, GameBoard board) {
+	public void buildCyan(GUI gui, Player player, GameBoard board) { // this method is the same for the rest of the color fields
 		int price = board.pirceForHouse(0);
-		if (ownerOfFieldName(1, gui).equals(ownerOfFieldName(3, gui))
-				&& player.getName().equals(ownerOfFieldName(3, gui))) {
-			if (numberOffCyan == 0 && counterCyan == 4) {// HOTEL
+		if (ownerOfFieldName(1, gui).equals(ownerOfFieldName(3, gui))	
+				&& player.getName().equals(ownerOfFieldName(3, gui))) { // checks if the players owns all of cyan
+			if (numberOffCyan == 0 && counterCyan == 4) {// if there are 4 houses on the other fields
 				if (hotelCyan == 0) {
-					((GUI_Street) gui.getFields()[1]).setHotel(true);
+					((GUI_Street) gui.getFields()[1]).setHotel(true);   // place a hotel
 					board.changeNumOffBuild(1, 1);
 					hotelCyan = 1;
 				} else {
-					((GUI_Street) gui.getFields()[3]).setHotel(true);
+					((GUI_Street) gui.getFields()[3]).setHotel(true);	//place a hotel on the other field
 					board.changeNumOffBuild(3, 1);
 				}
-				player.changeBalance(-price);
+				player.changeBalance(-price);	//pays for building a house
 				player.setHouseValue(price);
 			} else {
-				if (numberOffCyan == 0 && counterCyan <= 3) {
+				if (numberOffCyan == 0 && counterCyan <= 3) { // makes it so the houses get build evenly on the fields
 					counterCyan++;
-					((GUI_Street) gui.getFields()[1]).setHouses(counterCyan);
+					((GUI_Street) gui.getFields()[1]).setHouses(counterCyan); //place the amount of houses 
 					board.changeNumOffBuild(1, 1);
 					numberOffCyan = 1;
-				} else if (numberOffCyan == 1 && counterCyan <= 4) {
-					((GUI_Street) gui.getFields()[3]).setHouses(counterCyan);
-					board.changeNumOffBuild(3, 1);
+				} else if (numberOffCyan == 1 && counterCyan <= 4) {//makes it so the houses get build even
+					((GUI_Street) gui.getFields()[3]).setHouses(counterCyan);	//place the amout of houses
+					board.changeNumOffBuild(3, 1);	//counts the amount houses on that field
 					numberOffCyan = 0;
 				}
-				player.changeBalance(-price);
+				player.changeBalance(-price);	//pays for house
 				player.setHouseValue(price);
 			}
 		}
 	}
 
-	public void buildPink(GUI gui, Player player, GameBoard board) {
+	public void buildPink(GUI gui, Player player, GameBoard board) { // this methdo does the same as Buil cyan
 		int price = board.pirceForHouse(0);
 		if (ownerOfFieldName(6, gui).equals(ownerOfFieldName(8, gui))
 				&& ownerOfFieldName(6, gui).equals(ownerOfFieldName(9, gui))
@@ -93,7 +93,7 @@ public class BuyProperty {
 		}
 	}
 
-	public void buildGreen(GUI gui, Player player, GameBoard board) {
+	public void buildGreen(GUI gui, Player player, GameBoard board) { // does the same 
 		int price = board.pirceForHouse(1);
 		if (ownerOfFieldName(11, gui).equals(ownerOfFieldName(13, gui))
 				&& ownerOfFieldName(11, gui).equals(ownerOfFieldName(14, gui))
@@ -134,7 +134,7 @@ public class BuyProperty {
 		}
 	}
 
-	public void buildGrey(GUI gui, Player player, GameBoard board) {
+	public void buildGrey(GUI gui, Player player, GameBoard board) { // does the same
 		int price = board.pirceForHouse(1);
 		if (ownerOfFieldName(16, gui).equals(ownerOfFieldName(18, gui))
 				&& ownerOfFieldName(16, gui).equals(ownerOfFieldName(19, gui))
@@ -175,7 +175,7 @@ public class BuyProperty {
 		}
 	}
 
-	public void buildRed(GUI gui, Player player, GameBoard board) {
+	public void buildRed(GUI gui, Player player, GameBoard board) { // does the same
 		int price = board.pirceForHouse(2);
 		if (ownerOfFieldName(21, gui).equals(ownerOfFieldName(23, gui))
 				&& ownerOfFieldName(21, gui).equals(ownerOfFieldName(24, gui))
@@ -216,7 +216,7 @@ public class BuyProperty {
 		}
 	}
 
-	public void buildWhite(GUI gui, Player player, GameBoard board) {
+	public void buildWhite(GUI gui, Player player, GameBoard board) { // does the same
 		int price = board.pirceForHouse(2);
 		if (ownerOfFieldName(26, gui).equals(ownerOfFieldName(27, gui))
 				&& ownerOfFieldName(26, gui).equals(ownerOfFieldName(29, gui))
@@ -257,7 +257,7 @@ public class BuyProperty {
 		}
 	}
 
-	public void buildYellow(GUI gui, Player player, GameBoard board) {
+	public void buildYellow(GUI gui, Player player, GameBoard board) { // does the same
 		int price = board.pirceForHouse(3);
 		if (ownerOfFieldName(31, gui).equals(ownerOfFieldName(32, gui))
 				&& ownerOfFieldName(31, gui).equals(ownerOfFieldName(34, gui))
@@ -298,7 +298,7 @@ public class BuyProperty {
 		}
 	}
 
-	public void buildMagenta(GUI gui, Player player, GameBoard board) {
+	public void buildMagenta(GUI gui, Player player, GameBoard board) { // does the same
 		int price = board.pirceForHouse(3);
 		if (ownerOfFieldName(37, gui).equals(ownerOfFieldName(39, gui))
 				&& player.getName().equals(ownerOfFieldName(37, gui))) {
@@ -328,8 +328,8 @@ public class BuyProperty {
 			player.setHouseValue(price);
 		}
 	}
-
-	public void choiceOfArea(String choice, GUI gui, Player player, GameBoard board) {
+	//lets the player chose where to build
+	public void choiceOfArea(String choice, GUI gui, Player player, GameBoard board) { 
 		switch (choice) {
 		case "Cyan":
 			buildCyan(gui, player, board);

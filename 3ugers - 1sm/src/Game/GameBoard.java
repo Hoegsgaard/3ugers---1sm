@@ -16,8 +16,8 @@ import gui_main.GUI;
 public class GameBoard {
 	public GameBoard() {
 	}
-	GUI_Field[] fields = new GUI_Field[40];
-	final int[] fieldPrice = new int[40];
+	GUI_Field[] fields = new GUI_Field[40];	// sets the gameboard to 40 fields
+	final int[] fieldPrice = new int[40];	//price of the fields
 	boolean[] ownable = new boolean[40];
 	int[] NumOffBuild = new int[40];
 	int[] housePrice = { 50, 100, 150, 200 };
@@ -25,23 +25,23 @@ public class GameBoard {
 	boolean Street = true;
 	boolean Brewery = true;
 	boolean shipping = true;
-	int[][] rent = new int[][] { 
+	int[][] rent = new int[][] {  //dobbelt array with field rent, and rent with house and hotel
 		{ 0 }, // Start
 		{ 2, 10, 30, 90, 160, 250 }, 
 		{ 0 }, // ChanceCard
 		{ 4, 20, 60, 180, 320, 540 }, 
 		{ 0 }, // StatsSkat
-		{ 25, 50, 100, 200 }, // Shiping
+		{ 25, 50, 100, 200 }, // Shipping
 		{ 6, 30, 90, 270, 400, 550 }, 
 		{ 0 }, // ChanceCard
 		{ 6, 30, 90, 270, 400, 550 }, 
 		{ 8, 40, 100, 300, 450, 600 }, 
 		{ 0 }, // JAil
 		{ 10, 50, 150, 450, 625, 750 }, 
-		{ 0 }, // bryggeri
+		{ 0 }, // brewery
 		{ 10, 50, 150, 450, 625, 750 }, 
 		{ 12, 60, 180, 500, 700, 900 }, 
-		{ 25, 50, 100, 200 }, // Shiping
+		{ 25, 50, 100, 200 }, // Shipping
 		{ 14, 70, 200, 550, 750, 950 }, 
 		{ 0 }, // ChanceCard	
 		{ 14, 70, 200, 550, 750, 950 }, 
@@ -68,13 +68,13 @@ public class GameBoard {
 		{ 50, 200, 600, 1400, 1700, 2000 },
 	};
 	
-	public void createBoard() {
+	public void createBoard() {	//creates the game board
 		GUI.setNull_fields_allowed(true);
 		startOpNumOffBuild();
 		fields[0] = new GUI_Start();
 		fields[0].setTitle("Start");
 		fields[0].setSubText("Modtag: 200");
-		createStreet(1, "Rødovrevej", Color.CYAN, 60);
+		createStreet(1, "Rødovrevej", Color.CYAN, 60); // creates street with name, color and price for the field
 		fields[2] = new GUI_Chance();
 		fields[2].setSubText("Chance");
 		createStreet(3, "Hvidovre", Color.CYAN, 60);
@@ -142,16 +142,16 @@ public class GameBoard {
 		brewShipSetSetup();
 	}
 
-	private void createStreet(int field, String name, Color color, int price) {
+	private void createStreet(int field, String name, Color color, int price) { //sets the name, color, and price for the field
 		fields[field] = new GUI_Street();
 		fields[field].setTitle(name);
 		fields[field].setSubText("Pris: " + price);
 		fields[field].setBackGroundColor(color);
-		ownable[field] = true;
+		ownable[field] = true;		// makes the field ownable
 		((GUI_Street) fields[field]).setOwnerName(null);
 		fieldPrice[field] = price;
 	}
-	private void brewShipSetSetup() {
+	private void brewShipSetSetup() {	// makes field 12 and 28 to a brewery type
 		ownable[12] = true;
 		((GUI_Brewery) fields[12]).setOwnerName(null);
 		setPrice(12, 150);
@@ -168,7 +168,7 @@ public class GameBoard {
 	public GUI_Field[] getFields() {
 		return fields;
 	}
-	public void startOpNumOffBuild() {
+	public void startOpNumOffBuild() {	//makes all the indexes in the array 0 and not null
 		for (int i = 0; i < NumOffBuild.length; i++) {
 			NumOffBuild[i] = 0;
 		}
@@ -208,7 +208,7 @@ public class GameBoard {
 		}
 		return rent;
 	}
-	public int getRentShipping(int count) {
+	public int getRentShipping(int count) {	//gets the rent based on owned shipping fields
 		int pay = 0;
 		switch (count) {
 		case 1:
@@ -227,7 +227,7 @@ public class GameBoard {
 		return pay;
 	}
 	
-	public int pirceForHouse(int val) {
+	public int pirceForHouse(int val) { 	//price
 		return housePrice[val];
 	}
 	public int getNumOffBuild(int field) {
@@ -237,25 +237,25 @@ public class GameBoard {
 		NumOffBuild[field] = getNumOffBuild(field) + num;
 	}
 	public void sellAll(Player player, GUI gui) {
-		for (int i = 0; i < fields.length; i++) { // ALT HVAD DER IKKE KAN KØBES ER UDELUKKET
+		for (int i = 0; i < fields.length; i++) { 
 			if (i != 2 && i != 7 && i != 17 && i != 22 && i != 33 && i != 36 && i != 10 && i != 20 && i != 30 && i != 0
-					&& i != 4 && i != 38) {
-				if (i == 12 || i == 28) { //Hvis spilleren står på et bryggeri
+					&& i != 4 && i != 38) {// all the not be bought gets sorted out
+				if (i == 12 || i == 28) { //if the player stands on a brewery
 					if (player.getName().equals(((GUI_Brewery) gui.getFields()[i]).getOwnerName())) {
-						setOwnable(i, true);
-						((GUI_Brewery) gui.getFields()[i]).setBorder(Color.black);
+						setOwnable(i, true);	//set in ownable again
+						((GUI_Brewery) gui.getFields()[i]).setBorder(Color.black); // reset the board
 					}
-				} else if (i == 5 || i == 15 || i == 25 || i == 35) { //Hvis spilleren står på et shipperi?
+				} else if (i == 5 || i == 15 || i == 25 || i == 35) { //if the players stand on a shipping field
 					if (player.getName().equals(((GUI_Shipping) gui.getFields()[i]).getOwnerName())) {
 						setOwnable(i, true);
 						((GUI_Shipping) gui.getFields()[i]).setBorder(Color.BLACK);
 					}
-				} else { // Kun Streets er tilbage
+				} else { // only streets left
 					if (player.getName().equals(((GUI_Street) gui.getFields()[i]).getOwnerName())) {
-						setOwnable(i, true);
-						((GUI_Street) gui.getFields()[i]).setBorder(Color.BLACK);
-						((GUI_Street) gui.getFields()[i]).setHotel(false);
-						((GUI_Street) gui.getFields()[i]).setHouses(0);
+						setOwnable(i, true); // set street to ownable again
+						((GUI_Street) gui.getFields()[i]).setBorder(Color.BLACK);  //reset boarder
+						((GUI_Street) gui.getFields()[i]).setHotel(false); //removes the hotel
+						((GUI_Street) gui.getFields()[i]).setHouses(0);	 //removes houses
 					}
 				}
 			}

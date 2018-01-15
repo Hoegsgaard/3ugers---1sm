@@ -11,11 +11,11 @@ public class Trade {
 	}
 	
 	public void trade(GUI gui, Player[] players, Player player, Display view) {
-		String[] playersName = new String[players.length];
+		String[] playersName = new String[players.length]; // makes a string array of based on the amount of plauers
 		for (int i = 0; i < players.length; i++) {
-			playersName[i] = players[i].getName();
+			playersName[i] = players[i].getName();  //indexing the names in the string array
 		}
-		String tradeWhit = view.tradeWith(gui, playersName);
+		String tradeWhit = view.tradeWith(gui, playersName); // the player who wants to trade
 		int traderNumOffField = 0;
 		for (int i = 0; i < 40; i++) {
 			if (i != 2 && i != 7 && i != 17 && i != 22 && i != 33 && i != 36 && i != 10 && i != 20 && i != 30 && i != 0
@@ -35,7 +35,7 @@ public class Trade {
 				}
 			}
 		}
-		String[] traderField = new String[traderNumOffField];
+		String[] traderField = new String[traderNumOffField]; // an array of field he wants to trade
 		int tradeCounter = 0;
 		for (int i = 0; i < 40; i++) {
 			if (i != 2 && i != 7 && i != 17 && i != 22 && i != 33 && i != 36 && i != 10 && i != 20 && i != 30 && i != 0
@@ -54,7 +54,7 @@ public class Trade {
 						fieldName = ((GUI_Street) gui.getFields()[i]).getTitle();
 					}
 				}
-				if (tradeCounter < traderField.length && fieldName != "") {
+				if (tradeCounter < traderField.length && fieldName != "") { //find all the fields he owns
 					traderField[tradeCounter] = fieldName;
 					tradeCounter++;
 				}
@@ -104,13 +104,15 @@ public class Trade {
 				}
 			}
 		}
-		String iTrade = view.iTrade(gui, traderField);
-		String iWant = view.iWant(gui, tradeWhitsFields);
-		boolean deal = view.deal(gui, "Vil du bytte: " + iTrade + " For: " + iWant);
+		String iTrade = view.iTrade(gui, traderField); // the list with the fields he wants to trade
+		String iWant = view.iWant(gui, tradeWhitsFields);	//the list of fields he can choose from
+		boolean deal = view.deal(gui, "Vil du bytte: " + iTrade + " For: " + iWant); //del button 
+		//if the deal takes place will the owner of the fields swap
 		if (deal) {
 			for (int i = 0; i < 40; i++) {
 				if (i != 2 && i != 7 && i != 17 && i != 22 && i != 33 && i != 36 && i != 10 && i != 20 && i != 30
 						&& i != 0 && i != 4 && i != 38) {
+					//
 					if (i == 12 || i == 28) {
 						if (iWant.equals(((GUI_Brewery) gui.getFields()[i]).getTitle())) {
 							((GUI_Brewery) gui.getFields()[i]).setOwnerName(player.getName());
