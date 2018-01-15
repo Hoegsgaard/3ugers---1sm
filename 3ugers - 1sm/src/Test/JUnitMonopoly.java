@@ -2,6 +2,7 @@ package Test;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
@@ -115,7 +116,7 @@ class JUnitMonopoly {
 	@Test
 	public void testJailCard() {
 		cc.getOutOfJail(pTest, null);
-		assertTrue(pTest.getHasJailCard());
+		assertTrue(pTest.getHasJailCard() == true);
 	}
 
 	@Test
@@ -132,7 +133,9 @@ class JUnitMonopoly {
 	@Test
 	public void testChanceCardPayMoney() {
 		cc.payMoney(pTest, gui, 100, null);
-		assertTrue(pTest.getBalance() == 100);
+		pTest.setBalance(1000);
+		cc.payMoney(pTest, gui, 100, "Betal for vogn vask og smørning kr. 100.");
+		assertEquals(pTest.getBalance(), 900);
 	}
 
 	@Test
