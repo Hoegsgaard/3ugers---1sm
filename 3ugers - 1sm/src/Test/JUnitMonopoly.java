@@ -180,7 +180,7 @@ class JUnitMonopoly {
 		GameController.buyField(pTest, gui);
 		assertTrue(board.getOwnable(3) == false);	
 	}
-	
+	//new
 	@Test
 	public void testBuildHouse() {
 		board.createBoard();
