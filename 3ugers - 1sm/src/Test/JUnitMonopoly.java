@@ -141,16 +141,15 @@ class JUnitMonopoly {
 	@Test
 	
 	public void testChanceCardGetMoney() {
-		System.out.println(pTest.getBalance());
 		cc.getMoney(pTest, gui, 100, "Din præmieobligation er kommet ud. De Modtager kr. 100 af banken.");
-		System.out.println(pTest.getBalance());
 		assertTrue(pTest.getBalance() == 100);
 	}
 
 	@Test
 	public void testMoveTo() {
 		cc.moveTo(pTest, 15, gui, "Go somewhere");
-		assertTrue(pTest.getCurrentField() == 15);
+		int field = pTest.getCurrentField();
+		assertTrue(field == 15);
 	}
 	
 	@Test
