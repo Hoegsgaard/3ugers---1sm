@@ -141,7 +141,9 @@ class JUnitMonopoly {
 	@Test
 	
 	public void testChanceCardGetMoney() {
+		System.out.println(pTest.getBalance());
 		cc.getMoney(pTest, gui, 100, "Din præmieobligation er kommet ud. De Modtager kr. 100 af banken.");
+		System.out.println(pTest.getBalance());
 		assertTrue(pTest.getBalance() == 100);
 	}
 

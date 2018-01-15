@@ -14,7 +14,7 @@ public class BuyProperty {
 	public BuyProperty() {
 
 	}
-
+	
 	public String ownerOfFieldName(int field, GUI gui) {
 		return ((GUI_Street) gui.getFields()[field]).getOwnerName();
 
