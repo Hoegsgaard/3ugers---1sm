@@ -1,19 +1,10 @@
 package Test;
 
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
-import org.junit.Before;
 import org.junit.jupiter.api.Test;
 
 import Controller.DiceController;
-import Controller.GameController;
-import Controller.MoveController;
-import Game.ChanceCard;
-import Game.GameBoard;
-import Game.Player;
-import gui_fields.GUI_Player;
-import gui_main.GUI;
 
 class JUnitMonopoly {
 	// Dice test 2 stk

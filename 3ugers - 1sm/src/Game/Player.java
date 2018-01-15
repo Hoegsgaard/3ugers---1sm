@@ -4,8 +4,6 @@ import gui_fields.GUI_Player;
 
 public class Player { 
 	private int currentField = 0;
-	private static int playerCounter = 1;
-	private int playerNumber;
 	private int balance = 0;
 	private int fieldvalue = 0;
 	private int housevalue = 0;
@@ -19,18 +17,18 @@ public class Player {
 	private boolean bankrupt = false;
 
 	public Player() {
-		playerNumber = playerCounter++;
+		
 	}
-	public int houseOwned() {
-		return houseOwned;
+	public int houseOwned() {	
+		return houseOwned;	   
 	}
 	public int hotelOwned() {
 		return hotelOwned;
 	}
-	public GUI_Player getCarObject() {
+	public GUI_Player getCarObject() {	
 		return carObject;
 	}	
-	public void setCarObject(GUI_Player obj) {
+	public void setCarObject(GUI_Player obj) {	
 		this.carObject = obj;
 	}
 	public int getCurrentField() {
@@ -45,14 +43,14 @@ public class Player {
 	public void setBalance(int val) {
 		balance = val;
 	}
-	public void changeBalance(int balance) {
+	public void changeBalance(int balance) {	// change the balance of the player
 		this.balance += balance;
 		carObject.setBalance(this.balance);
 	}	
 	public String getName() {
 		return name;
 	}	
-	public void setName(String newName) {
+	public void setName(String newName) {	
 		this.name = newName;
 	}
 	public boolean getHasJailCard() {
