@@ -25,7 +25,7 @@ public class Player {
 	public int hotelOwned() {
 		return hotelOwned;
 	}
-	public GUI_Player getCarObject() {
+	public GUI_Player getCarObject() {	
 		return carObject;
 	}	
 	public void setCarObject(GUI_Player obj) {	
@@ -43,14 +43,14 @@ public class Player {
 	public void setBalance(int val) {
 		balance = val;
 	}
-	public void changeBalance(int balance) {
+	public void changeBalance(int balance) {	// change the balance of the player
 		this.balance += balance;
 		carObject.setBalance(this.balance);
 	}	
 	public String getName() {
 		return name;
 	}	
-	public void setName(String newName) {
+	public void setName(String newName) {	
 		this.name = newName;
 	}
 	public boolean getHasJailCard() {
