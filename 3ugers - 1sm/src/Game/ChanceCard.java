@@ -5,7 +5,7 @@ import gui_main.GUI;
 
 public class ChanceCard {
 
-	String[] chanceCard = { "moveToRådhuspladsen", "moveToGrønningen", "takeØresundsbanen", "goThreeStepsBack",
+	String[] chanceCard = { "moveToRådhuspladsen", "moveToGrønningen", "takeØresundsbåden", "goThreeStepsBack",
 			"goThreeStepsBack", "goToStart", "goToNextShippingCompany", "sammenskudsgilde", "nyttehaven", "klude",
 			"abonnementskort", "manufakturvarer", "assistenthus", "aktier", "legater", "præmieoblikation",
 			"gageforhøjelse", "coalPrices", "propertyTax", "tire", "fullStop", "vash", "vash", "cigarettes",
@@ -155,7 +155,7 @@ public class ChanceCard {
 	}
 	// Go to next Shipping Company
 	public void goToNextShippingCompany(Player player, GUI gui, String message) {
-		if (player.getCurrentField() >= 35 && player.getCurrentField() <= 5) {
+		if (player.getCurrentField() >= 35 || player.getCurrentField() <= 5) {
 			if (player.getCurrentField() > 35) {
 				player.changeBalance(200);
 			}
